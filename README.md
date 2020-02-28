@@ -1,7 +1,7 @@
-# online-bookstore
+# David's Online Bookstore
 An elaborate online bookstore. (Work in progress!)
 
-# Features
+## Features
 (When complete,) **Users are able to:**
  - Search for books
  - Add to cart
@@ -18,7 +18,7 @@ An elaborate online bookstore. (Work in progress!)
  - Receive some amount of commission for his/her published books
  - Receive an email when stock drops below some amount
  
-# Tech Stack
+## Tech Stack
  - Backend: Spring Boot or Node or AWS API Gateway (TBD)
  - Frontend: HTML/ThymeLeaf or React (TBD)
  - Database: PostgreSQL
