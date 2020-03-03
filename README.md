@@ -19,14 +19,17 @@ An elaborate online bookstore. (Work in progress!)
  - Receive an email when stock drops below some amount
  
 ## Tech Stack
- - Backend: Spring Boot or Node or AWS API Gateway (TBD)
- - Frontend: HTML/ThymeLeaf or React (TBD)
- - Database: PostgreSQL
- - ~~Redis session cache~~
+### Application
+ - React app
+ - Next.js
 
-## Deployment (AWS)
- - S3 or EC2
- - API Gateway/Lambda
- - RDS for PostgreSQL
- - CloudFront
- - Redis?
+### Deployment (AWS)
+ - S3 or EC2: frontend
+ - API Gateway/Lambda: serverless backend
+ - RDS for PostgreSQL w/ Read Replica: database
+ - CloudFront: CDN for faster loading
+ - ElastiCache Redis: server-side session cache for shopping carts
+ - WAF: prevent DDoS
+ - SQS between API Gateway and Lambda: request buffer
+ - Cognito: user authentication
+ - SNS: emailing publishers for reorder

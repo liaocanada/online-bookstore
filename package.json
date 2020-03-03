@@ -1,0 +1,24 @@
+{
+  "name": "davids-bookstore",
+  "version": "1.0.0",
+  "description": "An elaborate online bookstore. (Work in progress!)",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/liaocanada/online-bookstore.git"
+  },
+  "author": "David Liao",
+  "license": "GPL v3.0",
+  "homepage": "https://github.com/liaocanada/online-bookstore#readme",
+  "dependencies": {
+    "next": "^9.2.2",
+    "react": "^16.13.0",
+    "react-dom": "^16.13.0"
+  }
+}
