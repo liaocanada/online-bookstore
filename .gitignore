@@ -1,6 +1,11 @@
 # My own notes
 notes.md
 
+# Next.js export output
+out/
+
+# Below is all auto-generated
+
 # Logs
 logs
 *.log

@@ -1,3 +1,5 @@
+import useSWR from "swr";
+
 import Layout from "../components/Layout";
 import Product from "../components/products/Product";
 
@@ -20,7 +22,7 @@ Products.getInitialProps = async context => {
 	const { name, id, minPrice, maxPrice } = context.query;
 
 	// TEST: page doesn't load until props are retrieved
-	await new Promise(r => setTimeout(r, 5000));
+	await new Promise(r => setTimeout(r, 1000));
 
 	// TODO get info about all products that fit the filter from DB
 	return {
