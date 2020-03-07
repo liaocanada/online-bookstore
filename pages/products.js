@@ -1,11 +1,11 @@
 import useSWR from "swr";
 
+import config from "../config/config";
 import Layout from "../components/Layout";
 import Product from "../components/products/Product";
 
 const Products = props => {
-	const { dummyProducts, filter } = props;
-	console.log(filter);
+    const { products, filter } = props;
 	
 	return (
 		<Layout>
@@ -13,7 +13,8 @@ const Products = props => {
 			{filter.name &&
 				<p>There was a name filter for {filter.name} but this is not supported yet.</p>
 			}
-			{dummyProducts.map(({id, name, price}) => <Product key={id} id={id} name={name} price={price} />)}
+			{/* {products.map(({id, name, price}) => <Product key={id} id={id} name={name} price={parseFloat(price)} />)} */}
+			{products.map(({name, price}) => <Product key={name} id={name} name={name} price={parseFloat(price)} />)}
 		</Layout>
 	);
 };
@@ -21,16 +22,10 @@ const Products = props => {
 Products.getInitialProps = async context => {
 	const { name, id, minPrice, maxPrice } = context.query;
 
-	// TEST: page doesn't load until props are retrieved
-	await new Promise(r => setTimeout(r, 1000));
+    const res = await fetch(config.API_GATEWAY_ENDPOINT + "/getAllProducts");
 
-	// TODO get info about all products that fit the filter from DB
 	return {
-		dummyProducts: [
-			{id: "pid001", name: "product1", price: 1.00}, 
-			{id: "pid002", name: "product2", price: 2.00}, 
-			{id: "pid003", name: "product3", price: 3.00},
-		],
+		products: await res.json(),
 		filter: {
 			name, id, minPrice, maxPrice
 		}
