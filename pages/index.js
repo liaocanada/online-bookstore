@@ -1,10 +1,16 @@
-import Header from '../components/Header';
+import Head from "next/head";
 import Layout from '../components/Layout';
 
 export default function Index() {
 	return (
-		<Layout>
-			<p>Hello Next.js</p>
-		</Layout>
+        <>
+            <Head>
+                <script type="text/javascript" src="/static/handleDynamicUrl.js"></script>
+            </Head>
+
+            <Layout>
+                <p>Hello Next.js</p>
+            </Layout>
+        </>
 	);
 }

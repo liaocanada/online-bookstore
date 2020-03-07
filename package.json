@@ -4,9 +4,17 @@
   "description": "An elaborate online bookstore. (Work in progress!)",
   "main": "index.js",
   "scripts": {
+    "postinstall": "cd lambdas && npm install",
     "dev": "next",
+    
     "build": "next build",
     "export": "next export",
+    "deploy": "aws s3 sync ./out/ s3://ebookstore.davidliao.ca --acl public-read",
+    
+    "start-db": "aws rds start-db-instance --db-instance-identifier ebookstore-davidliao",
+    "stop-db": "aws rds stop-db-instance --db-instance-identifier ebookstore-davidliao",
+    "status-db": "aws rds describe-db-instances --db-instance-identifier ebookstore-davidliao",
+
     "start": "next start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
