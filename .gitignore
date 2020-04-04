@@ -1,5 +1,7 @@
 # Large CSVs for generating dummy database data
 scripts/sqlGenerators/*.csv
+test*.json
+test*.sql
 
 # My own notes
 notes.md
