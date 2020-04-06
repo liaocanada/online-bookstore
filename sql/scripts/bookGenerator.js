@@ -4,13 +4,13 @@ const fs = require("fs");
 const path = require("path");
 
 // SQL string for creating tables
-const createBooksSql = require("./createTable/books");
+const createBookSql = require("./createTable/book");
 
 // Functions to map objects into SQL for inserting tuples
-const insertBooksSql = require("./insertTuple/books");
+const insertBookSql = require("./insertTuple/book");
 
 // Output file paths
-const outputBooksPath = path.join(__dirname, "../../sql/books.sql");
+const outputBooksPath = path.join(__dirname, "../../sql/book.sql");
 
 
 // Get raw CSV data from GitHub source and parse into JSON
@@ -25,7 +25,7 @@ const parseStream = papa.parse(papa.NODE_STREAM_INPUT, parseOptions);
 dataStream.pipe(parseStream);
 
 // Replace files with create SQL
-fs.writeFileSync(outputBooksPath, createBooksSql + "\n");
+fs.writeFileSync(outputBooksPath, createBookSql + "\n");
 
 // Create write streams
 const booksSqlStream = fs.createWriteStream(outputBooksPath, {flags: "a+"});
@@ -33,7 +33,7 @@ const booksSqlStream = fs.createWriteStream(outputBooksPath, {flags: "a+"});
 
 // Map objects to SQL using imported functions
 parseStream.on("data", book => {
-    booksSqlStream.write(insertBooksSql(book) + "\n");
+    booksSqlStream.write(insertBookSql(book) + "\n");
 });
 
 parseStream.on("finish", () => {

@@ -15,7 +15,7 @@ function mapToSqlBook(book) {
 
     // Due to limitations on pg-escape module, numbers are injected directly into the string
     // All numbers take no user input, no chance of SQL injection
-    const sqlFormat = "INSERT INTO books " + 
+    const sqlFormat = "INSERT INTO book" + 
         "(name, description, price, publisher_price, sold_count, " + 
             "isbn, series, format, pages) " + 
         "VALUES " +
