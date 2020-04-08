@@ -3,6 +3,7 @@ const faker = require("faker");
 faker.seed(123);
 
 function mapToSqlBook(book) {
+    const id = book.book_id;
     const name = book.original_title;
     const description = getDescription(book);
     const price = parseFloat(faker.commerce.price(4.99, 29.99, 2));
@@ -13,13 +14,17 @@ function mapToSqlBook(book) {
     const format = faker.random.arrayElement(["paperback", "paperback", "paperback", "hardcover", "ebook"]);
     const pages = faker.random.number({min: 100, max: 500});
 
+    if (typeof(id) !== "number") {
+        throw new Error("Risk of SQL injection!");
+    }
+
     // Due to limitations on pg-escape module, numbers are injected directly into the string
     // All numbers take no user input, no chance of SQL injection
     const sqlFormat = "INSERT INTO book" + 
-        "(name, description, price, publisher_price, sold_count, " + 
+        "(product_id, name, description, price, publisher_price, sold_count, " + 
             "isbn, series, format, pages) " + 
         "VALUES " +
-            `(%L, %L, ${price}, ${publisherPrice}, ${soldCount}, ` + 
+            `(${id}, %L, %L, ${price}, ${publisherPrice}, ${soldCount}, ` + 
             `%L, %L, %L, ${pages});`;
 
     // Use pg-escape to escape strings
