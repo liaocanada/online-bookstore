@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Rath, Graham and Keebler's warehouse",
+        "address": "577 Satterfield Meadows, WY USA",
+        "phone": 4654134367,
+        "area_sqft": 49173
+    },
+    {
+        "name": "Frami - Beier's warehouse",
+        "address": "5761 Boehm Loaf, QC CAN",
+        "phone": 7546284776,
+        "area_sqft": 52195
+    },
+    {
+        "name": "Johns, Hand and O'Keefe's warehouse",
+        "address": "2229 Audreanne Plaza, RI USA",
+        "phone": 4041414038,
+        "area_sqft": 58372
+    },
+    {
+        "name": "Trantow, Pouros and Welch's warehouse",
+        "address": "4651 Kunze Grove, QC CAN",
+        "phone": 6892144925,
+        "area_sqft": 59317
+    },
+    {
+        "name": "Rolfson - Cartwright's warehouse",
+        "address": "762 Heaney Neck, AL USA",
+        "phone": 3346688254,
+        "area_sqft": 80238
+    }
+]
