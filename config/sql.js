@@ -11,7 +11,8 @@ const config = {
         BOOK_SQL: path.join(__dirname, "../sql/book.sql"),
         AUTHOR_SQL: path.join(__dirname, "../sql/author.sql"),
         WRITES_SQL: path.join(__dirname, "../sql/writes.sql"),
-        PRODUCT_TAG_SQL: path.join(__dirname, "../sql/product_tag.sql")
+        PRODUCT_TAG_SQL: path.join(__dirname, "../sql/product_tag.sql"),
+        PRODUCT_IMAGE_SQL: path.join(__dirname, "../sql/product_image.sql"),
     }
 };
 

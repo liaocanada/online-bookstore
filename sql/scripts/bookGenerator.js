@@ -9,12 +9,14 @@ const createBook = require("./createTable/book");
 const createAuthor = require("./createTable/author");
 const createWrites = require("./createTable/writes");
 const createProductTag = require("./createTable/product_tag");
+const createProductImage = require("./createTable/product_image");
 
 // Functions to map objects into SQL for inserting tuples
 const insertBook = require("./insertTuple/book");
 const insertAuthor = require("./insertTuple/author");
 const insertWrites = require("./insertTuple/writes");
 const insertProductTag = require("./insertTuple/product_tag");
+const insertProductImage = require("./insertTuple/product_image");
 
 // Get raw CSV data from GitHub source and parse into JSON
 const parseOptions = {
@@ -33,12 +35,14 @@ const booksSqlStream = fs.createWriteStream(config.outputs.BOOK_SQL, writeFlag);
 const authorsSqlStream = fs.createWriteStream(config.outputs.AUTHOR_SQL, writeFlag);
 const writesSqlStream = fs.createWriteStream(config.outputs.WRITES_SQL, writeFlag);
 const productTagSqlStream = fs.createWriteStream(config.outputs.PRODUCT_TAG_SQL, writeFlag);
+const productImageSqlStream = fs.createWriteStream(config.outputs.PRODUCT_IMAGE_SQL, writeFlag);
 
 // Add create table statements to SQL
 createBook(booksSqlStream);
 createAuthor(authorsSqlStream);
 createWrites(writesSqlStream);
 createProductTag(productTagSqlStream);
+createProductImage(productImageSqlStream);
 
 // Map objects to SQL using imported functions
 const uniqueAuthors = new Set();
@@ -49,6 +53,9 @@ parseStream.on("data", book => {
 
     // Add tags associated with the book
     insertProductTag(book, productTagSqlStream);
+
+    // Add image associated with the book
+    insertProductImage(book, productImageSqlStream);
     
     const authors = book.authors.split(", ");
     authors.forEach(author => {
