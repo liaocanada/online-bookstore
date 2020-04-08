@@ -10,6 +10,7 @@ const createAuthor = require("./createTable/author");
 const createWrites = require("./createTable/writes");
 const createProductTag = require("./createTable/product_tag");
 const createProductImage = require("./createTable/product_image");
+const createStoredIn = require("./createTable/stored_in");
 
 // Functions to map objects into SQL for inserting tuples
 const insertBook = require("./insertTuple/book");
@@ -17,6 +18,7 @@ const insertAuthor = require("./insertTuple/author");
 const insertWrites = require("./insertTuple/writes");
 const insertProductTag = require("./insertTuple/product_tag");
 const insertProductImage = require("./insertTuple/product_image");
+const insertStoredIn = require("./insertTuple/stored_in");
 
 // Get raw CSV data from GitHub source and parse into JSON
 const parseOptions = {
@@ -36,6 +38,7 @@ const authorsSqlStream = fs.createWriteStream(config.outputs.AUTHOR_SQL, writeFl
 const writesSqlStream = fs.createWriteStream(config.outputs.WRITES_SQL, writeFlag);
 const productTagSqlStream = fs.createWriteStream(config.outputs.PRODUCT_TAG_SQL, writeFlag);
 const productImageSqlStream = fs.createWriteStream(config.outputs.PRODUCT_IMAGE_SQL, writeFlag);
+const storedInSqlStream = fs.createWriteStream(config.outputs.STORED_IN_SQL, writeFlag);
 
 // Add create table statements to SQL
 createBook(booksSqlStream);
@@ -43,6 +46,7 @@ createAuthor(authorsSqlStream);
 createWrites(writesSqlStream);
 createProductTag(productTagSqlStream);
 createProductImage(productImageSqlStream);
+createStoredIn(storedInSqlStream);
 
 // Map objects to SQL using imported functions
 const uniqueAuthors = new Set();
@@ -57,6 +61,9 @@ parseStream.on("data", book => {
     // Add image associated with the book
     insertProductImage(book, productImageSqlStream);
     
+    // Add warehouse associated with the book
+    insertStoredIn(book, storedInSqlStream);
+
     const authors = book.authors.split(", ");
     authors.forEach(author => {
         // Add author
@@ -73,8 +80,12 @@ parseStream.on("data", book => {
 parseStream.on("finish", () => {
     console.log(`Generated SQL to: ${config.outputs.AUTHOR_SQL}`);
     console.log(`Generated SQL to: ${config.outputs.BOOK_SQL}`);
+    console.log(`Generated SQL to: ${config.outputs.PRODUCT_IMAGE_SQL}`);
+    console.log(`Generated SQL to: ${config.outputs.STORED_IN_SQL}`);
     console.log(`Generated SQL to: ${config.outputs.WRITES_SQL}`);
-    booksSqlStream.end();
     authorsSqlStream.end();
+    booksSqlStream.end();
+    productImageSqlStream.end();
+    storedInSqlStream.end();
     writesSqlStream.end();
 });

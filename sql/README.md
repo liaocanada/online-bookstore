@@ -8,5 +8,6 @@
 
 ## Order
 Since there are foreign key constraints, the files should be run in the following order:
-1. author/book
-2. writes
+1. product
+2. author/book/warehouse
+3. writes/stored_in/product_image/product_tag
