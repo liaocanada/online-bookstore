@@ -34,3 +34,6 @@ An elaborate online bookstore. Built by David Liao and Eric Pham.
  - SQS between API Gateway and Lambda: request buffer
  - Cognito: user authentication
  - SNS: emailing publishers for reorder
+
+## Database Design
+See README in the [sql](./sql) folder
