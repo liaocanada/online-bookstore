@@ -21,14 +21,13 @@ async function loadTagMap() {
     }
 
     // Start loading
-    console.log("Loading tags...");
     loadingPromise = loadTagIdToTagName();
     return loadingPromise;
 }
 
 async function loadTagIdToTagName() {
     return new Promise((resolve, reject) => {
-        const tagsStream = request.get("https://raw.githubusercontent.com/zygmuntz/goodbooks-10k/master/tags.csv");
+        const tagsStream = request.get(config.sources.TAGS_CSV);
         const parsedTagsStream = papa.parse(papa.NODE_STREAM_INPUT, parseOptions);
         tagsStream.pipe(parsedTagsStream);
 
@@ -40,7 +39,7 @@ async function loadTagIdToTagName() {
 
         parsedTagsStream.on("finish", async () => {
             await loadBooksToTags(tagIdToTagName);
-            console.log("Done loading tags.");
+            console.log(`Generated SQL to: ${config.outputs.PRODUCT_TAG_SQL}`);
             resolve(bookToTags);
         });
     });
@@ -48,7 +47,7 @@ async function loadTagIdToTagName() {
 
 async function loadBooksToTags(tagIdToTagName) {
     return new Promise((resolve, reject) => {
-        const bookToTagIdStream = request.get("https://raw.githubusercontent.com/zygmuntz/goodbooks-10k/master/book_tags.csv");
+        const bookToTagIdStream = request.get(config.sources.BOOKS_TAGS_CSV);
         const parsedBookToTagIdStream = papa.parse(papa.NODE_STREAM_INPUT, parseOptions);
         bookToTagIdStream.pipe(parsedBookToTagIdStream);
     

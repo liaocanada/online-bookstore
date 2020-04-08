@@ -1,7 +1,6 @@
 const papa = require("papaparse");
 const request = require("request");
 const fs = require("fs");
-const path = require("path");
 
 const config = require("../../config/sql");
 
@@ -17,12 +16,6 @@ const insertAuthor = require("./insertTuple/author");
 const insertWrites = require("./insertTuple/writes");
 const insertProductTag = require("./insertTuple/product_tag");
 
-// Output file paths
-const outputBooksPath = path.join(__dirname, "../../sql/book.sql");
-const outputAuthorsPath = path.join(__dirname, "../../sql/author.sql");
-const outputWritesPath = path.join(__dirname, "../../sql/writes.sql");
-const outputProductTagPath = path.join(__dirname, "../../sql/product_tag.sql");
-
 // Get raw CSV data from GitHub source and parse into JSON
 const parseOptions = {
     delimiter: ",",
@@ -30,19 +23,16 @@ const parseOptions = {
     dynamicTyping: true,
     preview: config.NUM_BOOKS,
 };
-const dataStream = request.get("https://raw.githubusercontent.com/zygmuntz/goodbooks-10k/master/books.csv");
+const dataStream = request.get(config.sources.BOOKS_CSV);
 const parseStream = papa.parse(papa.NODE_STREAM_INPUT, parseOptions);
 dataStream.pipe(parseStream);
 
-// Clear files and create write streams
-fs.writeFileSync(outputBooksPath, "");
-fs.writeFileSync(outputAuthorsPath, "");
-fs.writeFileSync(outputWritesPath, "");
-fs.writeFileSync(outputProductTagPath, "");
-const booksSqlStream = fs.createWriteStream(outputBooksPath, {flags: "a+"});
-const authorsSqlStream = fs.createWriteStream(outputAuthorsPath, {flags: "a+"});
-const writesSqlStream = fs.createWriteStream(outputWritesPath, {flags: "a+"});
-const productTagSqlStream = fs.createWriteStream(outputProductTagPath, {flags: "a+"});
+// Create write streams
+const writeFlag = {flags: "w"};  // Creates/clears file
+const booksSqlStream = fs.createWriteStream(config.outputs.BOOK_SQL, writeFlag);
+const authorsSqlStream = fs.createWriteStream(config.outputs.AUTHOR_SQL, writeFlag);
+const writesSqlStream = fs.createWriteStream(config.outputs.WRITES_SQL, writeFlag);
+const productTagSqlStream = fs.createWriteStream(config.outputs.PRODUCT_TAG_SQL, writeFlag);
 
 // Add create table statements to SQL
 createBook(booksSqlStream);
@@ -74,9 +64,9 @@ parseStream.on("data", book => {
 });
 
 parseStream.on("finish", () => {
-    console.log(`Generated SQL to: ${outputBooksPath}`);
-    console.log(`Generated SQL to: ${outputAuthorsPath}`);
-    console.log(`Generated SQL to: ${outputWritesPath}`);
+    console.log(`Generated SQL to: ${config.outputs.AUTHOR_SQL}`);
+    console.log(`Generated SQL to: ${config.outputs.BOOK_SQL}`);
+    console.log(`Generated SQL to: ${config.outputs.WRITES_SQL}`);
     booksSqlStream.end();
     authorsSqlStream.end();
     writesSqlStream.end();
