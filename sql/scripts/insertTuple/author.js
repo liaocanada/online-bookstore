@@ -11,7 +11,7 @@ function mapToSqlAuthor(author) {
         "INSERT INTO author" + 
             "(name, picture, summary) " + 
         "VALUES " +
-            `(%L, lo_import(%L), %L);`;
+            `(%L, %L, %L);`;
 
     // Use pg-escape to escape strings
     const bookSql = escape(sqlFormat, name, picture, summary);
