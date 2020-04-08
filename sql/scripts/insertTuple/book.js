@@ -2,7 +2,7 @@ const escape = require("pg-escape");
 const faker = require("faker");
 faker.seed(123);
 
-function mapToSqlBook(book) {
+function addBook(book, outputStream) {
     const id = book.book_id;
     const name = book.original_title;
     const description = getDescription(book);
@@ -36,7 +36,7 @@ function mapToSqlBook(book) {
         format,
     );
 
-    return bookSql;
+    outputStream.write(bookSql + "\n");
 };
 
 function getDescription(book) {
@@ -61,4 +61,4 @@ function getSeries(book) {
     else return null;
 };
 
-module.exports = mapToSqlBook;
+module.exports = addBook;

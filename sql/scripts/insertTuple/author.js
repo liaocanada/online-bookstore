@@ -2,7 +2,7 @@ const escape = require("pg-escape");
 const faker = require("faker");
 faker.seed(123);
 
-function mapToSqlAuthor(author) {
+function addAuthor(author, outputStream) {
     const name = author;
     const picture = getPicture(author);  // Just the url
     const summary = getSummary(author);
@@ -14,9 +14,9 @@ function mapToSqlAuthor(author) {
             `(%L, %L, %L);`;
 
     // Use pg-escape to escape strings
-    const bookSql = escape(sqlFormat, name, picture, summary);
+    const authorSql = escape(sqlFormat, name, picture, summary);
 
-    return bookSql;
+    outputStream.write(authorSql + "\n");
 };
 
 function getPicture(author) {
@@ -40,4 +40,4 @@ function getSummary(author) {
     return summary;
 }
 
-module.exports = mapToSqlAuthor;
+module.exports = addAuthor;

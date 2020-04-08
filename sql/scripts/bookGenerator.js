@@ -4,14 +4,14 @@ const fs = require("fs");
 const path = require("path");
 
 // SQL string for creating tables
-const createBookSql = require("./createTable/book");
-const createAuthorSql = require("./createTable/author");
-const createWritesSql = require("./createTable/writes");
+const createBook = require("./createTable/book");
+const createAuthor = require("./createTable/author");
+const createWrites = require("./createTable/writes");
 
 // Functions to map objects into SQL for inserting tuples
-const insertBookSql = require("./insertTuple/book");
-const insertAuthorSql = require("./insertTuple/author");
-const insertWritesSql = require("./insertTuple/writes");
+const insertBook = require("./insertTuple/book");
+const insertAuthor = require("./insertTuple/author");
+const insertWrites = require("./insertTuple/writes");
 
 // Output file paths
 const outputBooksPath = path.join(__dirname, "../../sql/book.sql");
@@ -29,34 +29,36 @@ const dataStream = request.get("https://raw.githubusercontent.com/zygmuntz/goodb
 const parseStream = papa.parse(papa.NODE_STREAM_INPUT, parseOptions);
 dataStream.pipe(parseStream);
 
-// Replace files with create SQL
-fs.writeFileSync(outputBooksPath, createBookSql + "\n");
-fs.writeFileSync(outputAuthorsPath, createAuthorSql + "\n");
-fs.writeFileSync(outputWritesPath, createWritesSql + "\n");
-
-// Create write streams
+// Clear files and create write streams
+fs.writeFileSync(outputBooksPath, "");
+fs.writeFileSync(outputAuthorsPath, "");
+fs.writeFileSync(outputWritesPath, "");
 const booksSqlStream = fs.createWriteStream(outputBooksPath, {flags: "a+"});
 const authorsSqlStream = fs.createWriteStream(outputAuthorsPath, {flags: "a+"});
 const writesSqlStream = fs.createWriteStream(outputWritesPath, {flags: "a+"});
 
+// Add create table statements to SQL
+createBook(booksSqlStream);
+createAuthor(authorsSqlStream);
+createWrites(writesSqlStream);
 
 // Map objects to SQL using imported functions
 const uniqueAuthors = new Set();
 
 parseStream.on("data", book => {
     // Add book
-    booksSqlStream.write(insertBookSql(book) + "\n");
+    insertBook(book, booksSqlStream);
     
     const authors = book.authors.split(", ");
     authors.forEach(author => {
         // Add author
         if (!uniqueAuthors.has(author)) {
             uniqueAuthors.add(author);
-            authorsSqlStream.write(insertAuthorSql(author) + "\n");
+            insertAuthor(author, authorsSqlStream);
         }
 
         // Add book-author
-        writesSqlStream.write(insertWritesSql(book.book_id, author) + "\n");
+        insertWrites(book.book_id, author, writesSqlStream);
     });
 });
 

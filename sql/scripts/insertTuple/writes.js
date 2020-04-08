@@ -1,6 +1,6 @@
 const escape = require("pg-escape");
 
-function mapToSqlWrites(bookId, authorName) {
+function mapToSqlWrites(bookId, authorName, outputStream) {
     if (typeof(bookId) !== "number") {
         throw new Error("Risk of SQL injection!");
     }
@@ -11,9 +11,9 @@ function mapToSqlWrites(bookId, authorName) {
         `VALUES (${bookId}, %L);`;
 
     // Use pg-escape to escape strings
-    const bookSql = escape(sqlFormat, authorName);
+    const writesSql = escape(sqlFormat, authorName);
 
-    return bookSql;
+    outputStream.write(writesSql + "\n");
 };
 
 module.exports = mapToSqlWrites;
