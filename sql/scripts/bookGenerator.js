@@ -32,7 +32,7 @@ dataStream.pipe(parseStream);
 // Replace files with create SQL
 fs.writeFileSync(outputBooksPath, createBookSql + "\n");
 fs.writeFileSync(outputAuthorsPath, createAuthorSql + "\n");
-fs.writeFileSync(outputWritesPath, createAuthorSql + "\n");
+fs.writeFileSync(outputWritesPath, createWritesSql + "\n");
 
 // Create write streams
 const booksSqlStream = fs.createWriteStream(outputBooksPath, {flags: "a+"});

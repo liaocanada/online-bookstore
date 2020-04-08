@@ -1,4 +1,4 @@
-CREATE TABLE author(name VARCHAR(80) PRIMARY KEY, picture BLOB, summary VARCHAR(2047));
+CREATE TABLE writes(product_id INT NOT NULL REFERENCES book, name VARCHAR(80) NOT NULL REFERENCES author, PRIMARY KEY(product_id, name));
 INSERT INTO writes(product_id, name) VALUES (1, 'Suzanne Collins');
 INSERT INTO writes(product_id, name) VALUES (2, 'J.K. Rowling');
 INSERT INTO writes(product_id, name) VALUES (2, 'Mary GrandPré');
