@@ -1,5 +1,6 @@
-# David's Online Bookstore
-An elaborate online bookstore. (Work in progress!)
+# Online Bookstore
+An elaborate online bookstore. Built by David Liao and Eric Pham. 
+(Work in progress!)
 
 ## Features
 (When complete,) **Users are able to:**
