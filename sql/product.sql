@@ -1,0 +1,7 @@
+CREATE TABLE product(product_id SERIAL PRIMARY KEY, name VARCHAR(255), description VARCHAR(2047), price NUMERIC(14, 2), publisher_price NUMERIC(8, 2), sold_count INT);
+INSERT INTO product(product_id, name, description, price, publisher_price, sold_count) VALUES (201, 'Very Cool E-Reader', 'A very cool e-Reader. You should buy it.', 89.1, 10, 101);
+INSERT INTO product(product_id, name, description, price, publisher_price, sold_count) VALUES (202, 'Green Lego', 'A single green 2x2 lego piece, carefully hand-crafted with only the finest materials.', 4.99, 0.01, 2);
+INSERT INTO product(product_id, name, description, price, publisher_price, sold_count) VALUES (203, 'Blue Lego', 'A single blue 2x2 lego piece, carefully hand-crafted with only the finest materials.', 4.99, 0.01, 3);
+INSERT INTO product(product_id, name, description, price, publisher_price, sold_count) VALUES (204, 'Yellow Lego', 'A single yellow 2x2 lego piece, carefully hand-crafted with only the finest materials.', 4.99, 0.01, 4);
+INSERT INTO product(product_id, name, description, price, publisher_price, sold_count) VALUES (204, 'Red Lego', 'A single red 2x2 lego piece, carefully hand-crafted with only the finest materials.', 4.99, 0.01, 5);
+INSERT INTO product(product_id, name, description, price, publisher_price, sold_count) VALUES (205, 'Blue partyhat', 'A nice hat from a cracker. (Wise Old Man and very cool specs not included)', 2147483647, 1, 6);

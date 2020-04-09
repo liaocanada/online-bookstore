@@ -20,6 +20,7 @@ const config = {
         BOOK_GENRE_SQL: path.join(__dirname, "../sql/book_genre.sql"),
         PUBLISHER_SQL: path.join(__dirname, "../sql/publisher.sql"),
         PUBLISHES_SQL: path.join(__dirname, "../sql/publishes.sql"),
+        PRODUCT_SQL: path.join(__dirname, "../sql/product.sql"),
     }
 };
 

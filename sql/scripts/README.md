@@ -7,3 +7,4 @@ The scripts should be run in the following order:
 `node couponGenerator.js`
 `node warehouseGenerator.js`
 `node bookGenerator.js`
+`node productGenerator.js`
