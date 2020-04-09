@@ -1,4 +1,4 @@
-CREATE TABLE warehouse(name VARCHAR(80) PRIMARY KEY, address VARCHAR(255) NOT NULL, phone INT, area_sqft INT, );
+CREATE TABLE warehouse(name VARCHAR(80) PRIMARY KEY, address VARCHAR(255) NOT NULL, phone BIGINT, area_sqft INT);
 INSERT INTO warehouse(name, address, phone, area_sqft) VALUES ('Rath, Graham and Keebler''s warehouse', '577 Satterfield Meadows, WY USA', 4654134367, 49173);
 INSERT INTO warehouse(name, address, phone, area_sqft) VALUES ('Frami - Beier''s warehouse', '5761 Boehm Loaf, QC CAN', 7546284776, 52195);
 INSERT INTO warehouse(name, address, phone, area_sqft) VALUES ('Johns, Hand and O''Keefe''s warehouse', '2229 Audreanne Plaza, RI USA', 4041414038, 58372);

@@ -3,7 +3,7 @@ module.exports = outputStream =>
         "CREATE TABLE warehouse(" +
             "name VARCHAR(80) PRIMARY KEY, " +  
             "address VARCHAR(255) NOT NULL, " + 
-            "phone INT, " + 
-            "area_sqft INT, " + 
+            "phone BIGINT, " +      // up to 15 digits
+            "area_sqft INT" + 
         ");\n"
     );
