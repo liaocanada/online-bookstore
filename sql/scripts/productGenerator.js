@@ -34,8 +34,10 @@ products.forEach(product => {
     insertProduct(product, productSqlStream);
 
     // Add tags associated with the product
+    insertProductTag(product, productTagSqlStream, false);
 
     // Add images associated with the product
+    insertProductImage(product, productImageSqlStream, false);
 
     // Add warehouses associated with the product
 
@@ -44,8 +46,8 @@ products.forEach(product => {
 });
 
 console.log(`Generated SQL to: ${config.outputs.PRODUCT_SQL}`);
-// console.log(`Appended SQL to: ${config.outputs.PRODUCT_TAG_SQL}`);
-// console.log(`Appended SQL to: ${config.outputs.PRODUCT_IMAGE_SQL}`);
+console.log(`Appended SQL to: ${config.outputs.PRODUCT_TAG_SQL}`);
+console.log(`Appended SQL to: ${config.outputs.PRODUCT_IMAGE_SQL}`);
 // console.log(`Appended SQL to: ${config.outputs.STORED_IN_SQL}`);
 // console.log(`Appended SQL to: ${config.outputs.PUBLISHER_SQL}`);
 // console.log(`Appended SQL to: ${config.outputs.PUBLISHES_SQL}`);

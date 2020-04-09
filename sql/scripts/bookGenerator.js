@@ -4,7 +4,7 @@ const fs = require("fs");
 
 const config = require("../../config/sql");
 
-// SQL string for creating tables
+// Functions for creating tables
 const createBook = require("./createTable/book");
 const createAuthor = require("./createTable/author");
 const createWrites = require("./createTable/writes");

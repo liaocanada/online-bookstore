@@ -93,3 +93,15 @@ INSERT INTO product_image(product_id, image) VALUES (97, 'https://images.gr-asse
 INSERT INTO product_image(product_id, image) VALUES (98, 'https://images.gr-assets.com/books/1351778881m/5060378.jpg');
 INSERT INTO product_image(product_id, image) VALUES (99, 'https://images.gr-assets.com/books/1358266080m/11857408.jpg');
 INSERT INTO product_image(product_id, image) VALUES (100, 'https://images.gr-assets.com/books/1412242487m/7244.jpg');
+INSERT INTO product_image(product_id, image) VALUES (201, 'https://images.pexels.com/photos/1247491/pexels-photo-1247491.jpeg?cs=srgb&dl=beach-e-book-ebook-ereader-1247491.jpg&fm=jpg');
+INSERT INTO product_image(product_id, image) VALUES (202, 'https://toppng.com/uploads/preview/dark-green-lego-brick-vector-data-for-free-green-lego-clipart-11563234504ea2bov1ota.png');
+INSERT INTO product_image(product_id, image) VALUES (203, 'https://lh3.googleusercontent.com/proxy/62d1hul_OIEJv9r-Typ2_eivJvgdymkeKw3ZN_GmsXVkxWGUi2TTT_WfQdvd8HHa1hBN76ofQkR6jwqmrs1HGEALp0B2DL8Em-al');
+INSERT INTO product_image(product_id, image) VALUES (204, 'https://webstockreview.net/images/legos-clipart-yellow-clipart-19.png');
+INSERT INTO product_image(product_id, image) VALUES (204, 'https://webstockreview.net/images/lego-clipart-technique-6.png');
+INSERT INTO product_image(product_id, image) VALUES (205, 'https://vignette.wikia.nocookie.net/2007scape/images/0/0a/Wise_Old_Man.png/revision/latest/top-crop/width/360/height/450?cb=20171211175901');
+INSERT INTO product_image(product_id, image) VALUES (201, 'https://images.pexels.com/photos/1247491/pexels-photo-1247491.jpeg?cs=srgb&dl=beach-e-book-ebook-ereader-1247491.jpg&fm=jpg');
+INSERT INTO product_image(product_id, image) VALUES (202, 'https://toppng.com/uploads/preview/dark-green-lego-brick-vector-data-for-free-green-lego-clipart-11563234504ea2bov1ota.png');
+INSERT INTO product_image(product_id, image) VALUES (203, 'https://lh3.googleusercontent.com/proxy/62d1hul_OIEJv9r-Typ2_eivJvgdymkeKw3ZN_GmsXVkxWGUi2TTT_WfQdvd8HHa1hBN76ofQkR6jwqmrs1HGEALp0B2DL8Em-al');
+INSERT INTO product_image(product_id, image) VALUES (204, 'https://webstockreview.net/images/legos-clipart-yellow-clipart-19.png');
+INSERT INTO product_image(product_id, image) VALUES (204, 'https://webstockreview.net/images/lego-clipart-technique-6.png');
+INSERT INTO product_image(product_id, image) VALUES (205, 'https://vignette.wikia.nocookie.net/2007scape/images/0/0a/Wise_Old_Man.png/revision/latest/top-crop/width/360/height/450?cb=20171211175901');

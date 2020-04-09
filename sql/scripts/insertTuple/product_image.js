@@ -1,17 +1,17 @@
 const escape = require("pg-escape");
 
-function addImagesForBook(book, outputStream) {
-    const bookId = book.book_id;
-    if (typeof(bookId) !== "number") {
+function addImageForProduct(product, outputStream, isBook = true) {
+    const productId = isBook ? product.book_id : product.product_id;
+    if (typeof(productId) !== "number") {
         throw new Error("Risk of SQL injection!");
     }
 
-    const imageUrl = processImageUrl(book.image_url);
+    const imageUrl = isBook ? processImageUrl(product.image_url) : product.image;
     if (!imageUrl) return;
 
     const sqlFormat = 
         "INSERT INTO product_image(product_id, image) " + 
-        `VALUES (${bookId}, %L);`;
+        `VALUES (${productId}, %L);`;
 
     // Use pg-escape to escape strings
     const productImageSql = escape(sqlFormat, imageUrl);
@@ -30,4 +30,4 @@ function processImageUrl(url) {
     return url;
 }
 
-module.exports = addImagesForBook;
+module.exports = addImageForProduct;
