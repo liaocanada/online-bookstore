@@ -1,6 +1,6 @@
 const papa = require("papaparse");
 const request = require("request");
-const config = require("../../../../config/sql");
+const config = require("../../../config/sql");
 
 const bookToTags = {};
 let loadingPromise = null;

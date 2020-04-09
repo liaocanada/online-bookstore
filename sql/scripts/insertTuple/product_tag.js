@@ -1,6 +1,6 @@
 const escape = require("pg-escape");
 
-const getTagMap = require("./helpers/getTagMap");
+const getTagMap = require("../helpers/getTagMap");
 
 function addTagsForBook(book, outputStream) {
     const bookId = book.book_id;

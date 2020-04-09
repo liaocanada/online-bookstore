@@ -11,11 +11,9 @@ for (let i = 0; i < config.NUM_WAREHOUSES; i++) {
     const name = faker.company.companyName() + "'s warehouse";
     if (warehouses.find(warehouse => warehouse.name === name)) throw new Error("Should be unique");
 
-    const address = faker.random.boolean() ? 
-        faker.address.streetAddress() + ", " + faker.random.arrayElement(["ON", "QC", "BC"]) + " CAN" :
-        faker.address.streetAddress() + ", " + faker.address.stateAbbr() + " USA";
+    const address = require("./helpers/getRandomAddress")();
 
-    const phone = parseInt(faker.phone.phoneNumberFormat().split("-").join(""));
+    const phone = require("./helpers/getRandomPhone")();
 
     const area_sqft = faker.random.number({ min: 20000, max: 110000 });
 
