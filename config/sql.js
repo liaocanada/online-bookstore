@@ -21,6 +21,13 @@ const config = {
         PUBLISHER_SQL: path.join(__dirname, "../sql/publisher.sql"),
         PUBLISHES_SQL: path.join(__dirname, "../sql/publishes.sql"),
         PRODUCT_SQL: path.join(__dirname, "../sql/product.sql"),
+        
+        ORDER_SQL: path.join(__dirname, "../sql/order.sql"),
+        ORDER_PRODUCT_SQL: path.join(__dirname, "../sql/order_product.sql"),
+        ORDER_COUPON_SQL: path.join(__dirname, "../sql/order_coupon.sql"),
+        CART_SQL: path.join(__dirname, "../sql/cart.sql"),
+        CART_PRODUCT_SQL: path.join(__dirname, "../sql/cart_product.sql"),
+        CART_COUPON_SQL: path.join(__dirname, "../sql/cart_coupon.sql"),
     }
 };
 

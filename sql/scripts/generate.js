@@ -1,29 +1,31 @@
 const childProcess = require("child_process");
 
+// Scripts should be run in this order
 const runOrder = [
     "couponGenerator.js",
     "warehouseGenerator.js",
     "bookGenerator.js",
-    "productGenerator.js"
+    "productGenerator.js",
+    "otherGenerator.js"
 ];
-let currentIndex = 0;
 
 // Some recursion :)
-const runNextGenerator = () => {
-    if (currentIndex === runOrder.length) {
+const runGenerators = fromIndex => {
+    if (fromIndex === runOrder.length) {
         console.log("Done!");
         return;
     }
 
-    console.log(" > node", runOrder[currentIndex]);
-    const childProcessInstance = childProcess.fork(runOrder[currentIndex++]);
+    // Run the script at the given index
+    console.log(" > node", runOrder[fromIndex]);
+    const childProcessInstance = childProcess.fork(runOrder[fromIndex]);
 
-    // childProcessInstance.stdout.pipe(process.stdout);
+    // When done, run the next script
     childProcessInstance.on("exit", () => {
         console.log("\n");
-        runNextGenerator();
+        runGenerators(fromIndex + 1);
     });
 };
 
 // Run
-runNextGenerator();
+runGenerators(0);
