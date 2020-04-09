@@ -1,0 +1,16 @@
+[
+    {
+        "coupon_code": "2019SAVINGS",
+        "is_percent": false,
+        "savings": 5,
+        "valid_from": "2019-01-01 00:00:00",
+        "valid_to": "2020-01-01 00:00:00"
+    },
+    {
+        "coupon_code": "ORDER15OFF",
+        "is_percent": true,
+        "savings": 15,
+        "valid_from": "2020-04-01 00:00:00",
+        "valid_to": "2020-04-30 00:00:00"
+    }
+]

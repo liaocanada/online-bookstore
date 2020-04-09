@@ -16,6 +16,7 @@ const config = {
         PRODUCT_IMAGE_SQL: path.join(__dirname, "../sql/product_image.sql"),
         WAREHOUSE_SQL: path.join(__dirname, "../sql/warehouse.sql"),
         STORED_IN_SQL: path.join(__dirname, "../sql/stored_in.sql"),
+        COUPON_SQL: path.join(__dirname, "../sql/coupon.sql"),
     }
 };
 
