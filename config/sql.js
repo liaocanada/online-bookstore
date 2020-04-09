@@ -17,6 +17,7 @@ const config = {
         WAREHOUSE_SQL: path.join(__dirname, "../sql/warehouse.sql"),
         STORED_IN_SQL: path.join(__dirname, "../sql/stored_in.sql"),
         COUPON_SQL: path.join(__dirname, "../sql/coupon.sql"),
+        BOOK_GENRE_SQL: path.join(__dirname, "../sql/book_genre.sql"),
     }
 };
 
