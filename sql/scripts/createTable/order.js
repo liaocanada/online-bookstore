@@ -1,6 +1,6 @@
 module.exports = outputStream =>
     outputStream.write(
-        "CREATE TABLE order(" +
+        "CREATE TABLE storeorder(" +
             "order_number SERIAL, " + 
             "username VARCHAR(255), " +         // REFERENCES user, but user is in another DB
             "status VARCHAR(80) NOT NULL, " + 
