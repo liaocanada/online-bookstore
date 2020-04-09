@@ -29,28 +29,33 @@ const publishesSqlStream = fs.createWriteStream(config.outputs.PUBLISHES_SQL, ap
 // Create product table
 createProduct(productSqlStream);
 
+// Add publishers associated with the product
+// Assume the only one is "Very Cool Publisher Inc"
+insertPublisher(products[0].publisher, publisherSqlStream);
+
 products.forEach(product => {
     // Add the product
     insertProduct(product, productSqlStream);
 
-    // Add tags associated with the product
+    // Add product-tags
     insertProductTag(product, productTagSqlStream, false);
 
-    // Add images associated with the product
+    // Add product-image
     insertProductImage(product, productImageSqlStream, false);
 
-    // Add warehouses associated with the product
+    // Add product-warehouse
+    insertStoredIn(product, storedInSqlStream, false);
 
-    // Add publishers associated with the product
-
+    // Add product-publisher
+    insertPublishes(product, product.publisher, publishesSqlStream, false);
 });
 
 console.log(`Generated SQL to: ${config.outputs.PRODUCT_SQL}`);
 console.log(`Appended SQL to: ${config.outputs.PRODUCT_TAG_SQL}`);
 console.log(`Appended SQL to: ${config.outputs.PRODUCT_IMAGE_SQL}`);
-// console.log(`Appended SQL to: ${config.outputs.STORED_IN_SQL}`);
-// console.log(`Appended SQL to: ${config.outputs.PUBLISHER_SQL}`);
-// console.log(`Appended SQL to: ${config.outputs.PUBLISHES_SQL}`);
+console.log(`Appended SQL to: ${config.outputs.STORED_IN_SQL}`);
+console.log(`Appended SQL to: ${config.outputs.PUBLISHER_SQL}`);
+console.log(`Appended SQL to: ${config.outputs.PUBLISHES_SQL}`);
 productSqlStream.end();
 productTagSqlStream.end();
 productImageSqlStream.end();

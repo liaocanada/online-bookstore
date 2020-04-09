@@ -99,3 +99,9 @@ INSERT INTO stored_in(product_id, name, stock, aisle) VALUES (97, 'Rath, Graham 
 INSERT INTO stored_in(product_id, name, stock, aisle) VALUES (98, 'Johns, Hand and O''Keefe''s warehouse', 604, 151);
 INSERT INTO stored_in(product_id, name, stock, aisle) VALUES (99, 'Rath, Graham and Keebler''s warehouse', 1441, 86);
 INSERT INTO stored_in(product_id, name, stock, aisle) VALUES (100, 'Rolfson - Cartwright''s warehouse', 1828, 40);
+INSERT INTO stored_in(product_id, name, stock, aisle) VALUES (201, 'Trantow, Pouros and Welch''s warehouse', 6, 99);
+INSERT INTO stored_in(product_id, name, stock, aisle) VALUES (202, 'Trantow, Pouros and Welch''s warehouse', 4998, 45);
+INSERT INTO stored_in(product_id, name, stock, aisle) VALUES (203, 'Rath, Graham and Keebler''s warehouse', 4997, 133);
+INSERT INTO stored_in(product_id, name, stock, aisle) VALUES (204, 'Johns, Hand and O''Keefe''s warehouse', 4996, 159);
+INSERT INTO stored_in(product_id, name, stock, aisle) VALUES (204, 'Johns, Hand and O''Keefe''s warehouse', 4995, 181);
+INSERT INTO stored_in(product_id, name, stock, aisle) VALUES (205, 'Frami - Beier''s warehouse', 4994, 181);

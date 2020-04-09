@@ -18,9 +18,9 @@ function addPublisher(publisher, outputStream) {
             `(%L, %L, %L, ${phone}, ${institution_number}, ${branch_number}, ${account_number});`;
 
     // Use pg-escape to escape strings
-    const authorSql = escape(sqlFormat, name, address, email);
+    const publisherSql = escape(sqlFormat, name, address, email);
 
-    outputStream.write(authorSql + "\n");
+    outputStream.write(publisherSql + "\n");
 };
 
 module.exports = addPublisher;

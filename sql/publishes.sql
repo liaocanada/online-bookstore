@@ -99,3 +99,9 @@ INSERT INTO publishes(product_id, publisher_name, year_published, reorder_thresh
 INSERT INTO publishes(product_id, publisher_name, year_published, reorder_threshold, commission_percent) VALUES (98, 'Quercus', 2006, 100, 47.46);
 INSERT INTO publishes(product_id, publisher_name, year_published, reorder_threshold, commission_percent) VALUES (99, 'Vintage Books', 2011, 1000, 63.01);
 INSERT INTO publishes(product_id, publisher_name, year_published, reorder_threshold, commission_percent) VALUES (100, 'HarperCollins', 1998, 500, 41.37);
+INSERT INTO publishes(product_id, publisher_name, year_published, reorder_threshold, commission_percent) VALUES (201, 'Very Cool Publisher Inc', 2020, 100, 60.59);
+INSERT INTO publishes(product_id, publisher_name, year_published, reorder_threshold, commission_percent) VALUES (202, 'Very Cool Publisher Inc', 2020, 75, 29.65);
+INSERT INTO publishes(product_id, publisher_name, year_published, reorder_threshold, commission_percent) VALUES (203, 'Very Cool Publisher Inc', 2020, 250, 49.25);
+INSERT INTO publishes(product_id, publisher_name, year_published, reorder_threshold, commission_percent) VALUES (204, 'Very Cool Publisher Inc', 2020, 50, 66.72);
+INSERT INTO publishes(product_id, publisher_name, year_published, reorder_threshold, commission_percent) VALUES (204, 'Very Cool Publisher Inc', 2020, 250, 53.61);
+INSERT INTO publishes(product_id, publisher_name, year_published, reorder_threshold, commission_percent) VALUES (205, 'Very Cool Publisher Inc', 2020, 75, 37.76);
