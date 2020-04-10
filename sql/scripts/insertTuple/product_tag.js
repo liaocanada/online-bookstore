@@ -30,7 +30,8 @@ function insertTags(productId, tags, outputStream) {
         // Due to limitations on pg-escape module, numbers are injected directly into the string
         const sqlFormat = 
             "INSERT INTO product_tag(product_id, tag) " + 
-            `VALUES (${productId}, %L);`;
+            `VALUES (${productId}, %L) ` +
+            "ON CONFLICT DO NOTHING;";  // Turns out the tags have duplicates
 
         // Use pg-escape to escape strings
         const productTagSql = escape(sqlFormat, tag.toString());
