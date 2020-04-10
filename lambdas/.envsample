@@ -1,0 +1,4 @@
+DB_HOST=ebookstore-davidliao.caz1q21i1ocv.us-east-1.rds.amazonaws.com
+DB_DATABASE=eBookstore
+DB_USER=sampleuser
+DB_PASSWORD=samplepassword
