@@ -1,6 +1,6 @@
 const escape = require("pg-escape");
 const faker = require("faker");
-faker.seed(122);
+faker.seed(123);
 
 function addUser(outputStream) {
    
@@ -25,6 +25,8 @@ function addUser(outputStream) {
     const userSql = escape(sqlFormat, username, password, first_name, last_name, email, address, picture, time_created, time_last_login);
 
     outputStream.write(userSql + "\n");
+
+    return username;
 };
 
 module.exports = addUser;

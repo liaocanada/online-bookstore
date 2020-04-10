@@ -13,8 +13,10 @@ Since there are foreign key constraints, the files should be run in the followin
 * author.sql
 * book.sql
 * coupon.sql
+* user.sql
 * product.sql
 * publisher.sql
+* role.sql
 * warehouse.sql
 
 ### 2) Relations with only foreign keys on `user`
@@ -33,4 +35,5 @@ Since there are foreign key constraints, the files should be run in the followin
 * order_product.sql
 * publishes.sql
 * stored_in.sql
+* user_role.sql
 * writes.sql

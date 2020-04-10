@@ -6,6 +6,7 @@ const runOrder = [
     "warehouseGenerator.js",
     "bookGenerator.js",
     "productGenerator.js",
+    "userGenerator.js",
     "otherGenerator.js"
 ];
 
