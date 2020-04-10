@@ -19,5 +19,5 @@ exports.handler = async (event, context) => {
 
     client.end();
 
-    return form200Response(res.rows);
+    return form201Response({product_id: prod_id});
 };
