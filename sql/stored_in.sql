@@ -103,5 +103,5 @@ INSERT INTO stored_in(product_id, name, stock, aisle) VALUES (201, 'Trantow, Pou
 INSERT INTO stored_in(product_id, name, stock, aisle) VALUES (202, 'Trantow, Pouros and Welch''s warehouse', 4998, 45);
 INSERT INTO stored_in(product_id, name, stock, aisle) VALUES (203, 'Rath, Graham and Keebler''s warehouse', 4997, 133);
 INSERT INTO stored_in(product_id, name, stock, aisle) VALUES (204, 'Johns, Hand and O''Keefe''s warehouse', 4996, 159);
-INSERT INTO stored_in(product_id, name, stock, aisle) VALUES (204, 'Johns, Hand and O''Keefe''s warehouse', 4995, 181);
-INSERT INTO stored_in(product_id, name, stock, aisle) VALUES (205, 'Frami - Beier''s warehouse', 4994, 181);
+INSERT INTO stored_in(product_id, name, stock, aisle) VALUES (205, 'Johns, Hand and O''Keefe''s warehouse', 4995, 181);
+INSERT INTO stored_in(product_id, name, stock, aisle) VALUES (206, 'Frami - Beier''s warehouse', 4994, 181);

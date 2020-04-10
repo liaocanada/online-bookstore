@@ -60,7 +60,7 @@
         "commission_percent": 99
     },
     {
-        "product_id": 204,
+        "product_id": 205,
         "name": "Red Lego",
         "description": "A single red 2x2 lego piece, carefully hand-crafted with only the finest materials.",
         "price": 4.99,
@@ -75,7 +75,7 @@
         "commission_percent": 99
     },
     {
-        "product_id": 205,
+        "product_id": 206,
         "name": "Blue partyhat",
         "description": "A nice hat from a cracker. (Wise Old Man and very cool specs not included)",
         "price": 2147483647.00,
