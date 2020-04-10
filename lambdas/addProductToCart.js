@@ -1,5 +1,5 @@
 const connect = require("./helpers/connectToDatabase");
-const form200Response = require("./helpers/form200Response");
+const form201Response = require("./helpers/form200Response");
 
 exports.handler = async (event, context) => {
     const client = await connect();
