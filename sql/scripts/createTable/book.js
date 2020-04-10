@@ -7,7 +7,7 @@ module.exports = outputStream =>
             "price NUMERIC(14, 2), " + 
             "publisher_price NUMERIC(8, 2), " + 
             "sold_count INT, " + 
-            "isbn VARCHAR(9), " + 
+            "isbn VARCHAR(10), " + 
             "series VARCHAR(255), " + 
             "format VARCHAR(255), " + 
             "pages INT" + 
