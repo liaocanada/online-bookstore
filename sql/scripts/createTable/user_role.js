@@ -1,7 +1,7 @@
 module.exports = outputStream =>
     outputStream.write(
         "CREATE TABLE role(" +
-            "username VARCHAR(255) REFERENCES user, " + 
+            "username VARCHAR(255) REFERENCES storeuser, " + 
             "role_id INT REFERENCES role", +
             "PRIMARY KEY(username, role_id)" +
         ");\n"
