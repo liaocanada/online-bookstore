@@ -28,6 +28,8 @@ const config = {
         CART_SQL: path.join(__dirname, "../sql/cart.sql"),
         CART_PRODUCT_SQL: path.join(__dirname, "../sql/cart_product.sql"),
         CART_COUPON_SQL: path.join(__dirname, "../sql/cart_coupon.sql"),
+
+        COMBINED_SQL: path.join(__dirname, "../sql/$combined.sql"),
     }
 };
 
