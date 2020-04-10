@@ -2,8 +2,10 @@
 // update the last_edited attribute for a user
 const updateCart = (client,user) => {
     const now = new Date();
-    const query = "update cart set last_edited ='"+now+"' where username = '"+user+"';";
-    const res = await client.query(query);
+    const statement = "update cart set last_edited = $1 where username = '$2';";
+    const values = [now, user];
+
+    const res = await client.query(statement, values);
 
     return res;
 };
