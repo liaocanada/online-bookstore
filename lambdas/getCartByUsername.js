@@ -7,9 +7,10 @@ exports.handler = async (event, context) => {
     const user = "testUser";
 
     // select all products in user's cart
-    const query = "select * " + "from cart natural join cart_product " + "group by username " + "having username = '" + username + "';";
+    const statement = "select * from cart natural join cart_product group by username having username = '$1';";
+    const values = [user];
 
-    const res = await client.query(query);
+    const res = await client.query(statement, values);
 
     client.end();
 
