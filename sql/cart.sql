@@ -1,1 +1,1 @@
-CREATE TABLE cart(username VARCHAR(255) PRIMARY KEY, last_edited TIMESTAMP);
+CREATE TABLE cart(username VARCHAR(255) PRIMARY KEY REFERENCES user, last_edited TIMESTAMP);
