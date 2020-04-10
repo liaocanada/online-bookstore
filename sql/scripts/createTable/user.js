@@ -9,6 +9,6 @@ module.exports = outputStream =>
             "address VARCHAR(255), " + 
             "picture VARCHAR(255), " + 
             "time_created TIMESTAMP, " + 
-            "time_last_login TIMESTAMP, " + 
+            "time_last_login TIMESTAMP" + 
         ");\n"
     );

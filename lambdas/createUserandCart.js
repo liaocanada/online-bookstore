@@ -24,6 +24,11 @@ exports.handler = async (event, context) => {
     values = [user, time_created];
     res = await client.query(statement, values);
 
+    // give user the role of customer
+    statement = "insert into user_role (username, role_id) values ($1, $2);";
+    values = [user, 1]; // 1 is role id for customer
+    res = await client.query(statement, values);
+
     client.end();
 
     return form201Response({username: user});
