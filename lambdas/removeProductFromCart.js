@@ -11,7 +11,7 @@ exports.handler = async (event, context) => {
     const update = require("./helpers/updateCart")(client,user);
 
     // delete a user's product
-    const statement = "delete from cart_product where username = '$1' and product_id = '$2';";
+    const statement = "delete from cart_product where username = $1 and product_id = $2;";
     const values = [user, prod_id];
 
     const res = await client.query(statement, values);
