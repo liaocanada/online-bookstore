@@ -5,7 +5,7 @@ exports.handler = async (event, context) => {
     const client = await connect();
 
     const user = "testUser";
-    const prod_id = "1";
+    const prod_id = 1;
     const quantity = 2;
 
     // update user's cart last_edited
@@ -13,8 +13,11 @@ exports.handler = async (event, context) => {
 
     // edit quantity of user product
     const query = "update cart_product set quantity ='"+quantity+"' where username = '"+user+"' and product_id = '"+prod_id+"';";
+    
+    const statement = "update cart_product set quantity ='$1' where username = '$2' and product_id = '$3';";
+    const values = [quantity, user, prod_id];
 
-    const res = await client.query(query);
+    const res = await client.query(statement, values);
 
     client.end();
 
