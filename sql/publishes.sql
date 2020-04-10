@@ -1,4 +1,4 @@
-CREATE TABLE publishes(product_id INT PRIMARY KEY REFERENCES product, publisher_name VARCHAR(80) REFERENCES publisher(name), year_published SMALLINT, reorder_threshold INT, commission_percent NUMERIC(5, 3));
+CREATE TABLE publishes(product_id INT PRIMARY KEY, publisher_name VARCHAR(80) REFERENCES publisher(name), year_published SMALLINT, reorder_threshold INT, commission_percent NUMERIC(5, 3));
 INSERT INTO publishes(product_id, publisher_name, year_published, reorder_threshold, commission_percent) VALUES (1, 'Scholastic', 2008, -1, 49.24);
 INSERT INTO publishes(product_id, publisher_name, year_published, reorder_threshold, commission_percent) VALUES (2, 'Bloomsbury', 1997, 75, 47.25);
 INSERT INTO publishes(product_id, publisher_name, year_published, reorder_threshold, commission_percent) VALUES (3, 'Little, Brown and Company', 2005, 50, 70.89);
