@@ -1,1 +1,1 @@
-CREATE TABLE order_product(order_number INT REFERENCES storeorder, username VARCHAR(255) REFERENCES storeorder, product_id INT REFERENCES product, quantity INT NOT NULL, price NUMERIC(14, 2) NOT NULL, PRIMARY KEY(order_number, username, product_id));
+CREATE TABLE order_product(order_number INT, username VARCHAR(255), product_id INT REFERENCES product, quantity INT NOT NULL, price NUMERIC(14, 2) NOT NULL, PRIMARY KEY(order_number, username, product_id), FOREIGN KEY(order_number, username) REFERENCES storeorder);
