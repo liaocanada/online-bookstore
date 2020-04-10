@@ -8,9 +8,11 @@ exports.handler = async (event, context) => {
 
     client.end();
 
-    return {
+    return form200Response(res.rows);
+
+    /*return {
         statusCode: 200,
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify(res.rows),
-    };
+    };*/
 };
