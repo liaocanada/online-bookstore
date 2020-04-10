@@ -1,5 +1,5 @@
 const connect = require("./helpers/connectToDatabase");
-const form200Response = require("./helpers/form200Response");
+const form201Response = require("./helpers/form200Response");
 
 exports.handler = async (event, context) => {
     const client = await connect();
@@ -13,7 +13,7 @@ exports.handler = async (event, context) => {
     const time_placed = new Date();
     const delivery_fee = 3.22;
 
-    // generate order_number
+    // generate order_number, make sure it doesnt already exist
 
     // add to order relation
     const statement = "insert into order (order_number, username, status, billed_to, shipped_to, time_placed, delivery_fee) values ($1, $2, $3, $4, $5, $6, $7);";
