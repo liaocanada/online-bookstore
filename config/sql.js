@@ -3,6 +3,7 @@ const path = require("path");
 const config = {
     NUM_BOOKS: 100,
     NUM_WAREHOUSES: 5,
+    NUM_USERS: 12,
     sources: {
         BOOKS_CSV: "https://raw.githubusercontent.com/zygmuntz/goodbooks-10k/master/books.csv",
         BOOKS_TAGS_CSV: "https://raw.githubusercontent.com/zygmuntz/goodbooks-10k/master/book_tags.csv",
@@ -28,6 +29,12 @@ const config = {
         CART_SQL: path.join(__dirname, "../sql/cart.sql"),
         CART_PRODUCT_SQL: path.join(__dirname, "../sql/cart_product.sql"),
         CART_COUPON_SQL: path.join(__dirname, "../sql/cart_coupon.sql"),
+
+        USER_SQL: path.join(__dirname, "../sql/user.sql"),
+        USER_ROLE_SQL: path.join(__dirname, "../sql/user_role.sql"),
+        ROLE_SQL: path.join(__dirname, "../sql/role.sql"),
+
+        COMBINED_SQL: path.join(__dirname, "../sql/$combined.sql"),
     }
 };
 
