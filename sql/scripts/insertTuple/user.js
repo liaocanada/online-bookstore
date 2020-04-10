@@ -7,9 +7,9 @@ function addUser(outputStream) {
     const first_name = faker.name.firstName();
     const last_name = faker.name.lastName();
 
-    const username = faker.internet.userName([first_name, last_name]);
+    const username = faker.internet.userName(first_name, last_name);
     const password = "12345";
-    const email = faker.internet.email(first_name,last_name,"gmail.com");
+    const email = faker.internet.email(first_name,last_name);
     const address = faker.address.streetAddress("###")+", "+faker.address.city()+", "+faker.address.stateAbbr()+faker.address.zipCode("###-###");
     const picture = faker.image.avatar();
     const time_created = faker.date.past(5);

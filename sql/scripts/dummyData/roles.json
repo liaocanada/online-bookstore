@@ -1,0 +1,12 @@
+[
+    {
+        "id": 1,
+        "name": "CUSTOMER",
+        "description": "A registered customer."
+    },
+    {
+        "id": 2,
+        "name": "ADMIN",
+        "description": "An administrator who is able to perform CRUD operations on all books in the store."
+    }
+]

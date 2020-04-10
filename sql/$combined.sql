@@ -216,6 +216,20 @@ CREATE TABLE coupon(coupon_code VARCHAR(80) PRIMARY KEY, is_percent BOOLEAN NOT 
 INSERT INTO coupon(coupon_code, is_percent, savings, valid_from, valid_to) VALUES ('2019SAVINGS', false, 5, '2019-01-01 00:00:00', '2020-01-01 00:00:00');
 INSERT INTO coupon(coupon_code, is_percent, savings, valid_from, valid_to) VALUES ('ORDER15OFF', true, 15, '2020-04-01 00:00:00', '2020-04-30 00:00:00');
 
+CREATE TABLE storeuser(username VARCHAR(255) PRIMARY KEY, password VARCHAR(255), first_name VARCHAR(255), last_name VARCHAR(255), email VARCHAR(255), address VARCHAR(255), picture VARCHAR(255), time_created TIMESTAMP, time_last_login TIMESTAMP);
+INSERT INTO storeuser(username, password, first_name, last_name, email, address, picture, time_created, time_last_login) VALUES ('Maurine42', '12345', 'Maurine', 'Rath', 'Maurine_Rath71@gmail.com', '447 Paucek Wall Suite 413, West Liza, OR342-063', 'https://s3.amazonaws.com/uifaces/faces/twitter/ashocka18/128.jpg', '2016-08-03 02:25:19', '2019-01-02 07:35:37');
+INSERT INTO storeuser(username, password, first_name, last_name, email, address, picture, time_created, time_last_login) VALUES ('Chris8', '12345', 'Chris', 'Kessler', 'Chris_Kessler42@yahoo.com', '2847 Florencio Run Suite 436, West Dante, ID296-707', 'https://s3.amazonaws.com/uifaces/faces/twitter/lepinski/128.jpg', '2020-02-19 21:00:39', '2017-11-30 16:15:27');
+INSERT INTO storeuser(username, password, first_name, last_name, email, address, picture, time_created, time_last_login) VALUES ('Chadrick42', '12345', 'Chadrick', 'Kunde', 'Chadrick88@gmail.com', '7869 Jamal Mission Suite 513, South Harvey, OH892-144', 'https://s3.amazonaws.com/uifaces/faces/twitter/mirfanqureshi/128.jpg', '2019-02-11 00:24:24', '2018-05-25 01:27:55');
+INSERT INTO storeuser(username, password, first_name, last_name, email, address, picture, time_created, time_last_login) VALUES ('Hugh.Moore48', '12345', 'Hugh', 'Moore', 'Hugh_Moore28@hotmail.com', '4303 Pfeffer Hills Suite 882, Jaclynfurt, IN586-265', 'https://s3.amazonaws.com/uifaces/faces/twitter/dnezkumar/128.jpg', '2019-05-26 21:17:52', '2016-01-12 15:25:45');
+INSERT INTO storeuser(username, password, first_name, last_name, email, address, picture, time_created, time_last_login) VALUES ('Emerald.Ruecker18', '12345', 'Emerald', 'Ruecker', 'Emerald_Ruecker@gmail.com', '05816 Zander Valley Apt. 453, Joelville, IA176-135', 'https://s3.amazonaws.com/uifaces/faces/twitter/lawlbwoy/128.jpg', '2015-09-24 14:43:16', '2018-08-02 02:59:13');
+INSERT INTO storeuser(username, password, first_name, last_name, email, address, picture, time_created, time_last_login) VALUES ('Cyrus_Howell', '12345', 'Cyrus', 'Howell', 'Cyrus_Howell35@hotmail.com', '0233 Meagan Keys Suite 903, Nonaton, NJ068-123', 'https://s3.amazonaws.com/uifaces/faces/twitter/franciscoamk/128.jpg', '2019-01-27 09:07:56', '2017-07-29 00:07:42');
+INSERT INTO storeuser(username, password, first_name, last_name, email, address, picture, time_created, time_last_login) VALUES ('Everett.Swift', '12345', 'Everett', 'Swift', 'Everett.Swift@yahoo.com', '18346 Eldred Extension Suite 885, New Emile, SD381-480', 'https://s3.amazonaws.com/uifaces/faces/twitter/samuelkraft/128.jpg', '2017-11-19 18:06:59', '2018-07-29 03:22:08');
+INSERT INTO storeuser(username, password, first_name, last_name, email, address, picture, time_created, time_last_login) VALUES ('Jovani_Mayert', '12345', 'Jovani', 'Mayert', 'Jovani91@gmail.com', '693 Elbert Falls Apt. 529, Port Kelvin, IL755-833', 'https://s3.amazonaws.com/uifaces/faces/twitter/doooon/128.jpg', '2016-08-15 17:37:19', '2020-04-23 21:39:40');
+INSERT INTO storeuser(username, password, first_name, last_name, email, address, picture, time_created, time_last_login) VALUES ('Caroline_Cummings', '12345', 'Caroline', 'Cummings', 'Caroline_Cummings@hotmail.com', '004 Torphy Avenue Apt. 951, North Eleonorefort, WA250-407', 'https://s3.amazonaws.com/uifaces/faces/twitter/mattsapii/128.jpg', '2016-07-27 01:03:30', '2018-05-05 03:51:08');
+INSERT INTO storeuser(username, password, first_name, last_name, email, address, picture, time_created, time_last_login) VALUES ('Amanda.Johns83', '12345', 'Amanda', 'Johns', 'Amanda80@yahoo.com', '826 Mallory Grove Apt. 116, Port Jimmie, OH441-407', 'https://s3.amazonaws.com/uifaces/faces/twitter/javorszky/128.jpg', '2017-06-13 15:30:03', '2017-01-08 05:43:07');
+INSERT INTO storeuser(username, password, first_name, last_name, email, address, picture, time_created, time_last_login) VALUES ('Arvel_Thompson', '12345', 'Arvel', 'Thompson', 'Arvel.Thompson@hotmail.com', '90715 Ignatius Hills Apt. 682, Morissetteside, WA100-416', 'https://s3.amazonaws.com/uifaces/faces/twitter/arpitnj/128.jpg', '2019-11-14 01:55:15', '2017-11-17 16:52:42');
+INSERT INTO storeuser(username, password, first_name, last_name, email, address, picture, time_created, time_last_login) VALUES ('Santina.MacGyver', '12345', 'Santina', 'MacGyver', 'Santina49@yahoo.com', '349 Adam Station Suite 549, Kristinaview, HI272-366', 'https://s3.amazonaws.com/uifaces/faces/twitter/atanism/128.jpg', '2020-02-17 10:24:59', '2018-10-16 08:13:48');
+
 CREATE TABLE product(product_id SERIAL PRIMARY KEY, name VARCHAR(255), description VARCHAR(2047), price NUMERIC(14, 2), publisher_price NUMERIC(8, 2), sold_count INT);
 INSERT INTO product(product_id, name, description, price, publisher_price, sold_count) VALUES (201, 'Very Cool E-Reader', 'A very cool e-Reader. You should buy it.', 89.1, 10, 101);
 INSERT INTO product(product_id, name, description, price, publisher_price, sold_count) VALUES (202, 'Green Lego', 'A single green 2x2 lego piece, carefully hand-crafted with only the finest materials.', 4.99, 0.01, 2);
@@ -288,6 +302,10 @@ INSERT INTO publisher(name, address, email, phone, institution_number, branch_nu
 INSERT INTO publisher(name, address, email, phone, institution_number, branch_number, account_number) VALUES ('Archibald Constable and Company', '253 Funk Cove, ON CAN', 'ArchibaldConstableandCompany.Daugherty@yahoo.com', 1550671339, 8, 6286, 454970034559);
 INSERT INTO publisher(name, address, email, phone, institution_number, branch_number, account_number) VALUES ('Quercus', '7867 Tatyana Spurs, AL USA', 'Quercus.Gutmann@gmail.com', 1999731578, 8, 52929, 136457196961);
 INSERT INTO publisher(name, address, email, phone, institution_number, branch_number, account_number) VALUES ('Very Cool Publisher Inc', '242 Miller Rest, BC CAN', 'VeryCoolPublisherInc_Jones41@yahoo.com', 6541343673, 5, 24476, 59687301406);
+
+CREATE TABLE role(role_id SERIAL PRIMARY KEY, name VARCHAR(25), description VARCHAR(2047));
+INSERT INTO role(role_id, name, description) VALUES (1, 'CUSTOMER', 'A registered customer.');
+INSERT INTO role(role_id, name, description) VALUES (2, 'ADMIN', 'An administrator who is able to perform CRUD operations on all books in the store.');
 
 CREATE TABLE warehouse(name VARCHAR(80) PRIMARY KEY, address VARCHAR(255) NOT NULL, phone BIGINT, area_sqft INT);
 INSERT INTO warehouse(name, address, phone, area_sqft) VALUES ('Rath, Graham and Keebler''s warehouse', '577 Satterfield Meadows, WY USA', 4654134367, 49173);
@@ -3202,6 +3220,20 @@ INSERT INTO stored_in(product_id, name, stock, aisle) VALUES (203, 'Rath, Graham
 INSERT INTO stored_in(product_id, name, stock, aisle) VALUES (204, 'Johns, Hand and O''Keefe''s warehouse', 4996, 159);
 INSERT INTO stored_in(product_id, name, stock, aisle) VALUES (205, 'Johns, Hand and O''Keefe''s warehouse', 4995, 181);
 INSERT INTO stored_in(product_id, name, stock, aisle) VALUES (206, 'Frami - Beier''s warehouse', 4994, 181);
+
+CREATE TABLE user_role(username VARCHAR(255) REFERENCES storeuser, role_id INT REFERENCES role, PRIMARY KEY(username, role_id));
+INSERT INTO user_role(username, role_id) VALUES ('Maurine42', 1);
+INSERT INTO user_role(username, role_id) VALUES ('Chris8', 1);
+INSERT INTO user_role(username, role_id) VALUES ('Chadrick42', 1);
+INSERT INTO user_role(username, role_id) VALUES ('Hugh.Moore48', 1);
+INSERT INTO user_role(username, role_id) VALUES ('Emerald.Ruecker18', 1);
+INSERT INTO user_role(username, role_id) VALUES ('Cyrus_Howell', 1);
+INSERT INTO user_role(username, role_id) VALUES ('Everett.Swift', 1);
+INSERT INTO user_role(username, role_id) VALUES ('Jovani_Mayert', 1);
+INSERT INTO user_role(username, role_id) VALUES ('Caroline_Cummings', 1);
+INSERT INTO user_role(username, role_id) VALUES ('Amanda.Johns83', 1);
+INSERT INTO user_role(username, role_id) VALUES ('Arvel_Thompson', 1);
+INSERT INTO user_role(username, role_id) VALUES ('Santina.MacGyver', 2);
 
 CREATE TABLE writes(product_id INT NOT NULL REFERENCES book, name VARCHAR(80) NOT NULL REFERENCES author, PRIMARY KEY(product_id, name));
 INSERT INTO writes(product_id, name) VALUES (1, 'Suzanne Collins') ON CONFLICT DO NOTHING;

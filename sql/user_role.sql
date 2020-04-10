@@ -1,0 +1,13 @@
+CREATE TABLE user_role(username VARCHAR(255) REFERENCES storeuser, role_id INT REFERENCES role, PRIMARY KEY(username, role_id));
+INSERT INTO user_role(username, role_id) VALUES ('Maurine42', 1);
+INSERT INTO user_role(username, role_id) VALUES ('Chris8', 1);
+INSERT INTO user_role(username, role_id) VALUES ('Chadrick42', 1);
+INSERT INTO user_role(username, role_id) VALUES ('Hugh.Moore48', 1);
+INSERT INTO user_role(username, role_id) VALUES ('Emerald.Ruecker18', 1);
+INSERT INTO user_role(username, role_id) VALUES ('Cyrus_Howell', 1);
+INSERT INTO user_role(username, role_id) VALUES ('Everett.Swift', 1);
+INSERT INTO user_role(username, role_id) VALUES ('Jovani_Mayert', 1);
+INSERT INTO user_role(username, role_id) VALUES ('Caroline_Cummings', 1);
+INSERT INTO user_role(username, role_id) VALUES ('Amanda.Johns83', 1);
+INSERT INTO user_role(username, role_id) VALUES ('Arvel_Thompson', 1);
+INSERT INTO user_role(username, role_id) VALUES ('Santina.MacGyver', 2);

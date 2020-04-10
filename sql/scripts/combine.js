@@ -7,8 +7,10 @@ const order = [
     config.outputs.AUTHOR_SQL,
     config.outputs.BOOK_SQL,
     config.outputs.COUPON_SQL,
+    config.outputs.USER_SQL,
     config.outputs.PRODUCT_SQL,
     config.outputs.PUBLISHER_SQL,
+    config.outputs.ROLE_SQL,
     config.outputs.WAREHOUSE_SQL,
     config.outputs.ORDER_SQL,
     config.outputs.CART_SQL,
@@ -21,6 +23,7 @@ const order = [
     config.outputs.ORDER_PRODUCT_SQL,
     config.outputs.PUBLISHES_SQL,
     config.outputs.STORED_IN_SQL,
+    config.outputs.USER_ROLE_SQL,
     config.outputs.WRITES_SQL
 ];
 
