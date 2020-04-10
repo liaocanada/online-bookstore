@@ -1,4 +1,4 @@
-CREATE TABLE stored_in(product_id INT PRIMARY KEY REFERENCES book, name VARCHAR(80) NOT NULL REFERENCES warehouse, stock INT NOT NULL, aisle INT);
+CREATE TABLE stored_in(product_id INT PRIMARY KEY, name VARCHAR(80) NOT NULL REFERENCES warehouse, stock INT NOT NULL, aisle INT);
 INSERT INTO stored_in(product_id, name, stock, aisle) VALUES (1, 'Trantow, Pouros and Welch''s warehouse', 1378, 180);
 INSERT INTO stored_in(product_id, name, stock, aisle) VALUES (2, 'Johns, Hand and O''Keefe''s warehouse', 69, 108);
 INSERT INTO stored_in(product_id, name, stock, aisle) VALUES (3, 'Johns, Hand and O''Keefe''s warehouse', 1431, 53);

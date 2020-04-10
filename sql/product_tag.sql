@@ -1,4 +1,4 @@
-CREATE TABLE product_tag(product_id INT NOT NULL REFERENCES book, tag VARCHAR(80) NOT NULL, PRIMARY KEY(product_id, tag));
+CREATE TABLE product_tag(product_id INT NOT NULL, tag VARCHAR(80) NOT NULL, PRIMARY KEY(product_id, tag));
 INSERT INTO product_tag(product_id, tag) VALUES (1, 'to-read');
 INSERT INTO product_tag(product_id, tag) VALUES (1, 'fantasy');
 INSERT INTO product_tag(product_id, tag) VALUES (1, 'favorites');

@@ -1,4 +1,4 @@
-CREATE TABLE product_image(product_id INT NOT NULL REFERENCES book, image VARCHAR(2047) NOT NULL, PRIMARY KEY(product_id, image));
+CREATE TABLE product_image(product_id INT NOT NULL, image VARCHAR(2047) NOT NULL, PRIMARY KEY(product_id, image));
 INSERT INTO product_image(product_id, image) VALUES (1, 'https://images.gr-assets.com/books/1447303603m/2767052.jpg');
 INSERT INTO product_image(product_id, image) VALUES (2, 'https://images.gr-assets.com/books/1474154022m/3.jpg');
 INSERT INTO product_image(product_id, image) VALUES (3, 'https://images.gr-assets.com/books/1361039443m/41865.jpg');
