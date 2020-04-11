@@ -1,0 +1,40 @@
+{
+    "version": "2.0",
+    "routeKey": "ANY /",
+    "rawPath": "/",
+    "rawQueryString": "",
+    "headers": {
+        "accept": "*/*",
+        "accept-encoding": "gzip, deflate, br",
+        "cache-control": "no-cache",
+        "content-length": "271",
+        "content-type": "application/json",
+        "host": "qyoxm4iv68.execute-api.us-east-1.amazonaws.com",
+        "postman-token": "d3b30d37-a7b9-421d-ab38-727c4d62fae9",
+        "user-agent": "PostmanRuntime/7.24.1",
+        "x-amzn-trace-id": "Root=1-5e923747-8095f0246d5b0fb83e456ea4",
+        "x-forwarded-for": "174.112.70.52",
+        "x-forwarded-port": "443",
+        "x-forwarded-proto": "https"
+    },
+    "requestContext": {
+        "accountId": "095371326078",
+        "apiId": "qyoxm4iv68",
+        "domainName": "qyoxm4iv68.execute-api.us-east-1.amazonaws.com",
+        "domainPrefix": "qyoxm4iv68",
+        "http": {
+            "method": "GET",
+            "path": "/",
+            "protocol": "HTTP/1.1",
+            "sourceIp": "174.112.70.52",
+            "userAgent": "PostmanRuntime/7.24.1"
+        },
+        "requestId": "K12TOhtEoAMEPEQ=",
+        "routeKey": "ANY /",
+        "stage": "$default",
+        "time": "11/Apr/2020:21:31:51 +0000",
+        "timeEpoch": 1586640711740
+    },
+    "body": "{\r\n    \"username\": \"davidliao\", \r\n    \"password\": \"davidliao\", \r\n    \"first_name\": \"David\", \r\n    \"last_name\": \"Liao\", \r\n    \"email\": \"hi@davidliao.ca\", \r\n    \"address\": \"120 Walden Drive\", \r\n    \"picture\": \"https://avatars3.githubusercontent.com/u/34524631?s=460&v=4\"\r\n}",
+    "isBase64Encoded": false
+}
