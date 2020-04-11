@@ -7,7 +7,7 @@ function mapToSqlWrites(bookId, authorName, outputStream) {
 
     // Due to limitations on pg-escape module, numbers are injected directly into the string
     const sqlFormat = 
-        "INSERT INTO writes(product_id, name) " + 
+        "INSERT INTO writes(product_id, author_name) " + 
         `VALUES (${bookId}, %L) ON CONFLICT DO NOTHING;`;  // Workaround for duplicate authors
 
     // Use pg-escape to escape strings
