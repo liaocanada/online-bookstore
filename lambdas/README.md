@@ -3,23 +3,33 @@ This folder contains all the lambda functions which are deployed to AWS Lambda. 
 
 ## API Endpoints
 ### Products
-| Method | Endpoint                   | Lambda Function      |
-| ------ | -------------------------- | -------------------- |
-| GET    | /products                  | getAllProducts       |
-| GET    | /products/${productId}     | getProductById       |
-| POST   | /products                  | createProduct        |
+| Method | Endpoint                   | Lambda Function      | Inputs  |
+| ------ | -------------------------- | -------------------- | ------- |
+| GET    | /products                  | getAllProducts       | (Query) |
+| GET    | /products/{product_id}     | getProductById       | Params  |
+| POST   | /products                  | createProduct        | Request body |
 
 ### Users
-Work in progress
+| Method | Endpoint                   | Function             | Inputs  |
+| ------ | -------------------------- | -------------------- | ------- |
+| GET    | /users/{username}          | getUser    | Params  |
+| POST   | /users                     | createUserAndCart    | Request body |
+<!-- | DELETE | /users/{username} | TODO | TODO | -->
 
-### Carts
-| Method | Endpoint                   | Function             |
-| ------ | -------------------------- | -------------------- |
-| GET    | /cart/${username}          | getCartByUsername    |
-| TODO   | TODO                       | TODO                 |
+### Cart/Products
+| Method | Endpoint                   | Function             | Inputs  |
+| ------ | -------------------------- | -------------------- | ------- |
+| GET    | /cart/{username}           | getCartByUsername    | Params  |
+| POST   | /cart/{username}           | addProductToCart     | Request body + Params |
+| PUT    | /cart/{username}/{product_id} | editProductInCart | Request body + Params |
+| DELETE | /cart/{username}/{product_id} | removeProductFromCart | Params |
+| DELETE | /cart/{username} | clearCart | Params |
 
 ### Orders
-Work in progress
+| Method | Endpoint                   | Function             | Inputs  |
+| ------ | -------------------------- | -------------------- | ------- |
+| GET    | /orders/{order_number}     | getOrder    | Params  |
+| POST   | /orders                    | submitOrder     | Request body |
 
 ## Running locally
 1. Make a copy of the .envsample file
