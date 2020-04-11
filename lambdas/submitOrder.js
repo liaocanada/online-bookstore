@@ -4,8 +4,6 @@ const form201Response = require("./helpers/form200Response");
 exports.handler = async (event, context) => {
     const client = await connect();
 
-    // make sure order doesnt exist already!!!!*****
-    const order_number = 1;
     const username = "testUser";
     const status = "Ordered";
     const billed_to = "198 Cool Street, L1R5D6, ON, Canada";
@@ -13,11 +11,9 @@ exports.handler = async (event, context) => {
     const time_placed = new Date();
     const delivery_fee = 3.22;
 
-    // generate order_number, make sure it doesnt already exist
-
     // add to order relation
-    const statement = "insert into order (order_number, username, status, billed_to, shipped_to, time_placed, delivery_fee) values ($1, $2, $3, $4, $5, $6, $7);";
-    const values = [order_number, username, status, billed_to, shipped_to, time_placed, delivery_fee];
+    const statement = "insert into order (order_number, username, status, billed_to, shipped_to, time_placed, delivery_fee) values (DEFAULT, $1, $2, $3, $4, $5, $6);";
+    const values = [username, status, billed_to, shipped_to, time_placed, delivery_fee];
 
     const res = await client.query(statement, values);
 

@@ -5,9 +5,9 @@ This folder contains all the lambda functions which are deployed to AWS Lambda. 
 ### Products
 | Method | Endpoint                   | Lambda Function      |
 | ------ | -------------------------- | -------------------- |
-| GET | /products | getAllProducts |
-| GET | /products/${productId} | getProductById   |
-| POST | /products | createProduct |
+| GET    | /products                  | getAllProducts       |
+| GET    | /products/${productId}     | getProductById       |
+| POST   | /products                  | createProduct        |
 
 ### Users
 Work in progress
