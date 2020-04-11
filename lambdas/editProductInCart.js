@@ -1,5 +1,5 @@
 const connect = require("./helpers/connectToDatabase");
-const form200Response = require("./helpers/form200Response");
+const formJsonResponse = require("./helpers/formJsonResponse");
 
 exports.handler = async (event, context) => {
     const client = await connect();
@@ -19,5 +19,5 @@ exports.handler = async (event, context) => {
 
     client.end();
 
-    return form201Response({product_id: prod_id});
+    return formJsonResponse(201, {product_id: prod_id});
 };

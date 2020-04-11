@@ -1,12 +1,13 @@
 const isInt = require("is-integer");
 
 const connect = require("./helpers/connectToDatabase");
-const form200Response = require("./helpers/form200Response");
+const formJsonResponse = require("./helpers/formJsonResponse");
+const formTextResponse = require("./helpers/formTextResponse");
 
 exports.handler = async (event, context) => {
 
     if (!isInt(event.pathParameters.product_id)) {
-        return form404Response("Invalid input");
+        return formTextResponse(404, "Invalid input");
     }
 
     const client = await connect();
@@ -24,5 +25,5 @@ exports.handler = async (event, context) => {
 
     client.end();
 
-    return form200Response(res.rows);
+    return formJsonResponse(200, res.rows);
 };
