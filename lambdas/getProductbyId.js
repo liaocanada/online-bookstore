@@ -7,8 +7,8 @@ exports.handler = async (event, context) => {
     const product_id = 1;
 
     // get user info
-    const statement = "select * from user natural join order where username = $1;";
-    const values = [user];
+    const statement = "select distinct product_id,name,description,price,isbn,series,format,pages,string_agg(author_name, ', ') as authors,string_agg(genre, ', ') as genres from product natural full outer join ((book natural join writes) natural join book_genre) where product_id = $1 group by product_id,name,description,price,isbn,series,format,pages;";
+    const values = [product_id];
 
     const res = await client.query(statement, values);
 

@@ -11,7 +11,7 @@ exports.handler = async (event, context) => {
         search = "345418263";
 
         // select all products in user's cart
-        const statement = "select * from product natural full outer join ((book natural join writes) natural join book_genre) where "+filter_by+" = $1;";
+        const statement = "select distinct product_id,name,description,price,isbn,series,format,pages,string_agg(author_name, ', ') as authors,string_agg(genre, ', ') as genres from product natural full outer join ((book natural join writes) natural join book_genre) where "+filter_by+" = $1 group by product_id,name,description,price,isbn,series,format,pages;";
         const values = [search];
 
         const res = await client.query(statement, values);
@@ -23,7 +23,7 @@ exports.handler = async (event, context) => {
     } else {
 
         // select all products in user's cart
-        const statement = "select * from product natural full outer join ((book natural join writes) natural join book_genre);";
+        const statement = "select distinct product_id,name,description,price,isbn,series,format,pages,string_agg(author_name, ', ') as authors,string_agg(genre, ', ') as genres from product natural full outer join ((book natural join writes) natural join book_genre) group by product_id,name,description,price,isbn,series,format,pages;";
 
         const res = await client.query(statement);
 
