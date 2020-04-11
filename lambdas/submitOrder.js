@@ -12,12 +12,15 @@ exports.handler = async (event, context) => {
     const delivery_fee = 3.22;
 
     // add to order relation
-    const statement = "insert into order (order_number, username, status, billed_to, shipped_to, time_placed, delivery_fee) values (DEFAULT, $1, $2, $3, $4, $5, $6);";
-    const values = [username, status, billed_to, shipped_to, time_placed, delivery_fee];
+    let statement = "insert into storeorder (order_number, username, status, billed_to, shipped_to, time_placed, delivery_fee) values (DEFAULT, $1, $2, $3, $4, $5, $6) returning order_number;";
+    let values = [username, status, billed_to, shipped_to, time_placed, delivery_fee];
 
-    const res = await client.query(statement, values);
+    let res = await client.query(statement, values);
 
-    // get all items from user cart and add them to order_product
+    //console.log(res.rows[0].order_number); // to get order number
+    
+
+    // get all items from user cart cart_product and add them to order_product
 
     // get all coupons from cart_coupon, but add to order_coupon
 
@@ -25,5 +28,5 @@ exports.handler = async (event, context) => {
 
     client.end();
 
-    return form201Response({order_number: order_number});
+    return form201Response({order_number: res.rows[0].order_number});
 };

@@ -7,7 +7,7 @@ exports.handler = async (event, context) => {
     const user = "testUser";
 
     // get user info
-    const statement = "select * from user natural join order where username = $1;";
+    const statement = "select * from storeuser natural join order where username = $1;";
     const values = [user];
 
     const res = await client.query(statement, values);

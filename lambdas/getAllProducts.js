@@ -18,7 +18,7 @@ exports.handler = async (event, context) => {
 
     // add query strings to filters
     for (let key in filter) {
-        filters += " "+key+"=$"+counter;
+        filters += " and "+key+"=$"+counter;
         values.push(filter.key);
         counter++;
     }

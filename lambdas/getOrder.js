@@ -7,7 +7,7 @@ exports.handler = async (event, context) => {
     const order_num = 100;
 
     // get order info
-    const statement = "select * from order natural join (order_coupon natural join order_product) where order_number = $1;";
+    const statement = "select * from storeorder natural join (order_coupon natural join order_product) where order_number = $1;";
     const values = [order_num];
 
     const res = await client.query(statement, values);

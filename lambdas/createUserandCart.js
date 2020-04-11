@@ -15,7 +15,7 @@ exports.handler = async (event, context) => {
     const time_last_login = new Date();
 
     // add user
-    let statement = "insert into user (username, password, first_name, last_name, email, address, picture, time_created, time_last_login) values ($1, $2, $3, $4, $5, $6, $7, $8, $9);";
+    let statement = "insert into storeuser (username, password, first_name, last_name, email, address, picture, time_created, time_last_login) values ($1, $2, $3, $4, $5, $6, $7, $8, $9);";
     let values = [user, pass, first_name, last_name, email, address, pic, time_created, time_last_login];
     let res = await client.query(statement, values);
 
