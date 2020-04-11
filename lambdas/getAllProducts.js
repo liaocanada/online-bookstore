@@ -9,13 +9,14 @@ exports.handler = async (event, context) => {
         "from product natural full outer join ((book natural join writes) natural join book_genre) ";
 
     // Apply filters from query string
+    const query = event.queryStringParameters || {};
     const filter = {
-        name: event.queryStringParameters.name,
-        author_name: event.queryStringParameters.author_name,
-        isbn: event.queryStringParameters.isbn,
-        genre: event.queryStringParameters.genre,
-        series: event.queryStringParameters.series,
-        format: event.queryStringParameters.format
+        name: query.name,
+        author_name: query.author_name,
+        isbn: query.isbn,
+        genre: query.genre,
+        series: query.series,
+        format: query.format
     };
     let counter = 1;
     const filters = [];
