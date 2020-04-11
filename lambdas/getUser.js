@@ -4,7 +4,7 @@ const form200Response = require("./helpers/form200Response");
 exports.handler = async (event, context) => {
     const client = await connect();
 
-    const user = "testUser";
+    const user = event.pathParameters.username;
 
     // get user info
     const statement = "select * from storeuser natural join order where username = $1;";

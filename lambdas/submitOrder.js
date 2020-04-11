@@ -11,6 +11,9 @@ exports.handler = async (event, context) => {
     const time_placed = new Date();
     const delivery_fee = 3.22;
 
+    // update user's cart last_edited
+    const update = require("./helpers/updateCart")(client,user);
+
     // add to order relation
     let statement = "insert into storeorder (order_number, username, status, billed_to, shipped_to, time_placed, delivery_fee) values (DEFAULT, $1, $2, $3, $4, $5, $6) returning order_number;";
     let values = [username, status, billed_to, shipped_to, time_placed, delivery_fee];
