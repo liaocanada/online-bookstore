@@ -16,6 +16,8 @@ exports.handler = async (event, context) => {
         client.end();
 
         return form200Response(res.rows);
+    } else {
+        return form404Response("Invalid input");
     }
     
 };
