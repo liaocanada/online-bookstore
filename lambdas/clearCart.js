@@ -4,7 +4,7 @@ const form200Response = require("./helpers/form200Response");
 exports.handler = async (event, context) => {
     const client = await connect();
 
-    const user = "testUser";
+    const user = event.pathParameters.username;
 
     // update user's cart last_edited
     const update = require("./helpers/updateCart")(client,user);

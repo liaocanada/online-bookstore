@@ -4,8 +4,8 @@ const form200Response = require("./helpers/form200Response");
 exports.handler = async (event, context) => {
     const client = await connect();
 
-    const user = "testUser";
-
+    const user = event.pathParameters.username;
+    
     // select all products in user's cart
     const statement = "select * from cart natural join (cart_product natural join product) group by username having username = $1;";
     const values = [user];
