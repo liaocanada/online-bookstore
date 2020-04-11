@@ -2,7 +2,7 @@
     "version": "2.0",
     "routeKey": "ANY /",
     "rawPath": "/",
-    "rawQueryString": "genre=Fantasy",
+    "rawQueryString": "genre=Fantasy&series=Harry Potter&author_name=Mary GrandPré",
     "headers": {
       "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
       "accept-encoding": "gzip, deflate, br",
@@ -21,7 +21,9 @@
       "x-forwarded-proto": "https"
     },
     "queryStringParameters": {
-      "genre": "Fantasy"
+      "genre": "Fantasy",
+      "series": "Harry Potter",
+      "author_name": "Mary GrandPré"
     },
     "requestContext": {
       "accountId": "095371326078",

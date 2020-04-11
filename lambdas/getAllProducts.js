@@ -13,7 +13,9 @@ exports.handler = async (event, context) => {
         name: event.queryStringParameters.name,
         author_name: event.queryStringParameters.author_name,
         isbn: event.queryStringParameters.isbn,
-        genre: event.queryStringParameters.genre
+        genre: event.queryStringParameters.genre,
+        series: event.queryStringParameters.series,
+        format: event.queryStringParameters.format
     };
     let counter = 1;
     const filters = [];
