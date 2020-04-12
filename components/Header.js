@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { Button } from '@material-ui/core';
 
 const linkStyle = {
   marginRight: 15
@@ -6,15 +7,17 @@ const linkStyle = {
 
 const Header = () => (
   <div>
-    <Link href="/">
-      <a style={linkStyle}>Home</a>
-    </Link>
-    <Link href="/about">
-      <a style={linkStyle}>About</a>
-    </Link>
     <Link href="/products">
-      <a style={linkStyle}>Products</a>
+      <Button variant="contained">Home</Button>
     </Link>
+    
+    <Link href="/user/{username}">
+      <Button variant="contained">Account</Button>
+    </Link>
+    <Link href="/cart/{username}">
+      <Button variant="contained">Cart</Button>
+    </Link>
+    <hr />
   </div>
 );
 
