@@ -42,5 +42,5 @@ exports.handler = async (event, context) => {
 
     client.end();
 
-    return formJsonResponse({ username });
+    return formJsonResponse(201, { username });
 };
