@@ -2,12 +2,14 @@
 This folder contains all the lambda functions which are deployed to AWS Lambda. The purpose of them is to access the RDS database and return a response to be served by API Gateway.
 
 ## API Endpoints
+API url is currently at `https://qyoxm4iv68.execute-api.us-east-1.amazonaws.com/`
+
 ### Products
 | Method | Endpoint                   | Lambda Function      | Inputs  |
 | ------ | -------------------------- | -------------------- | ------- |
 | GET    | /products                  | getAllProducts       | (Query) |
 | GET    | /products/{product_id}     | getProductById       | Params  |
-| POST   | /products                  | createProduct        | Request body |
+<!-- | POST   | /products                  | createProduct        | Request body | -->
 
 ### Users
 | Method | Endpoint                   | Function             | Inputs  |
@@ -37,3 +39,13 @@ This folder contains all the lambda functions which are deployed to AWS Lambda. 
 3. Change the DB_USER and DB_PASSWORD to the actual username/password used to access the database
 4. `cd ./lambdas`
 5. `node runner.js myLambda.js`, replacing myLambda.js with the file name of the lambda you want to run.
+
+## Deploying
+1. Run `deploy-zip.bat` to generate a zip file
+2. Upload the index.zip to AWS Lambda
+3. Add Lambda Layer
+4. Run `deploy-env.bat` to update environment variables
+5. Connect integration on API Gateway
+
+## Redeploying
+1. Run `deploy-existing.bat`
