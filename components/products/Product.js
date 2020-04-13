@@ -8,13 +8,14 @@ const productStyle = {
 	cursor: "pointer"
 };
 
-const Product = ({id, name, price, description,isbn, authors, genres}) => {
+const Product = ({id, name, price, description,isbn, authors, genres, quantity}) => {
 	return (
 		<Link href="/products/[id]" as={"/products/" + id}>
 			<Card style={productStyle}>
 			<Card.Body>
 				<Card.Title>{name}</Card.Title>
 				<Card.Subtitle className="mb-2 text-muted">${price.toFixed(2)}</Card.Subtitle>
+                {quantity && <Card.Text>{quantity}</Card.Text>}
 				<Card.Text>{description}</Card.Text>
 				{isbn && <Card.Text>ISBN: {isbn}</Card.Text>}
 				{authors && <Card.Text>Author(s): {authors}</Card.Text>}
@@ -22,6 +23,7 @@ const Product = ({id, name, price, description,isbn, authors, genres}) => {
 			</Card.Body>
 			</Card>
 		</Link>
+		
 	);
 };
 
