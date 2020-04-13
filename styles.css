@@ -1,0 +1,4 @@
+.card-img-top {
+    max-width: 160px;
+    transform: translateX(50%);
+}

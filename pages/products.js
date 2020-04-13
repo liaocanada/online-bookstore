@@ -23,10 +23,12 @@ class Products extends React.Component {
 
 	// Render
 	render() {
+		const { search, products } = this.props;
+
 		return (
 			<Layout>
-				{this.props.search ? 
-					<h1>Results for {this.props.search}</h1> :
+				{search ? 
+					<h1>Results for {search}</h1> :
 					<h1>Products</h1>
 				}
 				
@@ -34,7 +36,7 @@ class Products extends React.Component {
 					{products.map(product => <Product product={product} />)}
 				</CardColumns>
 
-				{this.props.products.length === 0 ? 
+				{products.length === 0 ? 
 					<p>No results found.</p> : 
 					<></>
 				}
