@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import config from "../../config/config";
 import Layout from '../../components/Layout';
 import Link from "next/link";
-import { Button } from '@material-ui/core';
+import Button from 'react-bootstrap/Button';
 
 const Product = ({products}) => {
 	//const { isbn, name,  } = props;	

@@ -6,18 +6,24 @@ const layoutStyle = {
   padding: 20,
   font: 'Roboto',
   border: '1px solid #DDD'
-  
+
 };
 
 const Layout = props => (
   <>
-  <Head>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
-  </Head>
-  <div style={layoutStyle}>
-    <Header />
-    {props.children}
-  </div>
+    <Head>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
+      <link
+        rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+        crossorigin="anonymous"
+      />
+    </Head>
+    <div style={layoutStyle}>
+      <Header />
+      {props.children}
+    </div>
   </>
 );
 

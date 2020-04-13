@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, TextField } from '@material-ui/core';
+import { Button, Form } from 'react-bootstrap';
 
 class Search extends React.Component {
 
@@ -13,14 +13,15 @@ class Search extends React.Component {
 		if (!submit) console.log("onsubmit is null!");
 		
 		return (
-			<>
-				<TextField id="standard-basic" 
-					label="Genre" 
+			<Form>
+				<Form.Label>Genre</Form.Label>
+				<Form.Control 
 					value={this.state.text}
 					onChange={event => this.setState({ text: event.target.value })}
 				/>
-				<Button variant="contained" onClick={() => submit(this.state.text)}>Search</Button>
-			</>
+
+				<Button variant="primary" onClick={() => submit(this.state.text)}>Search</Button>
+			</Form>
 		);
 	}
 };

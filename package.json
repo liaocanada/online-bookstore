@@ -23,11 +23,12 @@
   "license": "GPL v3.0",
   "homepage": "https://github.com/liaocanada/online-bookstore#readme",
   "dependencies": {
-    "@material-ui/core": "^4.9.10",
+    "bootstrap": "^4.4.1",
     "next": "^9.3.4",
     "node-fetch": "^2.6.0",
     "pg-escape": "^0.2.0",
     "react": "^16.13.1",
+    "react-bootstrap": "^1.0.0",
     "react-dom": "^16.13.1",
     "swr": "^0.1.18"
   },
