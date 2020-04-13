@@ -1,10 +1,10 @@
 import Link from "next/link";
 
 const linkify = (csv, mapToUrl) => {
-    if (!csv) return <>None</>;
+    if (!csv) return "None";
 
-    const links = csv.split(", ").map(element =>
-        <Link href={mapToUrl(element)}><a>{element}</a></Link>
+    const links = csv.split(", ").map((element, i) =>
+        <Link href={mapToUrl(element)} key={i}><a>{element}</a></Link>
     );
 
     // joinArray([1, 2, 3], 0) ---> [1, 0, 2, 0, 3]
