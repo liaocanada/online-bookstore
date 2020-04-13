@@ -1,36 +1,54 @@
 import config from "../../config/config";
 import Layout from '../../components/Layout';
 import Router from 'next/router';
-import Button from 'react-bootstrap/Button';
-import Image from 'react-bootstrap/Image';
+import { Button, Image, Carousel } from 'react-bootstrap';
 import React from 'react';
+import linkify from '../../helpers/linkify';
 
 class Product extends React.Component {
 
 	static async getInitialProps(context) {
 		const id = context.query.id;
 		const res = await fetch(config.API_GATEWAY_ENDPOINT + "/products/" + id);
+
 		return {
-			product: (await res.json())
+			product: await res.json()
 		};
 	};
 
 	render() {
-		let product = this.props.product;
+		let { product_id, name, price, description, isbn, authors, genres, quantity, images, series } = this.props.product;
+
+		price = parseFloat(price);
+		quantity = parseInt(quantity);
+		authors = linkify(authors, author => "/authors/" + author);
+		genres = linkify(genres, genre => "/products?q=" + genre);
+		images = images ? images.split(", ") : [];
 
 		return (
-		  <Layout>
-			  <Button variant="light" size="sm" onClick={() => Router.back()}>Back</Button>
-			  <h1>{product.name}</h1>
-			  {product.images && <Image src={product.images}/>}
-				<p>{product.description}</p>
-			  <p><i>${parseFloat(product.price).toFixed(2)}</i></p>
-			  {product.isbn && <p>ISBN: {product.isbn}</p>}
-			  {product.authors && <p>Author(s): {product.authors}</p>}
-			  {product.genres && <p>Genre(s): {product.genres}</p>}
-			  {product.series && <p>Series: {product.series}</p>}
-			  
-		  </Layout>
+			<Layout>
+				<Button variant="light" size="sm" onClick={() => Router.back()}>Back</Button>
+
+				<Carousel>
+					{images.map((image, i) =>
+						<Carousel.Item key={i}>
+							<Image
+								className="d-block w-100"
+								src={image}
+								rounded
+							/>
+						</Carousel.Item>
+					)}
+				</Carousel>
+
+				<h1>{name}</h1>
+				<p>{description}</p>
+				<p><i>${price.toFixed(2)}</i></p>
+				{isbn && <p>ISBN: {isbn}</p>}
+				{authors && <p>Author(s): {authors}</p>}
+				{genres && <p>Genre(s): {genres}</p>}
+				{series && <p>Series: {series}</p>}
+			</Layout>
 		);
 	}
 }

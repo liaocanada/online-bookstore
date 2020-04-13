@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { Card } from 'react-bootstrap';
 
+import linkify from '../../helpers/linkify';
+
 const productStyle = {
 	border: "1px solid #DDD",
 	margin: 20,
@@ -10,26 +12,6 @@ const productStyle = {
 
 const Product = props => {
 	let { product_id, name, price, description, isbn, authors, genres, quantity, images } = props.product;
-
-	const linkify = (csv, mapToUrl) => {
-		if (!csv) return <>None</>;
-
-		const links = csv.split(", ").map(element =>
-			<Link href={mapToUrl(element)}>{element}</Link>
-		);
-
-		// joinArray([1, 2, 3], 0) ---> [1, 0, 2, 0, 3]
-		const joinArray = (array, value) => {
-			return array.reduce((accumulator, element, index) => {
-				accumulator.push(element);
-				if (index < array.length - 1) accumulator.push(value);
-				return accumulator;
-			}, []);
-		};
-
-		const separator = <>, </>;
-		return joinArray(links, separator);
-	};
 
 	price = parseFloat(price);
 	quantity = parseInt(quantity);

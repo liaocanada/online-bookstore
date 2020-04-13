@@ -2,3 +2,7 @@
     max-width: 160px;
     transform: translateX(50%);
 }
+
+.carousel {
+    width: 25%;
+}
