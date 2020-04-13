@@ -1,9 +1,9 @@
 import config from "../config/config";
 import Layout from "../components/Layout";
 import Product from "../components/products/Product";
-import Search from "../components/Search";
 import React from 'react';
 import fetch from 'isomorphic-unfetch';
+import { CardColumns } from "react-bootstrap";
 
 class Products extends React.Component {
 
@@ -21,14 +21,6 @@ class Products extends React.Component {
 		};
 	}
 
-	// Define initial state
-	// constructor(props) {
-	// 	super(props);
-	// 	this.state = {
-	// 		products: props.products
-	// 	};
-	// }
-
 	// Render
 	render() {
 		return (
@@ -38,19 +30,21 @@ class Products extends React.Component {
 					<h1>Products</h1>
 				}
 				
-				{
-					this.props.products.map(({ product_id, name, description, price, isbn, authors, genres }) => 
-						<Product id={product_id} 
-							key={name} 
-							name={name} 
-							description={description} 
-							price={parseFloat(price)} 
-							isbn={isbn} 
-							authors={authors} 
-							genres={genres} 
-						/>
-					)
-				}
+				<CardColumns>
+					{
+						this.props.products.map(({ product_id, name, description, price, isbn, authors, genres }) => 
+							<Product id={product_id} 
+								key={name} 
+								name={name} 
+								description={description} 
+								price={parseFloat(price)} 
+								isbn={isbn} 
+								authors={authors} 
+								genres={genres} 
+							/>
+						)
+					}
+				</CardColumns>
 
 				{this.props.products.length === 0 ? 
 					<p>No results found.</p> : 

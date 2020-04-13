@@ -9,7 +9,6 @@ const productStyle = {
 };
 
 const Product = ({id, name, price, description,isbn, authors, genres}) => {
-	//const {id, name, price} = props;
 	return (
 		<Link href="/products/[id]" as={"/products/" + id}>
 			<Card style={productStyle}>
@@ -23,7 +22,6 @@ const Product = ({id, name, price, description,isbn, authors, genres}) => {
 			</Card.Body>
 			</Card>
 		</Link>
-		
 	);
 };
 
