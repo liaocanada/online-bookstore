@@ -35,20 +35,7 @@ class Cart extends React.Component {
 			<Layout>
 				<h1>{username}'s Cart</h1>
                 <h3>Total: ${price}</h3>
-				{
-					products.map(({ product_id, name, description, price, isbn, authors, genres, quantity }) => 
-						<Product id={product_id}
-							key={name}  
-							name={name} 
-							description={description} 
-							price={parseFloat(price)} 
-							isbn={isbn} 
-							authors={authors} 
-							genres={genres} 
-							quantity={quantity} 
-						/>
-					)
-				}
+				{products.map(product => <Product product={product} />)}
 			</Layout>
 		);
 	}

@@ -8,7 +8,9 @@ const productStyle = {
 	cursor: "pointer"
 };
 
-const Product = ({id, name, price, description,isbn, authors, genres, quantity}) => {
+const Product = props => {
+	const { id, name, price, description,isbn, authors, genres, quantity } = props.product;
+
 	return (
 		<Link href="/products/[id]" as={"/products/" + id}>
 			<Card style={productStyle}>

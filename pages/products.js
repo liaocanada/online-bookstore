@@ -31,19 +31,7 @@ class Products extends React.Component {
 				}
 				
 				<CardColumns>
-					{
-						this.props.products.map(({ product_id, name, description, price, isbn, authors, genres }) => 
-							<Product id={product_id} 
-								key={name} 
-								name={name} 
-								description={description} 
-								price={parseFloat(price)} 
-								isbn={isbn} 
-								authors={authors} 
-								genres={genres} 
-							/>
-						)
-					}
+					{products.map(product => <Product product={product} />)}
 				</CardColumns>
 
 				{this.props.products.length === 0 ? 

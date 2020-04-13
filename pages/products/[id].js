@@ -1,6 +1,6 @@
 import config from "../../config/config";
 import Layout from '../../components/Layout';
-import Link from "next/link";
+import Router from 'next/router';
 import Button from 'react-bootstrap/Button';
 import React from 'react';
 
@@ -20,9 +20,7 @@ class Product extends React.Component {
 
 		return (
 		  <Layout>
-			  <Link href="/products">
-				  <Button class="btn btn-secondary btn-sm">Back to Products</Button>
-			  </Link>
+			  <Button variant="light" size="sm" onClick={() => Router.back()}>Back</Button>
 			  <h1>{product.name}</h1>
 				<p>{product.description}</p>
 			  <p><i>${parseFloat(product.price).toFixed(2)}</i></p>
