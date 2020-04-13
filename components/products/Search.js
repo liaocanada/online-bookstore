@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Form } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 
 class Search extends React.Component {
 
@@ -14,13 +14,16 @@ class Search extends React.Component {
 		
 		return (
 			<Form>
-				<Form.Label>Genre</Form.Label>
-				<Form.Control 
-					value={this.state.text}
-					onChange={event => this.setState({ text: event.target.value })}
-				/>
+                <div class="form-group mx-sm-3 mb-2">
+                    <Form.Label>Genre</Form.Label>
+                    <Form.Control 
+                        value={this.state.text}
+                        onChange={event => this.setState({ text: event.target.value })}
+                    />
+                </div>
+				
 
-				<Button variant="primary" onClick={() => submit(this.state.text)}>Search</Button>
+				<button class="btn btn-primary mx-sm-3 mb-2" onClick={() => submit(this.state.text)}>Search</button>
 			</Form>
 		);
 	}

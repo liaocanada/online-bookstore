@@ -3,6 +3,7 @@ import Layout from "../components/Layout";
 import Product from "../components/products/Product";
 import Search from "../components/products/Search";
 import React from 'react';
+import fetch from 'isomorphic-unfetch';
 
 class Products extends React.Component {
 

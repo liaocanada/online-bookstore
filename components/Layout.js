@@ -4,7 +4,6 @@ import Head from "next/head";
 const layoutStyle = {
   margin: 20,
   padding: 20,
-  font: 'Roboto',
   border: '1px solid #DDD'
 
 };
@@ -12,7 +11,6 @@ const layoutStyle = {
 const Layout = props => (
   <>
     <Head>
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
       <link
         rel="stylesheet"
         href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -20,8 +18,8 @@ const Layout = props => (
         crossorigin="anonymous"
       />
     </Head>
+    <Header />
     <div style={layoutStyle}>
-      <Header />
       {props.children}
     </div>
   </>

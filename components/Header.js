@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Button } from 'react-bootstrap';
+import { Button, Navbar, Nav } from 'react-bootstrap';
 
 const linkStyle = {
   marginRight: 15
@@ -7,17 +7,15 @@ const linkStyle = {
 
 const Header = () => (
   <div>
-    <Link href="/products">
-      <Button variant="contained">Home</Button>
-    </Link>
+    <Navbar bg="light" variant="light">
+    <Navbar.Brand href="/products">BookStore</Navbar.Brand>
+    <Nav className="mr-auto">
+      <Nav.Link href="/products">Products</Nav.Link>
+      <Nav.Link href="/user/{username}">Account</Nav.Link>
+      <Nav.Link href="/cart/{username}">Cart</Nav.Link>
+    </Nav>
+  </Navbar>
     
-    <Link href="/user/{username}">
-      <Button variant="contained">Account</Button>
-    </Link>
-    <Link href="/cart/{username}">
-      <Button variant="contained">Cart</Button>
-    </Link>
-    <hr />
   </div>
 );
 
