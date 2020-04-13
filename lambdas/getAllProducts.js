@@ -31,7 +31,7 @@ exports.handler = async (event, context) => {
     });
 
     // Join the parts into a query
-    const filtersString = (filters.length === 0) ? "" : (" where " + filters.join(" and "));
+    const filtersString = (filters.length === 0) ? "" : (" where " + filters.join(" or "));
 
     statement += 
         filtersString +
