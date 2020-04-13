@@ -7,8 +7,8 @@ import React from 'react';
 class Product extends React.Component {
 
 	static async getInitialProps(context) {
-		const { id } = context.query;
-		const res = await fetch(config.API_GATEWAY_ENDPOINT + "/products/"+id);
+		const id = context.query.id;
+		const res = await fetch(config.API_GATEWAY_ENDPOINT + "/products/" + id);
 	
 		return {
 			product: (await res.json())[0]
