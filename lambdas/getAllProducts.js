@@ -35,15 +35,15 @@ exports.handler = async (event, context) => {
 
     statement += "( select product_id,string_agg(genre, ', ') as genres "+
     "from product natural full outer join (book natural join book_genre) "+filtersString+" group by product_id "+
-    ") as genre_table natural join ";
+    ") as genre_table natural left join ";
 
     statement += "( select product_id,string_agg(author_name, ', ') as authors "+
     "from product natural full outer join (book natural join writes) "+filtersString+" group by product_id "+
-    ") as author_table natural join ";
+    ") as author_table natural left join ";
 
     statement += "( select product_id,string_agg(tag, ', ') as tags "+
     "from (product natural full outer join book) natural join product_tag "+filtersString+" group by product_id "+
-    ") as tag_table natural join ";
+    ") as tag_table natural left join ";
 
     statement += "( select product_id,string_agg(image, ', ') as images "+
     "from (product natural full outer join book) natural join product_image "+filtersString+" group by product_id "+
@@ -61,29 +61,29 @@ exports.handler = async (event, context) => {
 };
 
 /*
-select distinct product_id,name,description,price,isbn,series,format,pages,authors,genres,images,tags
+select product_id,name,description,price,isbn,series,format,pages,authors,genres,images,tags
 from (product natural full outer join book) natural join
 		(
 			select product_id,string_agg(genre, ', ') as genres 
 			from product natural full outer join (book natural join book_genre)
-			where upper(name) like upper(concat('%','harr','%'))
+			where product_id = 47
 			group by product_id
-		) as genre_table natural join (
+		) as genre_table natural left join (
 			select product_id,string_agg(author_name, ', ') as authors
 			from product natural full outer join (book natural join writes)
-			where upper(name) like upper(concat('%','harr','%'))
+			where product_id = 47
 			group by product_id
-        ) as author_table natural join ( 
+        ) as author_table natural left join ( 
             select product_id,string_agg(tag, ', ') as tags
             from (product natural full outer join book) natural join product_tag
-            where upper(name) like upper(concat('%','harr','%'))
+            where product_id = 47
             group by product_id
-        ) as tag_table natural join (
+        ) as tag_table natural left join (
 			select product_id,string_agg(image, ', ') as images
 			from (product natural full outer join book) natural join product_image
-			where upper(name) like upper(concat('%','harr','%'))
+			where product_id = 47
 			group by product_id
-		) as pic_table
+        ) as pic_table
 		 
 		
  */ 
