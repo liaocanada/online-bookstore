@@ -4,6 +4,9 @@ import Router from 'next/router';
 import { Button, Image, Carousel, Row, Col, Badge } from 'react-bootstrap';
 import React from 'react';
 import linkify from '../../helpers/linkify';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons'
+import fetch from 'isomorphic-unfetch';
 
 class Product extends React.Component {
 
@@ -27,7 +30,7 @@ class Product extends React.Component {
 		images = images ? images.split(", ") : [];
 
 		const stockBadge = this.getStockBadge(stock);
-
+		
 		return (
 			<Layout>
 				<Row>
@@ -35,7 +38,7 @@ class Product extends React.Component {
 						variant="outline-secondary"
 						size="sm"
 						onClick={() => Router.back()}>
-						Back
+							<FontAwesomeIcon icon={faAngleLeft} /> Back
 					</Button>
 				</Row>
 
@@ -61,11 +64,17 @@ class Product extends React.Component {
 						<p>{description}</p>
 						<p>{format && this.capitalize(format) + " format"}</p>
 
-						<h3>Details</h3>
-						{series && <p>Series: {series}</p>}
-						{genres && genres !== "None" && <p>Genre(s): {genres}</p>}
-						{isbn && <p>ISBN: {isbn}</p>}
-						{<p>Bookstore product ID: {product_id}</p>}
+						<Button variant="outline-primary">
+							Add to Cart <FontAwesomeIcon icon={faAngleRight} />
+						</Button>
+
+						<div className="subsection">
+							<h3>Details</h3>
+							{series && <p>Series: {series}</p>}
+							{genres && genres != "None" && <p>Genre(s): {genres}</p>}
+							{isbn && <p>ISBN: {isbn}</p>}
+							{<p>Bookstore product ID: {product_id}</p>}
+						</div>
 					</Col>
 				</Row>
 			</Layout>
