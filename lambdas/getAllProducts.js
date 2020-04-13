@@ -79,6 +79,26 @@ from (product natural full outer join book) natural join (
 			group by product_id
         ) as pic_table
 where upper(authors) like upper(concat('%','row','%'));
+
+select distinct product_id,name,description,price,isbn,series,format,pages,authors,genres,tags,images
+from (product natural full outer join book) natural join (
+			select product_id,string_agg(genre, ', ') as genres 
+			from product natural full outer join (book natural join book_genre)
+			group by product_id
+		) as genre_table natural left join (
+			select product_id,string_agg(author_name, ', ') as authors
+			from product natural full outer join (book natural join writes)
+			group by product_id
+        ) as author_table natural left join ( 
+            select product_id,string_agg(tag, ', ') as tags
+            from (product natural full outer join book) natural join product_tag
+            group by product_id
+        ) as tag_table natural left join (
+			select product_id,string_agg(image, ', ') as images
+			from (product natural full outer join book) natural join product_image
+			group by product_id
+        ) as pic_table
+where upper(authors) like upper(concat('%','fantasy','%'));
 		 
 		
  */ 
