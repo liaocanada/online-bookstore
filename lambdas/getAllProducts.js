@@ -45,3 +45,12 @@ exports.handler = async (event, context) => {
 
     return formJsonResponse(200, res.rows);
 };
+
+/*
+select distinct product_id,name,description,price,isbn,series,
+        format,pages,string_agg(author_name, ', ') as authors,string_agg(genre, ', ') as genres
+        from product natural full outer join ((book natural join writes) natural join book_genre) 
+		where upper(name) like upper(concat('%','harr','%'))
+		group by product_id,name,description,price,isbn,series,format,pages
+		
+ */ 
