@@ -5,75 +5,56 @@ import Layout from "../components/Layout";
 import Product from "../components/products/Product";
 import Search from "../components/products/Search";
 import Link from "next/link";
-import { Button } from '@material-ui/core';
+import { Button, TextField } from '@material-ui/core';
 import React from 'react';
 
 class Products extends React.Component {
-	constructor(props) {
-	  super(props);
-	//   console.log(props.products);
-	//   console.log("poopoo");
-	  this.state = {value: '', products: props.products};
-	}
 
+	// Query API Gateway for products
 	static async getInitialProps(context) {
-		console.log("getInitialProps", context);
-		let req = config.API_GATEWAY_ENDPOINT + "/products";
-		const filters = [];
-		Object.keys(context.query).forEach(key => {
-			if (context.query[key]) {
-				filters.push(key + "=" + context.query[key]);
-			}
-		});
-		// Join the parts into a query
-		const filtersString = (filters.length === 0) ? "" : ("?" + filters.join("&"));
-
-		const res = await fetch(req+filtersString);
-		console.log("fetch finished", res);
+		const res = await fetch(config.API_GATEWAY_ENDPOINT + "/products");
 		return {
 			products: await res.json()
 		};
-	};
-
-	/*async updateProducts(query) {
-		let req = config.API_GATEWAY_ENDPOINT + "/products";
-
-		const filters = [];
-		Object.keys(query).forEach(key => {
-			if (query[key]) {
-				filters.push(key + "=" + query[key]);
-			}
-		});
-		// Join the parts into a query
-		const filtersString = (filters.length === 0) ? "" : ("/?" + filters.join("&"));
-
-		const res = await fetch(req+filtersString);
-		console.log(res);
-		this.state.products = await res.json();
-
-	}*/
-  
-	handleChange(event) {
-	  this.setState({value: event.target.value});
 	}
-  
+
+	// Define initial state
+	constructor(props) {
+		console.log("constructor");
+		super(props);
+		this.state = {
+			products: props.products,
+			genreSearch: ""
+		};
+	}
+
+	// Render
 	render() {
-			return (
-				<Layout>
-					<h1>Search Products</h1>
-						<p>{this.state.value}</p>
-						<label>
-							<input type="text" onChange={() => this.handleChange()} />
-						</label>
-						<Link href={"/products?"+this.state.value}>
-							<Button variant="contained">Search</Button>
-						</Link>
-					{this.state.products.map(({product_id, name, description, price, isbn, authors, genres}) => <Product key={name} id={product_id} name={name} description={description} price={parseFloat(price) }  isbn={isbn} authors={authors} genres={genres} />)}
-				</Layout>
-			  );
+		// console.log(this.state);
 		
+		return (
+			<Layout>
+				<h1>Search Products</h1>
+				<TextField id="standard-basic" 
+					label="Genre" 
+					value={this.state.genreSearch}
+					onChange={event => this.setState({ genreSearch: event.target.value })}
+				/>
+				<Button variant="contained" onClick={event => this.searchByGenre()}>Search</Button>
+				{this.state.products.map(({ product_id, name, description, price, isbn, authors, genres }) => <Product key={name} id={product_id} name={name} description={description} price={parseFloat(price)} isbn={isbn} authors={authors} genres={genres} />)}
+			</Layout>
+		);
 	}
-  }
+
+	async searchByGenre() {
+		if (!this.state.genreSearch) return;
+		
+		const url = "/products?genre=" + this.state.genreSearch;
+		const res = await fetch(config.API_GATEWAY_ENDPOINT + url);
+		const products = await res.json();
+		this.setState({ products });
+	}
+}
 
 /*
 const Products = props => {
