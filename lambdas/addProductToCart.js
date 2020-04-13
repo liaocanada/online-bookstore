@@ -1,5 +1,6 @@
 const connect = require("./helpers/connectToDatabase");
 const formJsonResponse = require("./helpers/formJsonResponse");
+const validateRequestBody = require("./helpers/validateRequestBody");
 
 exports.handler = async (event, context) => {
     const requestBody = JSON.parse(event.body);
