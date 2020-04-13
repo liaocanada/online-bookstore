@@ -18,13 +18,9 @@ const Product = props => {
 	authors = linkify(authors, author => "/authors/" + author);
 	genres = linkify(genres, genre => "/products?q=" + genre);
 
-	let firstImage;
-	if (images) {
-		firstImage = images.split(", ")[0];
-	} else {
-		firstImage = "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRWcKnEBkzIjaZL1W1U6t8essNmhTcyZFJQdDK_MtiPPmIX1GOM&usqp=CAU";
-	}
-	
+	const firstImage = images ?
+		images.split(", ")[0] : 
+		"https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRWcKnEBkzIjaZL1W1U6t8essNmhTcyZFJQdDK_MtiPPmIX1GOM&usqp=CAU";	
 
 	return (
 		<Link href="/products/[id]" as={"/products/" + product_id}>
@@ -35,8 +31,6 @@ const Product = props => {
 					<Card.Subtitle className="mb-2 text-muted">${price.toFixed(2)}</Card.Subtitle>
 					{!!quantity && <Card.Text>Quantity: {quantity}</Card.Text>}
 					{!!authors && <Card.Text>By {authors}</Card.Text>}
-					{/* <Card.Text>{description}</Card.Text> */}
-					{/* {!!isbn && <Card.Text>ISBN: {isbn}</Card.Text>} */}
 					{!!genres && <Card.Text>Genre(s): {genres}</Card.Text>}
 				</Card.Body>
 			</Card>

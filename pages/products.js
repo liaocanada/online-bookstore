@@ -34,7 +34,7 @@ class Products extends React.Component {
 				}
 				
 				<CardColumns>
-					{products.map(product => <Product product={product} />)}
+					{products.map((product, i) => <Product product={product} key={i} />)}
 				</CardColumns>
 
 				{products.length === 0 ? 
