@@ -1,10 +1,10 @@
-import config from "../config/config";
-import Layout from "../components/Layout";
-import ProductCart from "../components/products/ProductCart";
+import config from "../../config/config";
+import Layout from "../../components/Layout";
+import ProductCart from "../../components/products/ProductCart";
 import React from 'react';
 import fetch from 'isomorphic-unfetch';
 
-class Cart extends React.Component {
+class Order extends React.Component {
 
 	// Query API Gateway for products
 	static async getInitialProps(context) {
@@ -43,4 +43,4 @@ class Cart extends React.Component {
 	}
 }
 
-export default Products;
+export default Order;

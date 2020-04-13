@@ -1,6 +1,6 @@
-import config from "../config/config";
-import Layout from "../components/Layout";
-import ProductCart from "../components/products/ProductCart";
+import config from "../../config/config";
+import Layout from "../../components/Layout";
+import ProductCart from "../../components/products/ProductCart";
 import React from 'react';
 import fetch from 'isomorphic-unfetch';
 
@@ -10,6 +10,7 @@ class Cart extends React.Component {
 	static async getInitialProps(context) {
         const { username } = context.query;
 		const res = await fetch(config.API_GATEWAY_ENDPOINT + "/cart/"+username);
+		console.log(res);
 		return {
             username: username, // TODO: change this so we actually get username
 			products: await res.json()
@@ -18,7 +19,8 @@ class Cart extends React.Component {
 
 	// Define initial state
 	constructor(props) {
-        super(props);
+		super(props);
+		console.log(props);
         // figure out total price using props.product
         let price = 0;
         for (let i=0; i<props.products.length; i++) {
@@ -43,4 +45,4 @@ class Cart extends React.Component {
 	}
 }
 
-export default Products;
+export default Cart;
