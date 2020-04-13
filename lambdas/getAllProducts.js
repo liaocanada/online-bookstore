@@ -5,18 +5,34 @@ exports.handler = async (event, context) => {
     const client = await connect();
     
     let statement = "select distinct product_id,name,description,price,isbn,series,format,pages,authors,genres,tags,images "+
-    "from (product natural full outer join book) natural join ";
+                    "from (product natural full outer join book) natural join ( "+
+                            "select product_id,string_agg(genre, ', ') as genres "+
+                            "from product natural full outer join (book natural join book_genre) "+
+                            "group by product_id "+
+                        ") as genre_table natural left join ( "+
+                            "select product_id,string_agg(author_name, ', ') as authors "+
+                            "from product natural full outer join (book natural join writes) "+
+                            "group by product_id "+
+                        ") as author_table natural left join ( "+
+                            "select product_id,string_agg(tag, ', ') as tags "+
+                            "from (product natural full outer join book) natural join product_tag "+
+                            "group by product_id "+
+                        ") as tag_table natural left join ( "+
+                            "select product_id,string_agg(image, ', ') as images "+
+                            "from (product natural full outer join book) natural join product_image "+
+                            "group by product_id "+
+                        ") as pic_table";
 
     // Apply filters from query string
     const query = event.queryStringParameters || {};
     const filter = {
         name: query.name,
-        author_name: query.author_name,
+        authors: query.author_name,
         isbn: query.isbn,
-        genre: query.genre,
+        genres: query.genre,
         series: query.series,
         format: query.format,
-        tag: query.tag
+        tags: query.tag
     };
     let counter = 1;
     const filters = [];
@@ -32,24 +48,7 @@ exports.handler = async (event, context) => {
 
     // Join the parts into a query
     const filtersString = (filters.length === 0) ? "" : (" where " + filters.join(" or "));
-
-    statement += "( select product_id,string_agg(genre, ', ') as genres "+
-    "from product natural full outer join (book natural join book_genre) "+filtersString+" group by product_id "+
-    ") as genre_table natural left join ";
-
-    statement += "( select product_id,string_agg(author_name, ', ') as authors "+
-    "from product natural full outer join (book natural join writes) "+filtersString+" group by product_id "+
-    ") as author_table natural left join ";
-
-    statement += "( select product_id,string_agg(tag, ', ') as tags "+
-    "from (product natural full outer join book) natural join product_tag "+filtersString+" group by product_id "+
-    ") as tag_table natural left join ";
-
-    statement += "( select product_id,string_agg(image, ', ') as images "+
-    "from (product natural full outer join book) natural join product_image "+filtersString+" group by product_id "+
-    ") as pic_table;";
-
-    
+    statement += filtersString+";";
 
     // Execute the query
     console.log(statement, values);
@@ -61,29 +60,25 @@ exports.handler = async (event, context) => {
 };
 
 /*
-select product_id,name,description,price,isbn,series,format,pages,authors,genres,images,tags
-from (product natural full outer join book) natural join
-		(
+select distinct product_id,name,description,price,isbn,series,format,pages,authors,genres,tags,images
+from (product natural full outer join book) natural join (
 			select product_id,string_agg(genre, ', ') as genres 
 			from product natural full outer join (book natural join book_genre)
-			where product_id = 47
 			group by product_id
 		) as genre_table natural left join (
 			select product_id,string_agg(author_name, ', ') as authors
 			from product natural full outer join (book natural join writes)
-			where product_id = 47
 			group by product_id
         ) as author_table natural left join ( 
             select product_id,string_agg(tag, ', ') as tags
             from (product natural full outer join book) natural join product_tag
-            where product_id = 47
             group by product_id
         ) as tag_table natural left join (
 			select product_id,string_agg(image, ', ') as images
 			from (product natural full outer join book) natural join product_image
-			where product_id = 47
 			group by product_id
         ) as pic_table
+where upper(authors) like upper(concat('%','row','%'));
 		 
 		
  */ 
