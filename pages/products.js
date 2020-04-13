@@ -11,7 +11,7 @@ class Products extends React.Component {
 	static async getInitialProps(context) {
 		const q = context.query.q;
 		const query = q ? 
-			`?name=${q}&genre=${q}&isbn=${q}&author_name=${q}&series=${q}&format=${q}` :
+			`?name=${q}&genre=${q}&isbn=${q}&author_name=${q}&series=${q}&format=${q}&tag=${q}` :
 			"";
 		
 		const res = await fetch(config.API_GATEWAY_ENDPOINT + "/products" + query);
