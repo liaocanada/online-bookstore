@@ -1,10 +1,10 @@
-import config from "../config/config";
-import Layout from "../components/Layout";
-import ProductCart from "../components/products/ProductCart";
+import config from "../../config/config";
+import Layout from "../../components/Layout";
+import Product from "../../components/products/Product";
 import React from 'react';
 import fetch from 'isomorphic-unfetch';
 
-class Cart extends React.Component {
+class Order extends React.Component {
 
 	// Query API Gateway for products
 	static async getInitialProps(context) {
@@ -37,10 +37,10 @@ class Cart extends React.Component {
 			<Layout>
 				<h1>Order #{this.state.order_number}</h1>
                 <h3>Total: ${this.state.price.toString()}</h3>
-				{this.state.products.map(({ product_id, name, description, price, isbn, authors, genres, quantity }) => <ProductCart key={name} id={product_id} name={name} description={description} price={parseFloat(price)} isbn={isbn} authors={authors} genres={genres} quantity={quantity} />)}
+				{this.state.products.map(({ product_id, name, description, price, isbn, authors, genres, quantity }) => <Product key={name} id={product_id} name={name} description={description} price={parseFloat(price)} isbn={isbn} authors={authors} genres={genres} quantity={quantity} />)}
 			</Layout>
 		);
 	}
 }
 
-export default Products;
+export default Order;

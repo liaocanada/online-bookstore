@@ -10,6 +10,7 @@ class Cart extends React.Component {
 	static async getInitialProps(context) {
         const { username } = context.query;
 		const res = await fetch(config.API_GATEWAY_ENDPOINT + "/cart/"+username);
+		console.log(res);
 		return {
             username: username, // TODO: change this so we actually get username
 			products: await res.json()
