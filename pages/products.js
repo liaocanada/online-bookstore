@@ -15,6 +15,7 @@ class Products extends React.Component {
 			"";
 		
 		const res = await fetch(config.API_GATEWAY_ENDPOINT + "/products" + query);
+		console.log(res);
 		return {
 			search: q,
 			products: await res.json()

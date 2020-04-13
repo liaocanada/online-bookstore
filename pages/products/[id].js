@@ -2,6 +2,7 @@ import config from "../../config/config";
 import Layout from '../../components/Layout';
 import Router from 'next/router';
 import Button from 'react-bootstrap/Button';
+import Image from 'react-bootstrap/Image';
 import React from 'react';
 
 class Product extends React.Component {
@@ -9,9 +10,8 @@ class Product extends React.Component {
 	static async getInitialProps(context) {
 		const id = context.query.id;
 		const res = await fetch(config.API_GATEWAY_ENDPOINT + "/products/" + id);
-	
 		return {
-			product: (await res.json())[0]
+			product: (await res.json())
 		};
 	};
 
@@ -22,6 +22,7 @@ class Product extends React.Component {
 		  <Layout>
 			  <Button variant="light" size="sm" onClick={() => Router.back()}>Back</Button>
 			  <h1>{product.name}</h1>
+			  {product.images && <Image src={product.images}/>}
 				<p>{product.description}</p>
 			  <p><i>${parseFloat(product.price).toFixed(2)}</i></p>
 			  {product.isbn && <p>ISBN: {product.isbn}</p>}

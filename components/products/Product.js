@@ -36,7 +36,13 @@ const Product = props => {
 	authors = linkify(authors, author => "/authors/" + author);
 	genres = linkify(genres, genre => "/products?q=" + genre);
 
-	const firstImage = images.split(", ")[0];
+	let firstImage;
+	if (images) {
+		firstImage = images.split(", ")[0];
+	} else {
+		firstImage = "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRWcKnEBkzIjaZL1W1U6t8essNmhTcyZFJQdDK_MtiPPmIX1GOM&usqp=CAU";
+	}
+	
 
 	return (
 		<Link href="/products/[id]" as={"/products/" + product_id}>

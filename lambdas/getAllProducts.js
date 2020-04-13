@@ -40,7 +40,7 @@ exports.handler = async (event, context) => {
 
     Object.keys(filter).forEach(key => {
         if (filter[key]) {
-            filters.push("upper("+key + ") like upper(concat('%',$"+counter+",'%'))");
+            filters.push("upper("+key + ") like concat('%',upper($"+counter+"),'%')"); //filters.push("upper("+key + ") like upper(concat('%',$"+counter+",'%'))");
             values.push(filter[key]);
             counter++;
         }
