@@ -1,6 +1,6 @@
 import config from "../../config/config";
 import Layout from "../../components/Layout";
-import ProductCart from "../../components/products/ProductCart";
+import Product from "../../components/products/Product";
 import React from 'react';
 import fetch from 'isomorphic-unfetch';
 
@@ -10,41 +10,34 @@ class Cart extends React.Component {
 	static async getInitialProps(context) {
         const { username } = context.query;
 		const res = await fetch(config.API_GATEWAY_ENDPOINT + "/cart/"+username);
-		console.log(res);
 		return {
-            username: username, // TODO: change this so we actually get username
-			products: await res.json()
+            username: username,
+			products: await res.json()  // TODO make sure 200
 		};
 	}
 
 	// Define initial state
 	constructor(props) {
         super(props);
-		console.log(props.products);
-		
-		const products = props.products || [];
-
-		// Figure out total price using props.product
-		const price = products.reduce(
-			(accumulator, current) => accumulator += current.price
-		);
 
 		this.state = {
             username: props.username,
-            products,
-            price
+            products: props.products,
+            price: this.calculatePrice(props.products)
 		};
 	}
 
 	// Render
 	render() {
+		const { username, products, price } = this.state; 
+
 		return (
 			<Layout>
-				<h1>{this.state.username}'s Cart</h1>
-                <h3>Total: ${this.state.price.toString()}</h3>
+				<h1>{username}'s Cart</h1>
+                <h3>Total: ${price}</h3>
 				{
-					this.state.products.map(({ product_id, name, description, price, isbn, authors, genres, quantity }) => 
-						<ProductCart id={product_id}
+					products.map(({ product_id, name, description, price, isbn, authors, genres, quantity }) => 
+						<Product id={product_id}
 							key={name}  
 							name={name} 
 							description={description} 
@@ -57,6 +50,13 @@ class Cart extends React.Component {
 					)
 				}
 			</Layout>
+		);
+	}
+
+	calculatePrice(products) {
+		return products.reduce(
+			(accumulator, current) => accumulator += (parseFloat(current.price) || 0),
+			0
 		);
 	}
 }

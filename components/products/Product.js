@@ -15,7 +15,7 @@ const Product = ({id, name, price, description,isbn, authors, genres, quantity})
 			<Card.Body>
 				<Card.Title>{name}</Card.Title>
 				<Card.Subtitle className="mb-2 text-muted">${price.toFixed(2)}</Card.Subtitle>
-                {quantity && <Card.Text>{quantity}</Card.Text>}
+                {quantity && <Card.Text>Quantity: {quantity}</Card.Text>}
 				<Card.Text>{description}</Card.Text>
 				{isbn && <Card.Text>ISBN: {isbn}</Card.Text>}
 				{authors && <Card.Text>Author(s): {authors}</Card.Text>}
@@ -23,7 +23,6 @@ const Product = ({id, name, price, description,isbn, authors, genres, quantity})
 			</Card.Body>
 			</Card>
 		</Link>
-		
 	);
 };
 

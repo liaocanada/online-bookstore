@@ -1,15 +1,27 @@
 import Link from 'next/link';
-import { Navbar, Nav, Form, Button, NavDropdown } from 'react-bootstrap';
+import { Navbar, Nav } from 'react-bootstrap';
 import React from 'react';
 import Seach from "./Search";
+import authenticationService from "../services/authenticationService";
 
 class Header extends React.Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      currentUser: authenticationService.getCurrentUser()
+    };
+  }
+
+  componentDidMount() {
+    this.setState({
+      currentUser: authenticationService.getCurrentUser()
+    });
   }
 
   render() {
+    const { currentUser } = this.state;
+
     return (
       <Navbar bg="light" variant="light" sticky="top">
         <Link href="/products" passHref>
@@ -17,20 +29,20 @@ class Header extends React.Component {
         </Link>
 
         <Nav className="mr-auto">
-          {/* <Link href="/products" passHref>
-            <Nav.Link>Products</Nav.Link>
-          </Link> */}
           <Seach />
         </Nav>
 
-        <Nav>
-          <Link href="/user/{username}" passHref>
-            <Nav.Link>Account</Nav.Link>
-          </Link>
-          <Link href="/cart/{username}" passHref>
-            <Nav.Link>Cart</Nav.Link>
-          </Link>
-        </Nav>
+        {
+          currentUser && currentUser.username &&
+          <Nav>
+            <Link href={"/user/" + currentUser.username} passHref>
+              <Nav.Link>Account</Nav.Link>
+            </Link>
+            <Link href={"/cart/" + currentUser.username} passHref>
+              <Nav.Link>Cart</Nav.Link>
+            </Link>
+          </Nav>
+        }
 
       </Navbar>
     );
