@@ -1,6 +1,6 @@
 import config from "../../config/config";
 import Layout from "../../components/Layout";
-import Product from "../../components/products/ProductCard";
+import ProductCard from "../../components/products/ProductCard";
 import React from 'react';
 import fetch from 'isomorphic-unfetch';
 
@@ -42,7 +42,8 @@ class Order extends React.Component {
 				<h3>Billed to: {this.state.order_info.billed_to}</h3>
 				<h3>Shipped to: {this.state.order_info.shipped_to}</h3>
 				<h3>Time placed: {this.state.order_info.time_placed}</h3>
-				{this.state.products.map(({ product_id, name, description, price, isbn, authors, genres, quantity }) => <Product key={name} id={product_id} name={name} description={description} price={parseFloat(price)} isbn={isbn} authors={authors} genres={genres} quantity={quantity} />)}
+				{this.state.products.map((product, i) => 
+					<ProductCard key={i} product={product} />)}
 			</Layout>
 		);
 	}

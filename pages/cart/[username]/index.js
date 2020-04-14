@@ -7,6 +7,7 @@ import React from 'react';
 import fetch from 'isomorphic-unfetch';
 import { Button, Tab, Row, Col, Nav, Tabs } from "react-bootstrap";
 import authenticationService from "../../../services/authenticationService";
+import Router from "next/router";
 
 class Cart extends React.Component {
 
@@ -113,8 +114,23 @@ class Cart extends React.Component {
 		});
 	}
 
-	submitOrder() {
-		
+	async submitOrder() {
+		const requestBody = {
+			username: this.props.username,
+			billed_to: this.state.billingAddress,
+			shipped_to: this.state.shippingAddress,
+		};
+		const fetchOptions = {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify(requestBody),
+		};
+		const url = config.API_GATEWAY_ENDPOINT + "/orders";
+
+		const res = await fetch(url, fetchOptions);  // TODO error handling
+		const orderNumber = (await res.json()).order_number;
+
+		Router.push("/orders/" + orderNumber);
 	}
 }
 
