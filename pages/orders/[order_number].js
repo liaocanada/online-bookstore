@@ -19,7 +19,8 @@ class Order extends React.Component {
 	// Define initial state
 	constructor(props) {
         super(props);
-        // figure out total price using props.product
+		// figure out total price using props.product
+		console.log(props);
         let price = 0;
         for (let i=0; i<props.products.length; i++) {
             price += parseFloat(props.products[i].price);
