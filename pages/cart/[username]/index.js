@@ -34,6 +34,7 @@ class Cart extends React.Component {
 			activeTab: this.tabKeys[0],
 			shippingAddress: deepCopy(defaultAddress),
 			billingAddress: deepCopy(defaultAddress),
+			numItems: this.calculateNumItems(this.props.products)
 		};
 	}
 
@@ -57,7 +58,7 @@ class Cart extends React.Component {
 									</Nav.Link>
 								</Nav.Item>
 								<Nav.Item>
-									<Nav.Link eventKey={this.tabKeys[1]}>
+									<Nav.Link eventKey={this.tabKeys[1]} disabled={!this.state.numItems}>
 										2. Shipping & Billing
 									</Nav.Link>
 								</Nav.Item>
@@ -131,6 +132,14 @@ class Cart extends React.Component {
 		const orderNumber = (await res.json()).order_number;
 
 		Router.push("/orders/" + orderNumber);
+	}
+
+	// TODO move to helper
+	calculateNumItems(products) {
+		return products.reduce(
+			(accumulator, current) => accumulator += parseInt(current.quantity),
+			0
+		);
 	}
 }
 
