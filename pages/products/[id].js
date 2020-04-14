@@ -1,12 +1,14 @@
 import config from "../../config/config";
 import Layout from '../../components/Layout';
+import Toast from "../../components/Toast";
 import Router from 'next/router';
 import { Button, Image, Carousel, Row, Col, Badge } from 'react-bootstrap';
 import React from 'react';
 import linkify from '../../helpers/linkify';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons'
+import { faAngleLeft, faAngleRight, faCartPlus, faCheck } from '@fortawesome/free-solid-svg-icons'
 import fetch from 'isomorphic-unfetch';
+import authenticationService from "../../services/authenticationService";
 
 class Product extends React.Component {
 
@@ -19,8 +21,16 @@ class Product extends React.Component {
 		};
 	};
 
+	constructor(props) {
+		super(props);
+		this.state = {
+			messages: [],
+			purchased: false
+		};
+	}
+
 	render() {
-		let { product_id, name, price, description, isbn, authors, genres, 
+		let { product_id, name, price, description, isbn, authors, genres,
 			quantity, images, series, stock, format } = this.props.product;
 
 		price = parseFloat(price);
@@ -30,7 +40,7 @@ class Product extends React.Component {
 		images = images ? images.split(", ") : [];
 
 		const stockBadge = this.getStockBadge(stock);
-		
+
 		return (
 			<Layout>
 				<Row>
@@ -38,7 +48,7 @@ class Product extends React.Component {
 						variant="outline-secondary"
 						size="sm"
 						onClick={() => Router.back()}>
-							<FontAwesomeIcon icon={faAngleLeft} /> Back
+						<FontAwesomeIcon icon={faAngleLeft} /> Back
 					</Button>
 				</Row>
 
@@ -64,9 +74,16 @@ class Product extends React.Component {
 						<p>{description}</p>
 						<p>{format && this.capitalize(format) + " format"}</p>
 
-						<Button variant="outline-primary">
-							Add to Cart <FontAwesomeIcon icon={faAngleRight} />
-						</Button>
+						{
+							this.state.purchased ?
+								<Button variant="success">
+									Added! <FontAwesomeIcon icon={faCheck} />
+								</Button>
+								:
+								<Button variant="outline-primary" onClick={() => this.addToCart()}>
+									Add to Cart <FontAwesomeIcon icon={faAngleRight} />
+								</Button>
+						}
 
 						<div className="subsection">
 							<h3>Details</h3>
@@ -77,8 +94,42 @@ class Product extends React.Component {
 						</div>
 					</Col>
 				</Row>
+
+				{
+					this.state.messages.map(message =>
+						<Toast
+							headerIcon={message.icon}
+							title={message.title}
+							contents={message.contents}
+						/>
+					)
+				}
 			</Layout>
 		);
+	}
+
+	async addToCart() {
+		const requestBody = {
+			product_id: this.props.product.product_id,
+			quantity: 1,
+		};
+		const fetchOptions = {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify(requestBody),
+		};
+		const username = authenticationService.getCurrentUser().username;
+		const url = config.API_GATEWAY_ENDPOINT + "/cart/" + username;
+
+		const res = await fetch(url, fetchOptions);
+
+		const messages = this.state.messages;
+		messages.push({
+			icon: <FontAwesomeIcon icon={faCartPlus} />,
+			title: "Product added successfully!",
+			contents: `Your item ${this.props.product.name} has been successfully added to your cart.`
+		});
+		this.setState({ messages, purchased: true });
 	}
 
 	getStockBadge(stock) {
@@ -86,12 +137,12 @@ class Product extends React.Component {
 			return <Badge variant="danger" pill>Out of stock</Badge>
 		if (stock <= 250)
 			return <Badge variant="warning" pill>Only {stock} remaining!</Badge>
-		
+
 		return <Badge variant="success" pill>In stock ({stock})</Badge>
 	}
 
 	capitalize(str) {
-		if (!str) return ""; 
+		if (!str) return "";
 		return str.charAt(0).toUpperCase() + str.slice(1);
 	}
 }
