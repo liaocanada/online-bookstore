@@ -9,9 +9,9 @@ class Order extends React.Component {
 	// Query API Gateway for products
 	static async getInitialProps(context) {
         const { order_number } = context.query;
-		const res = await fetch(config.API_GATEWAY_ENDPOINT + "/order/"+order_number); // TODO: change this so we actually get an order number
+		const res = await fetch(config.API_GATEWAY_ENDPOINT + "/order/"+order_number);
 		return {
-            order_number: order_number, // TODO: change this so we actually get an order number
+            order_number: order_number,
 			products: await res.json()
 		};
 	}
