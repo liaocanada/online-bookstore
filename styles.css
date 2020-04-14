@@ -21,3 +21,8 @@
 .hidden {
     visibility: hidden;
 }
+
+#search-nav {
+    width: 10000px;
+    margin: 0 5%;
+}

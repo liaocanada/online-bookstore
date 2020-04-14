@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { Navbar, Nav } from 'react-bootstrap';
 import React from 'react';
-import Seach from "./Search";
+import Search from "./Search";
 import authenticationService from "../services/authenticationService";
 
 class Header extends React.Component {
@@ -28,8 +28,8 @@ class Header extends React.Component {
           <Navbar.Brand>BookStore</Navbar.Brand>
         </Link>
 
-        <Nav className="mr-auto">
-          <Seach />
+        <Nav id="search-nav">
+          <Search />
         </Nav>
 
         {
