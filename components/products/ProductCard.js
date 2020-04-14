@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Card } from 'react-bootstrap';
 
 import linkify from '../../helpers/linkify';
+import config from "../../config/config";
 
 const productStyle = {
 	border: "1px solid #DDD",
@@ -20,7 +21,7 @@ const Product = props => {
 
 	const firstImage = images ?
 		images.split(", ")[0] : 
-		"https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRWcKnEBkzIjaZL1W1U6t8essNmhTcyZFJQdDK_MtiPPmIX1GOM&usqp=CAU";	
+		config.BOOK_PLACEHOLDER_IMAGE;
 
 	return (
 		<Link href="/products/[id]" as={"/products/" + product_id}>

@@ -27,7 +27,7 @@ class Product extends React.Component {
 		};
 	}
 
-	render() { // TODO move to didshow
+	render() {
 		let { product_id, name, price, description, isbn, authors, genres,
 			quantity, images, format } = this.props.product;
 
@@ -38,8 +38,8 @@ class Product extends React.Component {
 
 		const firstImage = images ?
 			images.split(", ")[0] :
-			"https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRWcKnEBkzIjaZL1W1U6t8essNmhTcyZFJQdDK_MtiPPmIX1GOM&usqp=CAU";
-		// TODO mv to config
+			config.BOOK_PLACEHOLDER_IMAGE;
+
 		return (
 			<Media>
 				<img
