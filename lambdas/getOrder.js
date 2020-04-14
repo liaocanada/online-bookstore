@@ -13,9 +13,9 @@ exports.handler = async (event, context) => {
     let info = res.rows[0];
 
     // get order products
-    let statement = "select * from order_product where order_number = $1;";
-    let values = [order_num];
-    let res = await client.query(statement, values);
+    statement = "select * from order_product where order_number = $1;";
+    values = [order_num];
+    res = await client.query(statement, values);
     let products = res.rows;
 
     client.end();
