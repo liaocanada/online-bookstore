@@ -1,6 +1,6 @@
 import config from "../../config/config";
 import Layout from '../../components/Layout';
-import Toast from "../../components/Toast";
+import MyToast from "../../components/MyToast";
 import Router from 'next/router';
 import { Button, Image, Carousel, Row, Col, Badge } from 'react-bootstrap';
 import React from 'react';
@@ -97,7 +97,7 @@ class Product extends React.Component {
 
 				{
 					this.state.messages.map(message =>
-						<Toast
+						<MyToast
 							headerIcon={message.icon}
 							title={message.title}
 							contents={message.contents}

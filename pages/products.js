@@ -1,6 +1,6 @@
 import config from "../config/config";
 import Layout from "../components/Layout";
-import Product from "../components/products/Product";
+import ProductCard from "../components/products/ProductCard";
 import React from 'react';
 import fetch from 'isomorphic-unfetch';
 import { CardColumns } from "react-bootstrap";
@@ -33,7 +33,7 @@ class Products extends React.Component {
 				}
 				
 				<CardColumns>
-					{products.map((product, i) => <Product product={product} key={i} />)}
+					{products.map((product, i) => <ProductCard product={product} key={i} />)}
 				</CardColumns>
 
 				{products.length === 0 ? 

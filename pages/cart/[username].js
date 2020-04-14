@@ -1,6 +1,6 @@
 import config from "../../config/config";
 import Layout from "../../components/Layout";
-import Product from "../../components/products/Product";
+import ProductCard from "../../components/Cards/ProductCard";
 import React from 'react';
 import fetch from 'isomorphic-unfetch';
 
@@ -35,7 +35,7 @@ class Cart extends React.Component {
 			<Layout>
 				<h1>{username}'s Cart</h1>
                 <h3>Total: ${price}</h3>
-				{products.map(product => <Product product={product} />)}
+				{products.map(product => <ProductCard product={product} key={i} />)}
 			</Layout>
 		);
 	}
