@@ -4,10 +4,17 @@ const formJsonResponse = require("./helpers/formJsonResponse");
 exports.handler = async (event, context) => {
     const client = await connect();
 
-    const username = "testUser";
+    const requestBody = JSON.parse(event.body);
+    const expectedKeys = ["username", "billed_to", "shipped_to"];
+    
+    if (!validateRequestBody(requestBody, expectedKeys)) {
+        return formTextResponse(400, 
+            "Missing request body attributes: one of " + expectedKeys.toString());
+    }
+
+    const { username, billed_to, shipped_to } = requestBody;
+
     const status = "Ordered";
-    const billed_to = "198 Cool Street, L1R5D6, ON, Canada";
-    const shipped_to = "198 Cool Street, L1R5D6, ON, Canada";
     const time_placed = new Date();
     const delivery_fee = 3.22;
 
