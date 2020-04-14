@@ -15,8 +15,13 @@ class Cart extends React.Component {
 	static async getInitialProps(context) {
 		const { username } = context.query;
 		const res = await fetch(config.API_GATEWAY_ENDPOINT + "/cart/" + username);
+
+		const { firstName, lastName } = authenticationService.getCurrentUser();
+
 		return {
 			username: username,
+			firstName,
+			lastName,
 			products: await res.json()  // TODO make sure 200
 		};
 	}
@@ -90,6 +95,10 @@ class Cart extends React.Component {
 								<ReviewTab 
 									eventKey={this.tabKeys[2]}
 									products={this.props.products}
+									shippingAddress={this.state.shippingAddress}
+									billingAddress={this.state.billingAddress}
+									firstName={this.props.firstName}
+									lastName={this.props.lastName}
 									next={() => this.advanceTab()} 
 								/>
 

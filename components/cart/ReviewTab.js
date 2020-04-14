@@ -1,7 +1,7 @@
 import config from "../../config/config";
 import ProductMedia from "../../components/cart/ProductMedia";
 import React from 'react';
-import { Button, Tab } from "react-bootstrap";
+import { Button, Tab, Form, Row, Col } from "react-bootstrap";
 import Link from "next/link";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleLeft, faAngleDoubleRight } from '@fortawesome/free-solid-svg-icons';
@@ -31,6 +31,7 @@ class ReviewTab extends React.Component {
 
 		return (
 			<Tab.Pane eventKey={this.props.eventKey}>
+                <h2>Products</h2>
 				{products.map((product, i) => <>
 					<ProductMedia key={i} product={product} editable={false} />
 					<hr />
@@ -45,6 +46,34 @@ class ReviewTab extends React.Component {
 				<hr />
 				<h5 className="red float-right">CAD ${total.toFixed(2)}</h5>
 				<h5>Total (excl. shipping)</h5>
+
+                <h2>Shipping</h2>
+                <Form.Group as={Row}>
+                    <Form.Label column sm="2">Address</Form.Label>
+                    <Col sm="10">
+                        <Form.Control plaintext readOnly defaultValue={this.props.shippingAddress} />
+                    </Col>
+                </Form.Group>
+                <Form.Group as={Row}>
+                    <Form.Label column sm="2">Estimated shipping time</Form.Label>
+                    <Col sm="10">
+                        <Form.Control plaintext readOnly defaultValue="3 to 5 business days" />
+                    </Col>
+                </Form.Group>
+
+                <h2>Billing</h2>
+                <Form.Group as={Row}>
+                    <Form.Label column sm="2">Name</Form.Label>
+                    <Col sm="10">
+                        <Form.Control plaintext readOnly defaultValue={this.props.firstName + " " + this.props.lastName} />
+                    </Col>
+                </Form.Group>
+                <Form.Group as={Row}>
+                    <Form.Label column sm="2">Address</Form.Label>
+                    <Col sm="10">
+                        <Form.Control plaintext readOnly defaultValue={this.props.billingAddress} />
+                    </Col>
+                </Form.Group>
 
                 {/* TODO previous button */}
                 <Button variant="success" onClick={() => {}}>
