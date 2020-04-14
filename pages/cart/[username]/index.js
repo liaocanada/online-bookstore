@@ -50,7 +50,7 @@ class Cart extends React.Component {
 		return (
 			<Layout>
 				<h1>{this.props.username}'s Cart</h1>
-
+				<hr />
 				<Tab.Container 
 					activeKey={this.state.activeTab} 
 					onSelect={key => this.setState({ activeTab: key })}>

@@ -32,15 +32,9 @@ exports.handler = async (event, context) => {
 
     // get all items from user cart cart_product and add them to order_product
     // get items from cart first
-    statement = "select product_id, quantity, price from cart_product natural join product where username=$1";
-    values = [username];
+    statement = "insert into order_product (select $1, product_id, quantity, price from cart_product natural join (product natural full outer join book) where username=$2)";
+    values = [order_number, username];
     res = await client.query(statement, values);
-    // add all to order_product
-    for (let i=0; i<res.rows.length; i++) {
-        statement = "insert into order_product (order_number, product_id, quantity, price) values ($1, $2, $3, $4)";
-        values = [order_number, res.rows[i].product_id, res.rows[i].quantity, res.rows[i].price];
-        res = await client.query(statement, values);
-    }
 
     // get all coupons from cart_coupon, but add to order_coupon
     statement = "select coupon_code from cart_coupon where username=$1";
