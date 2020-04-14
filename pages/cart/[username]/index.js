@@ -1,6 +1,7 @@
 import config from "../../../config/config";
 import Layout from "../../../components/Layout";
 import ProductsSummaryTab from "../../../components/cart/ProductsSummaryTab";
+import ShippingBillingTab from "../../../components/cart/ShippingBillingTab";
 import React from 'react';
 import fetch from 'isomorphic-unfetch';
 import { Button, Tab, Row, Col, Nav, Tabs } from "react-bootstrap";
@@ -74,7 +75,16 @@ class Cart extends React.Component {
 									next={() => this.advanceTab()} 
 								/>
 
-								<Tab.Pane eventKey="second">
+								<ShippingBillingTab 
+									eventKey={this.tabKeys[1]}
+									shippingAddress={this.state.shippingAddress}
+									billingAddress={this.state.billingAddress}
+									setShippingAddress={shippingAddress => this.setState({ shippingAddress })}
+									setBillingAddress={billingAddress => this.setState({ billingAddress })}
+									next={() => this.advanceTab()} 
+								/>
+
+								<Tab.Pane eventKey="third">
 									{/* <Sonnet /> */}
 								</Tab.Pane>
 
