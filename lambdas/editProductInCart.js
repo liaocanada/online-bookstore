@@ -1,5 +1,6 @@
 const connect = require("./helpers/connectToDatabase");
 const formJsonResponse = require("./helpers/formJsonResponse");
+const validateRequestBody = require("./helpers/validateRequestBody");
 
 exports.handler = async (event, context) => {
     const client = await connect();
@@ -18,7 +19,7 @@ exports.handler = async (event, context) => {
     const prod_id = parseInt(event.pathParameters.product_id);
 
     // update user's cart last_edited
-    const update = require("./helpers/updateCart")(client,user);
+    const update = require("./helpers/updateCart")(client,username);
 
     if (parseInt(quantity) <= 0 ) {
         const statement = "delete from cart_product where username = $1 and product_id = $2;";
