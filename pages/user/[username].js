@@ -19,11 +19,10 @@ class User extends React.Component {
 	// Define initial state
 	constructor(props) {
         super(props);
-        console.log(props);
 		this.state = {
-            username: props.user.username,
-            user: props.user,
-            orders: props.orders
+            username: props.user.user.username,
+            user: props.user.user,
+            orders: props.user.orders
 		};
 	}
 
@@ -33,7 +32,6 @@ class User extends React.Component {
 			<Layout>
 				<h1>Hello, {this.state.username}</h1>
                 <Image
-                    className="d-block w-100"
                     src={this.state.user.picture}
                     rounded
                 />
