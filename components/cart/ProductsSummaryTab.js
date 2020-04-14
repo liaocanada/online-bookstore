@@ -31,7 +31,7 @@ class ProductsSummaryTab extends React.Component {
 		const { username, products, subtotal, taxes, total, numItems } = this.state;
 
 		return (
-			<Tab.Pane eventKey="product-summary">
+			<Tab.Pane eventKey={this.props.eventKey}>
 				{products.map((product, i) => <>
 					<ProductMedia key={i} product={product} />
 					<hr />
@@ -50,7 +50,7 @@ class ProductsSummaryTab extends React.Component {
 				{/* To take up space for the right-floating button */}
 				<Button className="hidden"></Button>
 				{ numItems ?
-					<Button variant="success float-right" onClick={() => this.checkOut()}>
+					<Button variant="success float-right" onClick={() => this.props.next()}>
 						Next: Shipping & Billing <FontAwesomeIcon icon={faAngleRight} />
 					</Button>
 					:
@@ -78,10 +78,6 @@ class ProductsSummaryTab extends React.Component {
 			(accumulator, current) => accumulator += parseInt(current.quantity),
 			0
 		);
-	}
-
-	checkOut() {
-
 	}
 }
 
