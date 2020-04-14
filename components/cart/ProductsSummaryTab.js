@@ -1,22 +1,12 @@
 import config from "../../config/config";
-import Layout from "../../components/Layout";
 import ProductMedia from "../../components/cart/ProductMedia";
 import React from 'react';
-import fetch from 'isomorphic-unfetch';
-import { Button } from "react-bootstrap";
+import { Button, Tab } from "react-bootstrap";
 import Link from "next/link";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faAngleRight } from '@fortawesome/free-solid-svg-icons'
 
-class Cart extends React.Component {
-
-	// Query API Gateway for products
-	static async getInitialProps(context) {
-		const { username } = context.query;
-		const res = await fetch(config.API_GATEWAY_ENDPOINT + "/cart/" + username);
-		return {
-			username: username,
-			products: await res.json()  // TODO make sure 200
-		};
-	}
+class ProductsSummaryTab extends React.Component {
 
 	// Define initial state
 	constructor(props) {
@@ -41,8 +31,7 @@ class Cart extends React.Component {
 		const { username, products, subtotal, taxes, total, numItems } = this.state;
 
 		return (
-			<Layout>
-				<h1>{username}'s Cart</h1>
+			<Tab.Pane eventKey="product-summary">
 				{products.map((product, i) => <>
 					<ProductMedia key={i} product={product} />
 					<hr />
@@ -61,8 +50,8 @@ class Cart extends React.Component {
 				{/* To take up space for the right-floating button */}
 				<Button className="hidden"></Button>
 				{ numItems ?
-					<Button variant="outline-success float-right" onClick={() => this.checkOut()}>
-						Check Out
+					<Button variant="success float-right" onClick={() => this.checkOut()}>
+						Next: Shipping & Billing <FontAwesomeIcon icon={faAngleRight} />
 					</Button>
 					:
 					<Link href="/products">
@@ -71,7 +60,7 @@ class Cart extends React.Component {
 						</Button>
 					</Link>
 				}
-			</Layout>
+			</Tab.Pane>
 		);
 	}
 
@@ -96,4 +85,4 @@ class Cart extends React.Component {
 	}
 }
 
-export default Cart;
+export default ProductsSummaryTab;
