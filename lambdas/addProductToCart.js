@@ -20,13 +20,27 @@ exports.handler = async (event, context) => {
     // update user's cart last_edited
     const update = require("./helpers/updateCart")(client,username);
 
-    // add product to cart_product
-    const statement = "insert into cart_product (username, product_id, quantity) values ($1, $2, $3);";
-    const values = [username, product_id, quantity];
-
+    // check if user has product in cart already
+    const statement = "select quantity from cart_product where username=$1 and product_id=$2;";
+    const values = [username, parseInt(product_id)];
     const res = await client.query(statement, values);
+
+    if (res.rows.length == 0) {
+        // add product to cart_product
+        const statement = "insert into cart_product (username, product_id, quantity) values ($1, $2, $3);";
+        const values = [username, parseInt(product_id), parseInt(quantity)];
+        const res = await client.query(statement, values);
+    } else {
+        // increment quantity if product exists in cart
+        const statement = "update cart_product set quantity = $1 where username = $2 and product_id = $3;";
+        const values = [parseInt(res.rows[0].quantity)+parseInt(quantity), username, prod_id];
+        const res = await client.query(statement, values);
+    }
+
+
+    
 
     client.end();
 
-    return formJsonResponse(201, { username, product_id, quantity });
+    return formJsonResponse(201, { username:username, product_id:product_id, quantity:quantity });
 };
