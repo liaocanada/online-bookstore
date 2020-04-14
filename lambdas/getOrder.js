@@ -7,12 +7,18 @@ exports.handler = async (event, context) => {
     const order_num = parseInt(event.pathParameters.order_number);
 
     // get order info
-    const statement = "select * from storeorder natural left outer join (order_product natural left outer join order_coupon) where order_number = $1;";
-    const values = [order_num];
+    let statement = "select * from storeorder where order_number = $1;";
+    let values = [order_num];
+    let res = await client.query(statement, values);
+    let info = res.rows[0];
 
-    const res = await client.query(statement, values);
+    // get order products
+    let statement = "select * from order_product where order_number = $1;";
+    let values = [order_num];
+    let res = await client.query(statement, values);
+    let products = res.rows;
 
     client.end();
 
-    return formJsonResponse(200, res.rows);
+    return formJsonResponse(200, {order_number:order_num, products:products, order_info:info });
 };
