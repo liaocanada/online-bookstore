@@ -17,3 +17,7 @@
 .subsection {
     padding-top: 15px;
 }
+
+.hidden {
+    visibility: hidden;
+}

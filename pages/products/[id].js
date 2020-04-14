@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleLeft, faAngleRight, faCartPlus, faCheck } from '@fortawesome/free-solid-svg-icons'
 import fetch from 'isomorphic-unfetch';
 import authenticationService from "../../services/authenticationService";
+import capitalize from "../../helpers/capitalize";
 
 class Product extends React.Component {
 
@@ -73,7 +74,7 @@ class Product extends React.Component {
 						{authors && <p>By {authors}</p>}
 						<strong className="red">CDN ${price.toFixed(2)}</strong>
 						<p>{description}</p>
-						<p>{format && this.capitalize(format) + " format"}</p>
+						<p>{format && capitalize(format) + " format"}</p>
 
 						{
 							this.state.purchased ?
@@ -143,10 +144,6 @@ class Product extends React.Component {
 		return <Badge variant="success" pill>In stock ({stock})</Badge>
 	}
 
-	capitalize(str) {
-		if (!str) return "";
-		return str.charAt(0).toUpperCase() + str.slice(1);
-	}
 }
 
 export default Product;
