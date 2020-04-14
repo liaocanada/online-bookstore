@@ -9,8 +9,8 @@ class Order extends React.Component {
 	// Query API Gateway for products
 	static async getInitialProps(context) {
         const { order_number } = context.query;
-		const res = await fetch(config.API_GATEWAY_ENDPOINT + "/order/"+order_number);
-		return res;
+		const res = await fetch(config.API_GATEWAY_ENDPOINT + "/orders/"+order_number);
+		return res.json();
 	}
 
 	// Define initial state
@@ -24,7 +24,7 @@ class Order extends React.Component {
         }
 		this.state = {
 			order_number: props.order_number,
-			order_info:order_info,
+			order_info:props.order_info,
             products: props.products,
             price: price
 		};
@@ -35,6 +35,7 @@ class Order extends React.Component {
 		return (
 			<Layout>
 				<h1>Order #{this.state.order_number}</h1>
+				<h4>Delivery fee: ${parseFloat(this.state.order_info.delivery_fee)}</h4>
                 <h3>Total: ${(this.state.price+parseFloat(this.state.order_info.delivery_fee)).toString()}</h3>
 				<h3>Ordered by: {this.state.order_info.username}</h3>
 				<h3>Status: {this.state.order_info.status}</h3>
