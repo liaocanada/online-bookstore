@@ -22,7 +22,8 @@ class Product extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			newQuantity: parseInt(this.props.product.quantity)
+			newQuantity: parseInt(this.props.product.quantity),
+			updated: false
 		};
 	}
 
@@ -48,20 +49,29 @@ class Product extends React.Component {
 					src={firstImage}
 				/>
 				<Media.Body>
-					<strong className="red float-right">${price.toFixed(2)}</strong>
+					<strong className="red float-right">${price.toFixed(2)} ea</strong>
 					<Link href="/products/[id]" as={"/products/" + product_id}>
 						<a><h5>{name}</h5></a>
 					</Link>
 					<Form inline>
 						<Form.Label>Quantity:</Form.Label>
+						{/* TODO make sure input is a positive integer */}
 						<Form.Control
 							value={this.state.newQuantity}
 							onChange={event => this.setState({ newQuantity: event.target.value })}
 							size="sm"
 						/>
-						<Button variant="outline-primary" size="sm" onClick={() => this.updateQuantity()}>
-							Update
+
+						{
+							this.state.updated ? 
+							<Button variant="success" size="sm" onClick={() => {}}>
+								Updated!
 							</Button>
+								:
+							<Button variant="outline-primary" size="sm" onClick={() => this.updateQuantity()}>
+								Update
+							</Button>
+						}
 					</Form>
 
 					{!!authors && <>By {authors}<br /></>}
@@ -87,6 +97,7 @@ class Product extends React.Component {
 
 		const res = await fetch(url, fetchOptions);
 
+		this.setState({ updated: true });
 		Router.reload();
 	}
 
