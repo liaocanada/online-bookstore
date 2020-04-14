@@ -31,16 +31,17 @@ class Product extends React.Component {
 
 	render() {
 		let { product_id, name, price, description, isbn, authors, genres,
-			quantity, images, series, stock, format } = this.props.product;
+			quantity, images, series, stock, format, pages } = this.props.product;
 
 		price = parseFloat(price);
 		quantity = parseInt(quantity);
+		pages = parseInt(pages);
 		authors = linkify(authors, author => "/authors/" + author);
 		genres = linkify(genres, genre => "/products?q=" + genre);
 		images = images ? images.split(", ") : [];
 
 		const stockBadge = this.getStockBadge(stock);
-
+			
 		return (
 			<Layout>
 				<Row>
@@ -89,6 +90,7 @@ class Product extends React.Component {
 							<h3>Details</h3>
 							{series && <p>Series: {series}</p>}
 							{genres && genres != "None" && <p>Genre(s): {genres}</p>}
+							{!!pages && <p>{pages} pages</p>}
 							{isbn && <p>ISBN: {isbn}</p>}
 							{<p>Bookstore product ID: {product_id}</p>}
 						</div>
