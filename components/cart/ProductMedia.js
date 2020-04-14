@@ -4,8 +4,27 @@ import { Media, Button, Form } from 'react-bootstrap';
 
 import linkify from '../../helpers/linkify';
 import capitalize from "../../helpers/capitalize";
+import authenticationService from "../../services/authenticationService";
+import config from "../../config/config";
 
 class Product extends React.Component {
+
+	// Process props
+	static async getInitialProps(context) {
+		const { username } = context.query;
+		const res = await fetch(config.API_GATEWAY_ENDPOINT + "/cart/" + username);
+		return {
+			username: username,
+			products: await res.json()  // TODO make sure 200
+		};
+	}
+
+	constructor(props) {
+		super(props);
+		this.state = {
+			newQuantity: parseInt(this.props.product.quantity)
+		};
+	}
 
 	render() { // TODO move to didshow
 		let { product_id, name, price, description, isbn, authors, genres,
@@ -33,30 +52,60 @@ class Product extends React.Component {
 					<Link href="/products/[id]" as={"/products/" + product_id}>
 						<a><h5>{name}</h5></a>
 					</Link>
-					<p>
-						<Form inline>
-							<Form.Label>Quantity:</Form.Label>
-							<Form.Control value={quantity} size="sm" />
-							<Button variant="outline-primary" size="sm" onClick={() => this.updateQuantity()}>
-								Update
-						</Button>
-						</Form>
+					<Form inline>
+						<Form.Label>Quantity:</Form.Label>
+						<Form.Control
+							value={this.state.newQuantity}
+							onChange={event => this.setState({ newQuantity: event.target.value })}
+							size="sm"
+						/>
+						<Button variant="outline-primary" size="sm" onClick={() => this.updateQuantity()}>
+							Update
+							</Button>
+					</Form>
 
-						{!!authors && <>By {authors}<br /></>}
-						{!!format && <>{capitalize(format)} format<br /></>}
-						<a href="#" onClick={() => this.delete()}>Delete</a>
-					</p>
+					{!!authors && <>By {authors}<br /></>}
+					{!!format && <>{capitalize(format)} format<br /></>}
+					<a href="#" onClick={() => this.delete()}>Delete</a>
 				</Media.Body>
 			</Media>
 		);
 	}
 
-	updateQuantity() {
-		
+	async updateQuantity() {
+		const requestBody = {
+			quantity: this.state.newQuantity
+		};
+		const fetchOptions = {
+			method: "PUT",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify(requestBody),
+		};
+		const username = authenticationService.getCurrentUser().username;
+		const productId = this.props.product.product_id;
+		const url = config.API_GATEWAY_ENDPOINT + "/cart/" + username + "/" + productId;
+
+		const res = await fetch(url, fetchOptions);
+
+		Router.reload();
 	}
 
-	delete() {
+	async delete() {
+		const requestBody = {
+			quantity: 0
+		};
+		const fetchOptions = {
+			method: "PUT",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify(requestBody),
+		};
+		const username = authenticationService.getCurrentUser().username;
+		const productId = this.props.product.product_id;
+		const url = config.API_GATEWAY_ENDPOINT + "/cart/" + username + "/" + productId;
 
+		const res = await fetch(url, fetchOptions);
+
+		Router.reload();
 	}
 }
 

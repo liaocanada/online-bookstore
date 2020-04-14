@@ -42,16 +42,19 @@ class Cart extends React.Component {
 		return (
 			<Layout>
 				<h1>{username}'s Cart</h1>
-				{products.map((product, i) => <ProductMedia product={product} key={i} />)}
-				<hr />
-				<h5 class="float-right">CAD ${subtotal.toFixed(2)}</h5>
+				{products.map((product, i) => <>
+						<ProductMedia key={i} product={product} />
+						<hr />
+					</>
+				)}
+				<h5 className="float-right">CAD ${subtotal.toFixed(2)}</h5>
                 <h5>Subtotal ({numItems} items)</h5>
 
-				<h5 class="float-right">CAD ${taxes.toFixed(2)}</h5>
+				<h5 className="float-right">CAD ${taxes.toFixed(2)}</h5>
                 <h5>Taxes</h5>
 
 				<hr />
-				<h5 class="red float-right">CAD ${total.toFixed(2)}</h5>
+				<h5 className="red float-right">CAD ${total.toFixed(2)}</h5>
                 <h5>Total (excl. shipping)</h5>
 
 				{/* To take up space for the right-floating button */}
