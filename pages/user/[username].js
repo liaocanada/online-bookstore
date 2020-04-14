@@ -11,16 +11,15 @@ class User extends React.Component {
 	static async getInitialProps(context) {
         const { username } = context.query;
         const res = await fetch(config.API_GATEWAY_ENDPOINT + "/users/"+username);
-        const info = await res.json();
 		return {
-            user: info.user,
-			orders: info.orders
+            user: await res.json()
 		};
 	}
 
 	// Define initial state
 	constructor(props) {
         super(props);
+        console.log(props);
 		this.state = {
             username: props.user.username,
             user: props.user,

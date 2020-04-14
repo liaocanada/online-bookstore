@@ -11,21 +11,20 @@ class Author extends React.Component {
 	static async getInitialProps(context) {
         const { author_name } = context.query;
         const res = await fetch(config.API_GATEWAY_ENDPOINT + "/authors/"+author_name);
-        const info = await res.json();
+        
 		return {
-            name: info.name,
-            picture: info.picture,
-            summary: info.summary
+            info: await res.json()
 		};
 	}
 
 	// Define initial state
 	constructor(props) {
         super(props);
+        console.log(props);
 		this.state = {
-            name: props.name,
-            picture: props.picture,
-            summary: props.summary
+            name: props.info.author.name,
+            picture: props.info.author.picture,
+            summary: props.info.author.summary
 		};
 	}
 
@@ -35,12 +34,12 @@ class Author extends React.Component {
 			<Layout>
 				<h1>{this.state.name}'s Books</h1>
                 <Image
-                    className="d-block w-100"
                     src={this.state.picture}
                     rounded
                 />
+                <br/>
                 <h3>Summary: {this.state.summary}</h3>
-                <Link href={"/products?q="+this.state.name}><h4>Check out their books!</h4></Link>
+                <Link href={"/products?q="+this.state.name}><a><u>Check out their books!</u></a></Link>
 			</Layout>
 		);
 	}
