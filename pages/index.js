@@ -9,7 +9,7 @@ export default function Index() {
             </Head>
 
             <Layout>
-                <p>Hello Next.js</p>
+                <p>Welcome. Click the 'BookStore' button to start!</p>
             </Layout>
         </>
 	);
