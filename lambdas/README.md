@@ -33,6 +33,11 @@ API url is currently at `https://qyoxm4iv68.execute-api.us-east-1.amazonaws.com/
 | GET    | /orders/{order_number}     | getOrder    | Params  |
 | POST   | /orders                    | submitOrder     | Request body |
 
+### Authors
+| Method | Endpoint                   | Function             | Inputs  |
+| ------ | -------------------------- | -------------------- | ------- |
+| GET    | /authors/{author_name}     | getAuthor    | Params  |
+
 ## Running locally
 1. Make a copy of the .envsample file
 2. Rename it .env
