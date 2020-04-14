@@ -2,6 +2,7 @@ import config from "../../../config/config";
 import Layout from "../../../components/Layout";
 import ProductsSummaryTab from "../../../components/cart/ProductsSummaryTab";
 import ShippingBillingTab from "../../../components/cart/ShippingBillingTab";
+import ReviewTab from "../../../components/cart/ReviewTab";
 import React from 'react';
 import fetch from 'isomorphic-unfetch';
 import { Button, Tab, Row, Col, Nav, Tabs } from "react-bootstrap";
@@ -84,9 +85,11 @@ class Cart extends React.Component {
 									next={() => this.advanceTab()} 
 								/>
 
-								<Tab.Pane eventKey="third">
-									{/* <Sonnet /> */}
-								</Tab.Pane>
+								<ReviewTab 
+									eventKey={this.tabKeys[2]}
+									products={this.props.products}
+									next={() => this.advanceTab()} 
+								/>
 
 							</Tab.Content>
 						</Col>
@@ -111,7 +114,7 @@ class Cart extends React.Component {
 	}
 
 	submitOrder() {
-
+		
 	}
 }
 

@@ -4,9 +4,9 @@ import React from 'react';
 import { Button, Tab } from "react-bootstrap";
 import Link from "next/link";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
+import { faAngleLeft, faAngleDoubleRight } from '@fortawesome/free-solid-svg-icons';
 
-class ProductsSummaryTab extends React.Component {
+class ReviewTab extends React.Component {
 
 	// Define initial state
 	constructor(props) {
@@ -32,7 +32,7 @@ class ProductsSummaryTab extends React.Component {
 		return (
 			<Tab.Pane eventKey={this.props.eventKey}>
 				{products.map((product, i) => <>
-					<ProductMedia key={i} product={product} editable={true} />
+					<ProductMedia key={i} product={product} editable={false} />
 					<hr />
 				</>
 				)}
@@ -46,19 +46,15 @@ class ProductsSummaryTab extends React.Component {
 				<h5 className="red float-right">CAD ${total.toFixed(2)}</h5>
 				<h5>Total (excl. shipping)</h5>
 
-				{/* To take up space for the right-floating button */}
-				<Button className="hidden"></Button>
-				{ numItems ?
-					<Button variant="success float-right" onClick={() => this.props.next()}>
-						Next: Shipping & Billing <FontAwesomeIcon icon={faAngleRight} />
-					</Button>
-					:
-					<Link href="/products">
-						<Button variant="outline-primary float-right">
-							Browse Items
-						</Button>
-					</Link>
-				}
+                {/* TODO previous button */}
+                <Button variant="success" onClick={() => {}}>
+                    <FontAwesomeIcon icon={faAngleLeft} /> Prev: Shipping & Billing
+                </Button>
+
+                <Button variant="success float-right" onClick={() => this.props.next()}>
+                    Place Order <FontAwesomeIcon icon={faAngleDoubleRight} />
+                </Button>
+
 			</Tab.Pane>
 		);
 	}
@@ -80,4 +76,4 @@ class ProductsSummaryTab extends React.Component {
 	}
 }
 
-export default ProductsSummaryTab;
+export default ReviewTab;

@@ -27,6 +27,7 @@ class ShippingBillingTab extends React.Component {
                     saveAddress={newAddress => setBillingAddress(newAddress)}
                 />
 
+                {/* TODO previous button */}
                 <Button variant="success" onClick={() => {}}>
                     <FontAwesomeIcon icon={faAngleLeft} /> Prev: Product Summary
                 </Button>

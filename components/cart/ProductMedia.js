@@ -40,6 +40,8 @@ class Product extends React.Component {
 			images.split(", ")[0] :
 			config.BOOK_PLACEHOLDER_IMAGE;
 
+		const editable = this.props.editable;
+
 		return (
 			<Media>
 				<img
@@ -50,19 +52,26 @@ class Product extends React.Component {
 				/>
 				<Media.Body>
 					<strong className="red float-right">${price.toFixed(2)} ea</strong>
-					<Link href="/products/[id]" as={"/products/" + product_id}>
-						<a><h5>{name}</h5></a>
-					</Link>
+					{editable ? 
+						<Link href="/products/[id]" as={"/products/" + product_id}>
+							<a><h5>{name}</h5></a>
+						</Link>
+						:
+						<h5>{name}</h5>
+					}
+
 					<Form inline>
 						<Form.Label>Quantity:</Form.Label>
 						{/* TODO make sure input is a positive integer */}
 						<Form.Control
+							plaintext={!editable}
+							readOnly={!editable}
 							value={this.state.newQuantity}
 							onChange={event => this.setState({ newQuantity: event.target.value })}
 							size="sm"
 						/>
 
-						{
+						{editable && (
 							this.state.updated ? 
 							<Button variant="success" size="sm" onClick={() => {}}>
 								Updated!
@@ -71,12 +80,12 @@ class Product extends React.Component {
 							<Button variant="outline-primary" size="sm" onClick={() => this.updateQuantity()}>
 								Update
 							</Button>
-						}
+						)}
 					</Form>
 
 					{!!authors && <>By {authors}<br /></>}
 					{!!format && <>{capitalize(format)} format<br /></>}
-					<a href="#" onClick={() => this.delete()}>Delete</a>
+					{editable && <a href="#" onClick={() => this.delete()}>Delete</a>}
 				</Media.Body>
 			</Media>
 		);
