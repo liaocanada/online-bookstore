@@ -32,17 +32,20 @@ class Header extends React.Component {
           <Search />
         </Nav>
 
+        <Nav>
+            <Link href="/insights" passHref>
+              <Nav.Link>Insights</Nav.Link>
+            </Link>
         {
           currentUser && currentUser.username &&
-          <Nav>
-            <Link href={"/user/" + currentUser.username} passHref>
+            <><Link href={"/user/" + currentUser.username} passHref>
               <Nav.Link>Account</Nav.Link>
             </Link>
             <Link href={"/cart/" + currentUser.username} passHref>
               <Nav.Link>Cart</Nav.Link>
-            </Link>
-          </Nav>
+            </Link></>
         }
+        </Nav>
 
       </Navbar>
     );
