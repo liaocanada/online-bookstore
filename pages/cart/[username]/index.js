@@ -49,7 +49,7 @@ class Cart extends React.Component {
 
 		return (
 			<Layout>
-				<h1>{this.props.username}'s Cart</h1>
+				<h1>{this.props.firstName}'s Cart</h1>
 				<hr />
 				<Tab.Container 
 					activeKey={this.state.activeTab} 
