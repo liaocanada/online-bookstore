@@ -37,3 +37,9 @@ An elaborate online bookstore. Built by David Liao and Eric Pham.
 
 ## Database Design
 See README in the [sql](./sql) folder
+
+## Instruction for running
+- Clone this repo (or download it)
+- Run the following commands in the terminal (when in the directory of the app):
+- npm install
+- npm run dev
