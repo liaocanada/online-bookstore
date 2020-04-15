@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Layout from '../components/Layout';
+import { Jumbotron, Button } from "react-bootstrap";
 
 export default function Index() {
 	return (
@@ -9,7 +10,13 @@ export default function Index() {
             </Head>
 
             <Layout>
-                <p>Welcome. Click the 'BookStore' button to start!</p>
+                <Jumbotron>
+                    <h1>Welcome</h1>
+                    <p>Welcome to the BookStore. Get started by browsing through the collection.</p>
+                    <p>
+                        <Button variant="primary">See all products</Button>
+                    </p>
+                </Jumbotron>
             </Layout>
         </>
 	);
