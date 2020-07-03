@@ -1,8 +1,6 @@
 const connect = require("./helpers/connectToDatabase");
 const formJsonResponse = require("./helpers/formJsonResponse");
 
-const fs = require('fs');
-
 exports.handler = async (event, context) => {
     const client = await connect();
     
