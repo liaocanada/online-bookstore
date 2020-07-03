@@ -1,40 +1,30 @@
 const AWS = require('aws-sdk');
-const { Client } = require('pg');
+const createClient = require('data-api-client');
 
-require('dotenv').config();
-const ssm = new AWS.SSM({region: 'us-east-1'});
+// require('dotenv').config();
+// const rdsDataService = new AWS.RDSDataService();
 
-const connect = async () => {
-    const awsSsmParams = [
-        '/bookstore/db/username',
-        '/bookstore/db/password',
-        '/bookstore/db/url',
-        '/bookstore/db/port',
-        '/bookstore/db/name'
-    ];
-    const params = {
-        Names: awsSsmParams,
-        WithDecryption: true
-    };
-    const { Parameters } = await new Promise((resolve, reject) => {
-        ssm.getParameters(params, (err, data) => {
+const getDatabaseName = async () => {
+    const ssm = new AWS.SSM({region: 'us-east-1'});
+    const dbParamKey = '/bookstore/db/name';
+
+    const data = await new Promise((resolve, reject) => {
+        ssm.getParameter({ Name: dbParamKey }, (err, data) => {
             if (err) reject(err);
             resolve(data);
         });
     })
 
-    const getParameterValue = index => 
-        Parameters.find(param => param.Name === awsSsmParams[index]).Value;
+    return data.Parameter.Value;
+};
 
-    const client = new Client({ 
-        user: getParameterValue(0),
-        password: getParameterValue(1),
-        host: getParameterValue(2),
-        port: parseInt(getParameterValue(3)),
-        database: getParameterValue(4)
+const connect = async () => {
+    // Require and instantiate data-api-client with secret and cluster arns
+    const client = createClient({
+        secretArn: 'arn:aws:secretsmanager:us-east-1:095371326078:secret:rds-db-credentials/cluster-HFPRLGMVCYC37ZDV7N2NOGAIUA/postgres-6ixLQg',
+        resourceArn: 'arn:aws:rds:us-east-1:095371326078:cluster:auroraserverless-bookstore-db',
+        database: await getDatabaseName()
     });
-    
-    await client.connect();
 
     return client;
 };
