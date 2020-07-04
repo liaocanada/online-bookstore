@@ -12,9 +12,9 @@ for %%f in (*.js) do if not "%%~f"=="runner.js" (
     echo !toDeploy:~0,-3!
 
     :: Redeploy
-    powershell -Command "(gc %toDeploy%) -replace './helpers', '/opt/lambdas/helpers' | Out-File -encoding ASCII index.js"
+    powershell -Command "(gc %%f) -replace './helpers', '/opt/lambdas/helpers' | Out-File -encoding ASCII index.js"
     powershell "Compress-Archive index.js index.zip"
-    aws lambda update-function-code --function-name %toDeploy% --zip-file fileb://index.zip
+    aws lambda update-function-code --function-name !toDeploy:~0,-3! --zip-file fileb://index.zip
     del index.js
     del index.zip
 
