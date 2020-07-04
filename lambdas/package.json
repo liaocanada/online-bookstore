@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "aws-sdk": "^2.709.0",
     "data-api-client": "^1.0.1",
     "is-integer": "^1.0.7",
     "pg": "^7.18.2"
