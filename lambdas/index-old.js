@@ -6,7 +6,5 @@ exports.handler = async (event, context) => {
 
     const res = await client.query("SELECT * FROM product;");
 
-    client.end();
-
     return formJsonResponse(200, res.rows);
 };

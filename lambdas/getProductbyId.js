@@ -33,12 +33,10 @@ exports.handler = async (event, context) => {
                                 "select product_id,string_agg(image, ', ') as images "+
                                 "from (product natural full outer join book) natural join product_image "+
                                 "group by product_id "+
-                            ") as pic_table where product_id=$1";
-    const values = [product_id];
+                            ") as pic_table where product_id=:product_id";
+    const values = { product_id };
 
     const res = await client.query(statement, values);
-
-    client.end();
 
     return formJsonResponse(200, res.rows[0]);
 };

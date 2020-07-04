@@ -25,22 +25,21 @@ exports.handler = async (event, context) => {
     // TODO add error handling for duplicate usernames
     let statement = "insert into storeuser (username, password, first_name, " + 
         "last_name, email, address, picture, time_created, time_last_login) " + 
-        "values ($1, $2, $3, $4, $5, $6, $7, $8, $9);";
-    let values = [username, password, first_name, last_name, email, address, 
-        picture, time_created, time_last_login];
+        "values (:username, :password, :first_name, :last_name, :email, :address, " +
+        ":picture, :time_created, :time_last_login);";
+    let values = { username, password, first_name, last_name, email, address, 
+        picture, time_created, time_last_login };
     let res = await client.query(statement, values);
 
     // create user cart
-    statement = "insert into cart (username, last_edited) values ($1, $2);";
-    values = [username, time_created];
+    statement = "insert into cart (username, last_edited) values (:username, :time_created);";
+    values = { username, time_created };
     res = await client.query(statement, values);
 
     // give user the role of customer
-    statement = "insert into user_role (username, role_id) values ($1, $2);";
-    values = [username, 1]; // 1 is role id for customer
+    statement = "insert into user_role (username, role_id) values (:username, :role_id);";
+    values = { username, role_id: 1 }; // 1 is role id for customer
     res = await client.query(statement, values);
-
-    client.end();
 
     return formJsonResponse(201, { username });
 };
