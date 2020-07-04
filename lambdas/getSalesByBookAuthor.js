@@ -14,5 +14,5 @@ exports.handler = async (event, context) => {
 
     ;
 
-    return formJsonResponse(200, res.rows);
+    return formJsonResponse(200, res.records);
 };

@@ -10,13 +10,13 @@ exports.handler = async (event, context) => {
     let statement = "select * from storeorder where order_number = :order_num;";
     let values = { order_num };
     let res = await client.query(statement, values);
-    let info = res.rows[0];
+    let info = res.records[0];
 
     // get order products
     statement = "select * from order_product where order_number = :order_num;";
     values = { order_num };
     res = await client.query(statement, values);
-    let products = res.rows;
+    let products = res.records;
 
     return formJsonResponse(200, { order_number: order_num, products: products, order_info: info });
 };

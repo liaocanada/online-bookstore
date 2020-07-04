@@ -32,7 +32,7 @@ exports.handler = async (event, context) => {
 
     let res = await client.query(statement, values);
 
-    const order_number = res.rows[0].order_number;
+    const order_number = res.records[0].order_number;
 
     // get all items from user cart cart_product and add them to order_product
     // get items from cart first
@@ -47,9 +47,9 @@ exports.handler = async (event, context) => {
     values = { username };
     res = await client.query(statement, values);
     // add all to order_product
-    for (let i=0; i<res.rows.length; i++) {
+    for (let i=0; i<res.records.length; i++) {
         statement = "insert into order_coupon (order_number, coupon_code) values (:order_number, :coupon_code)";
-        values = { order_number, coupon_code: res.rows[i].coupon_code };
+        values = { order_number, coupon_code: res.records[i].coupon_code };
         res = await client.query(statement, values);
     }
 

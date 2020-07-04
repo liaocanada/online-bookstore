@@ -29,7 +29,7 @@ exports.handler = async (event, context) => {
 
     const res = await client.query(statement, values);
 
-    if (res.rows.length == 0) {
+    if (res.records.length == 0) {
         // add product to cart_product
         const statement = "insert into cart_product (username, product_id, quantity) values (:username, :pid, :qty);";
         const values = { username, pid: parseInt(product_id), qty: parseInt(quantity) };
@@ -38,7 +38,7 @@ exports.handler = async (event, context) => {
     } else {
         // increment quantity if product exists in cart
         const statement = "update cart_product set quantity = :qty where username = :username and product_id = :prod_id;";
-        const values = { qty: parseInt(res.rows[0].quantity)+parseInt(quantity), username, prod_id };
+        const values = { qty: parseInt(res.records[0].quantity)+parseInt(quantity), username, prod_id };
         console.log(statement, values);
         await client.query(statement, values);
     }

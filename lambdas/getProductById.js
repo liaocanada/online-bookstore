@@ -38,7 +38,7 @@ exports.handler = async (event, context) => {
 
     const res = await client.query(statement, values);
 
-    return formJsonResponse(200, res.rows[0]);
+    return formJsonResponse(200, res.records[0]);
 };
 
 /*

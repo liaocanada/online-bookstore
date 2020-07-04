@@ -11,7 +11,7 @@ exports.handler = async (event, context) => {
     const values = { author };
     const res = await client.query(statement, values);
 
-    const authorInfo = res.rows[0];
+    const authorInfo = res.records[0];
 
     return formJsonResponse(200, { author: authorInfo });
 };
