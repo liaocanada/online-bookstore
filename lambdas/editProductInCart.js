@@ -21,7 +21,7 @@ exports.handler = async (event, context) => {
     const prod_id = parseInt(event.pathParameters.product_id);
 
     // update user's cart last_edited
-    updateCart(client,username);
+    updateCart(client, username);
 
     if (parseInt(quantity) <= 0 ) {
         const statement = "delete from cart_product where username = :username and product_id = :prod_id;";

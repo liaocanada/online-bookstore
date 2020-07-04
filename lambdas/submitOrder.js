@@ -1,6 +1,8 @@
 const connect = require("./helpers/connectToDatabase");
 const formJsonResponse = require("./helpers/formJsonResponse");
+const formTextResponse = require("./helpers/formTextResponse");
 const validateRequestBody = require("./helpers/validateRequestBody");
+const updateCart = require("./helpers/updateCart");
 
 exports.handler = async (event, context) => {
     const client = await connect();
@@ -20,7 +22,7 @@ exports.handler = async (event, context) => {
     const delivery_fee = 3.22;
 
     // update user's cart last_edited
-    const update = require("./helpers/updateCart")(client,username);
+    updateCart(client, username);
 
     // add to order relation
     let statement = "insert into storeorder (order_number, username, status, billed_to, " + 
