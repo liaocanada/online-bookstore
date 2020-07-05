@@ -1,18 +1,34 @@
-const { Client } = require("pg");
-require('dotenv').config();
+const AWS = require('aws-sdk');
+AWS.config.update({region: 'us-east-1'});
+
+const createClient = require('data-api-client');
+
+// require('dotenv').config();
+// const rdsDataService = new AWS.RDSDataService();
+
+const getDatabaseName = async () => {
+    const ssm = new AWS.SSM({region: 'us-east-1'});
+    const dbParamKey = '/bookstore/db/name';
+
+    const data = await new Promise((resolve, reject) => {
+        ssm.getParameter({ Name: dbParamKey }, (err, data) => {
+            if (err) reject(err);
+            resolve(data);
+        });
+    })
+
+    return data.Parameter.Value;
+};
 
 const connect = async () => {
-    const client = new Client({
-        host: process.env.DB_HOST,
-        port: 5432,
-        database: process.env.DB_DATABASE,
-        user: process.env.DB_USER,
-        password: process.env.DB_PASSWORD,  // Should use AWS Credentials Manager but it costs $
+    // Require and instantiate data-api-client with secret and cluster arns
+    const client = createClient({
+        secretArn: 'arn:aws:secretsmanager:us-east-1:095371326078:secret:rds-db-credentials/cluster-HFPRLGMVCYC37ZDV7N2NOGAIUA/postgres-6ixLQg',
+        resourceArn: 'arn:aws:rds:us-east-1:095371326078:cluster:auroraserverless-bookstore-db',
+        database: await getDatabaseName()
     });
-    
-    await client.connect();
 
     return client;
-}
+};
 
 module.exports = connect;

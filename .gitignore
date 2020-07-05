@@ -9,6 +9,9 @@ notes.md
 # Next.js export output
 out/
 
+# Lambda layer zip file
+lambdas.zip
+
 **/.DS_Store
 
 # Below is all auto-generated
