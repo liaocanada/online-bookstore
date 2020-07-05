@@ -3,6 +3,7 @@ const formJsonResponse = require("./helpers/formJsonResponse");
 const formTextResponse = require("./helpers/formTextResponse");
 const validateRequestBody = require("./helpers/validateRequestBody");
 const updateCart = require("./helpers/updateCart");
+const formatToTimestamp = require("./helpers/formatToTimestamp");
 
 exports.handler = async (event, context) => {
     const client = await connect();
@@ -28,9 +29,44 @@ exports.handler = async (event, context) => {
     let statement = "insert into storeorder (order_number, username, status, billed_to, " + 
         "shipped_to, time_placed, delivery_fee) values (DEFAULT, :username, :status, " +
         ":billed_to, :shipped_to, :time_placed, :delivery_fee) returning order_number;";
-    let values = { username, status, billed_to, shipped_to, time_placed, delivery_fee };
+    // let values = { username, status, billed_to, shipped_to, time_placed, delivery_fee };
 
-    let res = await client.query(statement, values);
+    // let res = await client.query(statement, values);
+
+    // Can't use lines above because data-api-client does not support Date types
+    // Workaround is to use native methods directly, passing the TIMESTAMP typehint
+    // Waiting on https://github.com/jeremydaly/data-api-client/issues/28
+    let res = await client.executeStatement({
+        sql: statement,
+        parameters: [
+            {
+                name: "username",
+                value: { stringValue: username }
+            },
+            {
+                name: "status",
+                value: { stringValue: status }
+            },
+            {
+                name: "billed_to",
+                value: { stringValue: billed_to }
+            },
+            {
+                name: "shipped_to",
+                value: { stringValue: shipped_to }
+            },
+            {
+                name: "time_placed",
+                value: { stringValue: formatToTimestamp(time_placed, false) },
+                typeHint: "TIMESTAMP"
+            },
+            {
+                name: "delivery_fee",
+                value: { stringValue: delivery_fee }
+            }
+        ]
+    });
+
 
     const order_number = res.records[0].order_number;
 

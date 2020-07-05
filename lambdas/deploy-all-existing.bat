@@ -4,7 +4,7 @@ echo off
 echo WARNING: this will delete any index.js or index.zip you have in the current directory!
 pause
 
-set layerVersion=3
+set layerVersion=4
 
 setlocal EnableDelayedExpansion
 for %%f in (*.js) do if not "%%~f"=="runner.js" (
