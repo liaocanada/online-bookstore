@@ -5,15 +5,11 @@
   "main": "index.js",
   "scripts": {
     "postinstall": "cd lambdas && npm install",
-    "dev": "next",
-    "build": "next build",
-    "export": "next export",
-    "deploy": "aws s3 sync ./out/ s3://ebookstore.davidliao.ca --acl public-read",
-    "start-db": "aws rds start-db-instance --db-instance-identifier ebookstore-davidliao",
-    "stop-db": "aws rds stop-db-instance --db-instance-identifier ebookstore-davidliao",
-    "status-db": "aws rds describe-db-instances --db-instance-identifier ebookstore-davidliao",
-    "start": "next start",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "deploy": "aws s3 sync build/ s3://ebookstore.davidliao.ca --acl public-read",
+    "eject": "react-scripts eject"
   },
   "repository": {
     "type": "git",
@@ -28,17 +24,13 @@
     "@fortawesome/react-fontawesome": "^0.1.9",
     "bootstrap": "^4.4.1",
     "isomorphic-unfetch": "^3.0.0",
-    "next": "^9.3.4",
-    "node-fetch": "^2.6.0",
     "pg-escape": "^0.2.0",
     "react": "^16.13.1",
     "react-bootstrap": "^1.0.0",
     "react-dom": "^16.13.1",
-    "react-minimal-pie-chart": "^7.1.0",
-    "swr": "^0.1.18"
+    "react-minimal-pie-chart": "^7.1.0"
   },
   "devDependencies": {
-    "@zeit/next-css": "^1.0.1",
     "faker": "^4.1.0",
     "papaparse": "^5.2.0",
     "request": "^2.88.2"
