@@ -1,4 +1,4 @@
-import "../styles.css";
+import "../index.css";
 
 // Font-awesome config
 import { config } from '@fortawesome/fontawesome-svg-core'
