@@ -9,6 +9,9 @@ notes.md
 # Next.js export output
 out/
 
+# React export output
+build/
+
 # Lambda layer zip file
 lambdas.zip
 
