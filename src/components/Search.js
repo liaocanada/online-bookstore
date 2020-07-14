@@ -1,6 +1,5 @@
 import React from 'react';
 import { Form, Button, InputGroup } from 'react-bootstrap';
-import Router from 'next/router';
 
 class Search extends React.Component {
 
@@ -41,7 +40,7 @@ class Search extends React.Component {
 	handleSubmit() {
 		const search = this.state.text;
 		const query = search ? ("?q=" + search) : "";
-		Router.push("/products" + query);
+		// Router.push("/products" + query);
 	}
 };
 

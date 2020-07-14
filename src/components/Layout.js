@@ -1,5 +1,5 @@
+import React from 'react';
 import Header from "./Header";
-import Head from "next/head";
 
 const layoutStyle = {
   margin: 20,
@@ -10,14 +10,14 @@ const layoutStyle = {
 
 const Layout = props => (
   <>
-    <Head>
+    <head>
       <link
         rel="stylesheet"
         href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
         crossOrigin="anonymous"
       />
-    </Head>
+    </head>
     <Header />
     <div style={layoutStyle}>
       {props.children}

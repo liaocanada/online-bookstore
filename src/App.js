@@ -1,22 +1,18 @@
 import React from 'react';
+import Layout from './components/Layout';
+import { Jumbotron, Button } from "react-bootstrap";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Layout>
+        <Jumbotron>
+            <h1>Welcome</h1>
+            <p>Welcome to the BookStore. Get started by browsing through the collection.</p>
+            <p>
+                <Button variant="primary">See all products</Button>
+            </p>
+        </Jumbotron>
+    </Layout>
   );
 }
 
