@@ -1,4 +1,4 @@
-import config from "../config/config";
+import config from "../config";
 import Layout from "../components/Layout";
 import ProductCard from "../components/products/ProductCard";
 import React from 'react';
@@ -21,28 +21,34 @@ class Products extends React.Component {
 		};
 	}
 
-	// Render
 	render() {
-		const { search, products } = this.props;
-
-		return (
-			<Layout>
-				{search ? 
-					<h1>Results for {search}</h1> :
-					<h1>Products</h1>
-				}
-				
-				<CardColumns>
-					{products.map((product, i) => <ProductCard product={product} key={i} />)}
-				</CardColumns>
-
-				{products.length === 0 ? 
-					<p>No results found.</p> : 
-					<></>
-				}
-			</Layout>
-		);
+		return <h1>products here</h1>
 	}
+
+	// Render
+	// render() {
+	// 	// const { search, products } = this.props;
+	// 	const products = [];
+	// 	const search = "";
+
+	// 	return (
+	// 		<Layout>
+	// 			{search ? 
+	// 				<h1>Results for {search}</h1> :
+	// 				<h1>Products</h1>
+	// 			}
+				
+	// 			<CardColumns>
+	// 				{products.map((product, i) => <ProductCard product={product} key={i} />)}
+	// 			</CardColumns>
+
+	// 			{products.length === 0 ? 
+	// 				<p>No results found.</p> : 
+	// 				<></>
+	// 			}
+	// 		</Layout>
+	// 	);
+	// }
 
 }
 

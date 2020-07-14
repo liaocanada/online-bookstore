@@ -1,4 +1,4 @@
-import config from "../../config/config";
+import config from "../../config";
 import Layout from "../../components/Layout";
 import ProductCard from "../../components/products/ProductCard";
 import React from 'react';

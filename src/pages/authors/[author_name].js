@@ -1,4 +1,4 @@
-import config from "../../config/config";
+import config from "../../config";
 import Layout from "../../components/Layout";
 import Link from "next/link";
 import { Image } from 'react-bootstrap';

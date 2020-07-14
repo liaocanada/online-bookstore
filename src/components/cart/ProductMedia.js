@@ -1,3 +1,4 @@
+import React from 'react';
 import Link from "next/link";
 import Router from "next/router";
 import { Media, Button, Form } from 'react-bootstrap';
@@ -5,7 +6,7 @@ import { Media, Button, Form } from 'react-bootstrap';
 import linkify from '../../helpers/linkify';
 import capitalize from "../../helpers/capitalize";
 import authenticationService from "../../services/authenticationService";
-import config from "../../config/config";
+import config from "../../config";
 
 class Product extends React.Component {
 

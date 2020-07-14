@@ -1,9 +1,10 @@
-import config from "../../config/config";
+import React from 'react';
+import config from "../../config";
 import Layout from '../../components/Layout';
 import MyToast from "../../components/MyToast";
-import Router from 'next/router';
+// import { useHistory } from "react-router-dom"; // TODO change to functional component and use hook
+import { withRouter } from "react-router-dom";
 import { Button, Image, Carousel, Row, Col, Badge } from 'react-bootstrap';
-import React from 'react';
 import linkify from '../../helpers/linkify';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleLeft, faAngleRight, faCartPlus, faCheck } from '@fortawesome/free-solid-svg-icons'
@@ -43,13 +44,13 @@ class Product extends React.Component {
 
 		const stockBadge = this.getStockBadge(stock);
 			
-		return (
+		return withRouter(({ history }) => (
 			<Layout>
 				<Row>
 					<Button id="back-button"
 						variant="outline-secondary"
 						size="sm"
-						onClick={() => Router.back()}>
+						onClick={() => history.goBack()}>
 						<FontAwesomeIcon icon={faAngleLeft} /> Back
 					</Button>
 				</Row>
@@ -90,7 +91,7 @@ class Product extends React.Component {
 						<div className="subsection">
 							<h3>Details</h3>
 							{series && <p>Series: {series}</p>}
-							{genres && genres != "None" && <p>Genre(s): {genres}</p>}
+							{genres && genres !== "None" && <p>Genre(s): {genres}</p>}
 							{!!pages && <p>{pages} pages</p>}
 							{isbn && <p>ISBN: {isbn}</p>}
 							{<p>Bookstore product ID: {product_id}</p>}
@@ -108,7 +109,7 @@ class Product extends React.Component {
 					)
 				}
 			</Layout>
-		);
+		));
 	}
 
 	async addToCart() {
@@ -124,7 +125,7 @@ class Product extends React.Component {
 		const username = authenticationService.getCurrentUser().username;
 		const url = config.API_GATEWAY_ENDPOINT + "/cart/" + username;
 
-		const res = await fetch(url, fetchOptions);
+		await fetch(url, fetchOptions);
 
 		const messages = this.state.messages;
 		messages.push({

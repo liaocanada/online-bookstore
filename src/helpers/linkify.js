@@ -1,10 +1,11 @@
-import Link from "next/link";
+import React from 'react';
+import { Link } from "react-router-dom";
 
 const linkify = (csv, mapToUrl) => {
     if (!csv) return "None";
 
     const links = csv.split(", ").map((element, i) =>
-        <Link href={mapToUrl(element)} key={i}><a>{element}</a></Link>
+        <Link to={mapToUrl(element)} key={i}>{element}</Link>
     );
 
     // joinArray([1, 2, 3], 0) ---> [1, 0, 2, 0, 3]

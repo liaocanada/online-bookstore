@@ -1,4 +1,4 @@
-import config from "../../../config/config";
+import config from "../../../config";
 import Layout from "../../../components/Layout";
 import ProductsSummaryTab from "../../../components/cart/ProductsSummaryTab";
 import ShippingBillingTab from "../../../components/cart/ShippingBillingTab";

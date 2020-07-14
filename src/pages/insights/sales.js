@@ -1,7 +1,7 @@
 import React from "react";
 import MyPieChart from "../../components/insights/MyPieChart";
 import Layout from "../../components/Layout";
-import config from "../../config/config";
+import config from "../../config";
 
 class Sales extends React.Component {
 

@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import { Navbar, Nav } from 'react-bootstrap';
 import Search from "./Search";
+import Products from "../pages/products";
 import authenticationService from "../services/authenticationService";
 
 class Header extends React.Component {
@@ -55,9 +56,9 @@ class Header extends React.Component {
 
         </Navbar>
 
-        {/* <Switch>
-          <Route path="/products"></Route>
-        </Switch> */}
+        <Switch>
+          <Route path="/products"><Products /></Route>
+        </Switch>
       </Router>
     );
   }

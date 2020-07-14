@@ -1,4 +1,4 @@
-import config from "../../config/config";
+import config from "../../config";
 import ProductMedia from "../../components/cart/ProductMedia";
 import React from 'react';
 import { Button, Tab } from "react-bootstrap";
