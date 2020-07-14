@@ -22,33 +22,28 @@ class Products extends React.Component {
 	}
 
 	render() {
-		return <h1>products here</h1>
-	}
+		// const { search, products } = this.props;
+		const products = [];  // TODO call API
+		const search = "";
 
-	// Render
-	// render() {
-	// 	// const { search, products } = this.props;
-	// 	const products = [];
-	// 	const search = "";
-
-	// 	return (
-	// 		<Layout>
-	// 			{search ? 
-	// 				<h1>Results for {search}</h1> :
-	// 				<h1>Products</h1>
-	// 			}
+		return (
+			<Layout>
+				{search ? 
+					<h1>Results for {search}</h1> :
+					<h1>Products</h1>
+				}
 				
-	// 			<CardColumns>
-	// 				{products.map((product, i) => <ProductCard product={product} key={i} />)}
-	// 			</CardColumns>
+				<CardColumns>
+					{products.map((product, i) => <ProductCard product={product} key={i} />)}
+				</CardColumns>
 
-	// 			{products.length === 0 ? 
-	// 				<p>No results found.</p> : 
-	// 				<></>
-	// 			}
-	// 		</Layout>
-	// 	);
-	// }
+				{products.length === 0 ? 
+					<p>No results found.</p> : 
+					<></>
+				}
+			</Layout>
+		);
+	}
 
 }
 

@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-	BrowserRouter as Router,
-	Switch,
-	Route,
-	Link
-} from "react-router-dom";
-import loadable from "@loadable/component";
+import { Link } from "react-router-dom";
 import { Card } from 'react-bootstrap';
 import linkify from '../../helpers/linkify';
 import config from "../../config";
@@ -30,7 +24,7 @@ const Product = props => {
 		config.BOOK_PLACEHOLDER_IMAGE;
 
 	return (
-		<Router>
+		<>
 			<Link to={"/products/" + product_id}>
 				<Card style={productStyle}>
 					<Card.Img variant="top" src={firstImage} />
@@ -43,11 +37,7 @@ const Product = props => {
 					</Card.Body>
 				</Card>
 			</Link>
-
-			<Switch>
-				<Route path="/:id" children={loadable(() => import('../../pages/products/[id]'), {fallback: <h1>Loading</h1>})} />
-			</Switch>
-		</Router>
+		</>
 	);
 };
 
