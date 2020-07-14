@@ -1,21 +1,21 @@
 import React from 'react';
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 import { Navbar, Nav } from 'react-bootstrap';
-import Search from "./Search";
-import authenticationService from "../services/authenticationService";
+import Search from './Search';
+import authenticationService from '../services/authenticationService';
 
 class Header extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      currentUser: authenticationService.getCurrentUser()
+      currentUser: authenticationService.getCurrentUser(),
     };
   }
 
   componentDidMount() {
     this.setState({
-      currentUser: authenticationService.getCurrentUser()
+      currentUser: authenticationService.getCurrentUser(),
     });
   }
 
@@ -34,17 +34,21 @@ class Header extends React.Component {
           </Nav>
 
           <Nav>
-              <Link to="/insights">
-                <Nav.Link>Insights</Nav.Link>
-              </Link>
-              {
-                currentUser && currentUser.username &&
-                  <><Link to={"/user/" + currentUser.username}>
-                    <Nav.Link>Account</Nav.Link>
-                  </Link>
-                  <Link to={"/cart/" + currentUser.username}>
-                    <Nav.Link>Cart</Nav.Link>
-                  </Link></>
+            <Link to="/insights">
+              <Nav.Link>Insights</Nav.Link>
+            </Link>
+            {
+                currentUser && currentUser.username
+                  && (
+                  <>
+                    <Link to={`/user/${currentUser.username}`}>
+                      <Nav.Link>Account</Nav.Link>
+                    </Link>
+                    <Link to={`/cart/${currentUser.username}`}>
+                      <Nav.Link>Cart</Nav.Link>
+                    </Link>
+                  </>
+                  )
               }
           </Nav>
 
