@@ -5,6 +5,8 @@ import { Image } from 'react-bootstrap';
 import React from 'react';
 import fetch from 'isomorphic-unfetch';
 
+// /user/[username]
+
 class User extends React.Component {
 
 	// Query API Gateway for products

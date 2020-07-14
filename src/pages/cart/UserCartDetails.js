@@ -1,12 +1,12 @@
-import config from "../../../config";
-import Layout from "../../../components/Layout";
-import ProductsSummaryTab from "../../../components/cart/ProductsSummaryTab";
-import ShippingBillingTab from "../../../components/cart/ShippingBillingTab";
-import ReviewTab from "../../../components/cart/ReviewTab";
+import config from "../../config";
+import Layout from "../../components/Layout";
+import ProductsSummaryTab from "../../components/cart/ProductsSummaryTab";
+import ShippingBillingTab from "../../components/cart/ShippingBillingTab";
+import ReviewTab from "../../components/cart/ReviewTab";
 import React from 'react';
 import fetch from 'isomorphic-unfetch';
 import { Button, Tab, Row, Col, Nav, Tabs } from "react-bootstrap";
-import authenticationService from "../../../services/authenticationService";
+import authenticationService from "../../services/authenticationService";
 import Router from "next/router";
 
 class Cart extends React.Component {

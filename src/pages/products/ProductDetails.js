@@ -12,6 +12,8 @@ import fetch from 'isomorphic-unfetch';
 import authenticationService from "../../services/authenticationService";
 import capitalize from "../../helpers/capitalize";
 
+// /products/[id]
+
 class Product extends React.Component {
 
 	static async getInitialProps(context) {

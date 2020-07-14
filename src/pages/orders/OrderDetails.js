@@ -4,6 +4,8 @@ import ProductCard from "../../components/products/ProductCard";
 import React from 'react';
 import fetch from 'isomorphic-unfetch';
 
+// /orders/[order_number]
+
 class Order extends React.Component {
 
 	// Query API Gateway for products
