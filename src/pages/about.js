@@ -1,10 +1,10 @@
-import Header from '../components/Header';
+import React from 'react';
 import Layout from '../components/Layout';
 
-export default function About() {
-	return (
-		<Layout>
-			<p>This is the about page</p>
-		</Layout>
-	);
-}
+const About = () => (
+  <Layout>
+    <p>This is the about page</p>
+  </Layout>
+);
+
+export default About;
