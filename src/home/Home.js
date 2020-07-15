@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Jumbotron, Button } from 'react-bootstrap';
-import Layout from '../components/Layout';
+import Layout from '../shared/Layout';
 
 const Home = () => (
   <Layout>

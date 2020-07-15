@@ -6,10 +6,10 @@ import {
 } from 'react-router-dom';
 
 // Pages
-import Home from './pages/Home';
-import Products from './pages/Products';
+import Home from './home/Home';
+import Products from './products/Products';
 import Insights from './pages/insights';
-import UserDetails from './pages/user/UserDetails';
+import UserDetails from './user/UserDetails';
 import CartDetails from './pages/cart/CartDetails';
 
 const App = () => (

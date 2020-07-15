@@ -1,9 +1,9 @@
 import React from 'react';
 import fetch from 'isomorphic-unfetch';
 import { CardColumns } from 'react-bootstrap';
-import config from '../config';
-import Layout from '../components/Layout';
-import ProductCard from '../components/products/ProductCard';
+import config from '../shared/config';
+import Layout from '../shared/Layout';
+import ProductCard from './products/ProductCard';
 
 const Products = () => {
   // Query API Gateway for products

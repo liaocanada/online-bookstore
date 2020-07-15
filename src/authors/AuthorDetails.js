@@ -2,8 +2,8 @@ import Link from 'next/link';
 import { Image } from 'react-bootstrap';
 import React from 'react';
 import fetch from 'isomorphic-unfetch';
-import Layout from '../../components/Layout';
-import config from '../../config';
+import Layout from '../shared/Layout';
+import config from '../shared/config';
 
 // URL: /authors/[author_name]
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import MyPieChart from '../../components/insights/MyPieChart';
-import Layout from '../../components/Layout';
-import config from '../../config';
+import Layout from '../shared/Layout';
+import config from '../shared/config';
 
 class Income extends React.Component {
   static async getInitialProps(context) {

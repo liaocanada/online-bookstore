@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Card } from 'react-bootstrap';
-import linkify from '../../helpers/linkify';
-import config from '../../config';
+import linkify from '../../shared/helpers/linkify';
+import config from '../../shared/config';
 
 const productStyle = {
   border: '1px solid #DDD',

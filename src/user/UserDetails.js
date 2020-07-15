@@ -1,9 +1,9 @@
 import { Image } from 'react-bootstrap';
 import React from 'react';
 import fetch from 'isomorphic-unfetch';
-import config from '../../config';
-import Layout from '../../components/Layout';
-import Order from '../../components/orders/Order';
+import config from '../shared/config';
+import Layout from '../shared/Layout';
+import Order from '../orders/order/Order';
 
 // /user/[username]
 
