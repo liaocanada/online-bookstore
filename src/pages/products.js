@@ -1,9 +1,11 @@
 import React from 'react';
-import fetch from 'isomorphic-unfetch';
 import { CardColumns } from 'react-bootstrap';
-import config from '../config';
+import { useDispatch, useSelector } from 'react-redux';
+
 import Layout from '../components/Layout';
 import ProductCard from '../components/products/ProductCard';
+
+import { updateProducts, selectAllProducts } from '../reducers/productsSlice';
 
 const Products = () => {
   // Query API Gateway for products
@@ -21,7 +23,15 @@ const Products = () => {
   // }
 
   // const { search, products } = this.props;
-  const products = []; // TODO call API
+  // const products = []; // TODO call API
+
+  const dispatch = useDispatch();
+
+  const products = useSelector(selectAllProducts); // TODO call API
+  dispatch(updateProducts());
+  const products2 = useSelector(selectAllProducts); // TODO call API
+  console.log(products);
+  console.log(products2);
   const search = '';
 
   return (

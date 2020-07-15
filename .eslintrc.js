@@ -26,5 +26,6 @@ module.exports = {
     'no-multi-spaces': ['warn', { ignoreEOLComments: true }],
     radix: ['off'],
     'react/jsx-one-expression-per-line': ['off'],
+    'no-param-reassign': ['off'],
   },
 };
