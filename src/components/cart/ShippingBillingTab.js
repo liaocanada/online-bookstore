@@ -1,7 +1,5 @@
-import config from "../../config";
 import React from 'react';
 import { Button, Tab } from "react-bootstrap";
-import Link from "next/link";
 import AddressForm from "../cart/AddressForm";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';

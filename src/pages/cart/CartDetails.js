@@ -3,7 +3,6 @@ import fetch from 'isomorphic-unfetch';
 import {
   Tab, Row, Col, Nav
 } from 'react-bootstrap';
-import Router from 'next/router';
 import config from '../../config';
 import Layout from '../../components/Layout';
 import ProductsSummaryTab from '../../components/cart/ProductsSummaryTab';
@@ -145,7 +144,7 @@ class Cart extends React.Component {
     const res = await fetch(url, fetchOptions); // TODO error handling
     const orderNumber = (await res.json()).order_number;
 
-    Router.push(`/orders/${orderNumber}`);
+    // Router.push(`/orders/${orderNumber}`);
   }
 
   // TODO move to helper
