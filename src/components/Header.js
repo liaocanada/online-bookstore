@@ -34,22 +34,16 @@ class Header extends React.Component {
           </Nav>
 
           <Nav>
-            <Link to="/insights">
-              <Nav.Link>Insights</Nav.Link>
-            </Link>
+            <Nav.Link as={Link} to="/insights">Insights</Nav.Link>
             {
-                currentUser && currentUser.username
-                  && (
-                  <>
-                    <Link to={`/user/${currentUser.username}`}>
-                      <Nav.Link>Account</Nav.Link>
-                    </Link>
-                    <Link to={`/cart/${currentUser.username}`}>
-                      <Nav.Link>Cart</Nav.Link>
-                    </Link>
-                  </>
-                  )
-              }
+              currentUser && currentUser.username
+              && (
+                <>
+                  <Nav.Link as={Link} to={`/user/${currentUser.username}`}>Account</Nav.Link>
+                  <Nav.Link as={Link} to={`/cart/${currentUser.username}`}>Cart</Nav.Link>
+                </>
+              )
+            }
           </Nav>
 
         </Navbar>
