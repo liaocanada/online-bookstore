@@ -35,25 +35,25 @@ class ProductsSummaryTab extends React.Component {
           <hr />
         </>
         )}
-        <h5 className='float-right'>CAD ${subtotal.toFixed(2)}</h5>
+        <h5 className="float-right">CAD ${subtotal.toFixed(2)}</h5>
         <h5>Subtotal ({numItems} items)</h5>
 
-        <h5 className='float-right'>CAD ${taxes.toFixed(2)}</h5>
+        <h5 className="float-right">CAD ${taxes.toFixed(2)}</h5>
         <h5>Taxes</h5>
 
         <hr />
-        <h5 className='red float-right'>CAD ${total.toFixed(2)}</h5>
+        <h5 className="red float-right">CAD ${total.toFixed(2)}</h5>
         <h5>Total (excl. shipping)</h5>
 
         {/* To take up space for the right-floating button */}
-        <Button className='hidden'></Button>
+        <Button className="hidden"></Button>
         {numItems ?
-          <Button variant='success float-right' onClick={() => this.props.next()}>
+          <Button variant="success float-right" onClick={() => this.props.next()}>
             Next: Shipping & Billing <FontAwesomeIcon icon={faAngleRight} />
           </Button>
           :
-          <Link to='/products'>
-            <Button variant='outline-primary float-right'>
+          <Link to="/products">
+            <Button variant="outline-primary float-right">
               Browse Items
 						</Button>
           </Link>
