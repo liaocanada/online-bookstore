@@ -9,7 +9,7 @@ const productStyle = {
   cursor: 'pointer'
 };
 
-const Order = props => {
+const OrderCard = props => {
   let { order_number, status, time_placed } = props;
 
   return (
@@ -25,4 +25,4 @@ const Order = props => {
   );
 };
 
-export default Order;
+export default OrderCard;

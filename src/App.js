@@ -7,7 +7,7 @@ import {
 
 // Pages
 import Home from './home/Home';
-import Products from './products/Products';
+import Products from './products/components';
 import Insights from './pages/insights';
 import UserDetails from './user/UserDetails';
 import CartDetails from './pages/cart/CartDetails';
