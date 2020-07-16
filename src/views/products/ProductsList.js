@@ -1,37 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { CardColumns } from 'react-bootstrap';
 import Layout from '../shared/components/Layout';
 import ProductCard from './components/ProductCard';
-import { getAllProducts } from '../../api/productsApi';
 
-const Products = () => {
-  const [products, setProducts] = useState([]);
-  const [search, setSearch] = useState('');
-  useEffect(() => {
-    getAllProducts().then(res => {
-      setProducts(res.products);
-      setSearch(res.search);
-    });
-  }, []);
+const Products = props => {
+  const { products, search } = props.data;
 
   return (
     <Layout>
-      {search
-        ? (
-          <h1>
-            Results for
-            {search}
-          </h1>
-        )
-        : <h1>Products</h1>}
+      {search ?
+        <h1>Results for {search}</h1> :
+        <h1>Products</h1>}
 
       <CardColumns>
-        {products.map((product, i) => <ProductCard product={product} key={i} />)}
+        {products.map(product => <ProductCard product={product} key={product.product_id} />)}
       </CardColumns>
 
-      {products.length === 0
-        ? <p>No results found.</p>
-        : <></>}
+      {products.length === 0 ?
+        <p>No results found.</p> :
+        <></>}
     </Layout>
   );
 };

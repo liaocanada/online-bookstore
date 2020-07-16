@@ -21,7 +21,7 @@ const Loader = props => {
 
   useEffect(() => {
     action().then(res => {
-      setData(selector(res));
+      setData(selector ? selector(res) : res);
       setLoading(false);
     }).catch(err => {
       setError(err);

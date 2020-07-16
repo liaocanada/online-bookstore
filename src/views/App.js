@@ -7,7 +7,7 @@ import {
 
 // Pages
 import Home from './home/Home';
-import ProductsList from './products/ProductsList';
+import ProductsListLoader from './products/ProductsListLoader';
 import ProductDetailsLoader from './products/ProductDetailsLoader';
 import InsightsHome from './insights/InsightsHome';
 import UserDetails from './user/UserDetails';
@@ -17,7 +17,7 @@ const App = () => (
   <Router>
     <Switch>
       <Route exact path="/"><Home /></Route>
-      <Route exact path="/products"><ProductsList /></Route>
+      <Route exact path="/products"><ProductsListLoader /></Route>
       <Route exact path="/products/:id"><ProductDetailsLoader /></Route>
       <Route exact path="/insights"><InsightsHome /></Route>
       <Route exact path="/user/:username"><UserDetails /></Route>
