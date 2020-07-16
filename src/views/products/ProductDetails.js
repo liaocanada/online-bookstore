@@ -5,40 +5,36 @@ import {
 } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  faAngleLeft, faAngleRight, faCartPlus, faCheck
+  faAngleLeft, faAngleRight, faCartPlus, faCheck, faExclamationTriangle
 } from '@fortawesome/free-solid-svg-icons';
-import fetch from 'isomorphic-unfetch';
 import linkify from '../shared/helpers/linkify';
+import capitalize from '../shared/helpers/capitalize';
 import MyToast from '../shared/components/MyToast';
 import Layout from '../shared/components/Layout';
-import config from '../../config';
 import { getCurrentUser } from '../../api/authenticationApi';
-import capitalize from '../shared/helpers/capitalize';
+import { addProductToCart as addToCartApi } from '../../api/checkoutApi';
 
 // /products/[id]
 
-const addToCart = async (productId, productName, addMessage, setPurchasedTrue) => {  // TODO move to api
-  const requestBody = {
-    product_id: productId,
-    quantity: 1,
-  };
-  const fetchOptions = {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(requestBody),
-  };
+const addToCart = async (productId, productName, addMessage, setPurchasedTrue) => {
   const { username } = getCurrentUser();
-  const url = `${config.API_GATEWAY_ENDPOINT}/cart/${username}`;
+  const res = await addToCartApi(username, productId);
 
-  await fetch(url, fetchOptions);
+  if (res.status === 200 || res.status === 201) {
+    setPurchasedTrue();
 
-  addMessage({
-    icon: <FontAwesomeIcon icon={faCartPlus} />,
-    title: 'Product added successfully!',
-    contents: `Your item ${productName} has been successfully added to your cart.`
-  });
-
-  setPurchasedTrue();
+    addMessage({
+      icon: <FontAwesomeIcon icon={faCartPlus} />,
+      title: 'Product added successfully!',
+      contents: `Your item ${productName} has been successfully added to your cart.`
+    });
+  } else {
+    addMessage({
+      icon: <FontAwesomeIcon icon={faExclamationTriangle} />,
+      title: 'Uh oh!',
+      contents: 'Something went wrong. Please try again later.'
+    });
+  }
 };
 
 const getStockBadge = stock => {
@@ -46,10 +42,7 @@ const getStockBadge = stock => {
   if (stock <= 250) {
     return (
       <Badge variant="warning" pill>
-        Only
-        {stock}
-        {' '}
-        remaining!
+        Only {stock} remaining!
       </Badge>
     );
   }
@@ -77,7 +70,7 @@ const ProductDetails = props => {
   images = images ? images.split(', ') : [];
 
   const [messages, setMessages] = useState([]);
-  const addMessage = message => setMessages(messages.concat([message]));  // Concat returns new array
+  const addMessage = message => setMessages(messages.concat([message]));
   const [purchased, setPurchased] = useState(false);
   const setPurchasedTrue = () => setPurchased(true);
 
@@ -95,15 +88,15 @@ const ProductDetails = props => {
           onClick={() => history.goBack()}
         >
           <FontAwesomeIcon icon={faAngleLeft} />
-          {' '}Back
+          {' ' /* TODO use padding */}Back
         </Button>
       </Row>
 
       <Row>
         <Col md={4}>
           <Carousel>
-            {images.map((image, i) => (
-              <Carousel.Item key={i}>
+            {images.map(image => (
+              <Carousel.Item key={image}>
                 <Image
                   className="d-block w-100"
                   src={image}
@@ -115,18 +108,9 @@ const ProductDetails = props => {
         </Col>
 
         <Col md={8}>
-          <h1>
-            {name}{' '}{stockBadge}
-          </h1>
-          {authors && (
-            <p>
-              By
-              {authors}
-            </p>
-          )}
-          <strong className="red">
-            CDN ${price.toFixed(2)}
-          </strong>
+          <h1>{name}{' '}{stockBadge}</h1>
+          {authors && <p>By {authors}</p>}
+          <strong className="red">CDN ${price.toFixed(2)}</strong>
           <p>{description}</p>
           <p>{format && `${capitalize(format)} format`}</p>
 
@@ -138,8 +122,7 @@ const ProductDetails = props => {
                   {' '}
                   <FontAwesomeIcon icon={faCheck} />
                 </Button>
-              )
-              : (
+              ) : (
                 <Button variant="outline-primary" onClick={() => addToCart(product_id, name, addMessage, setPurchasedTrue)}>
                   Add to Cart <FontAwesomeIcon icon={faAngleRight} />
                 </Button>
