@@ -28,5 +28,6 @@ module.exports = {
     'react/jsx-one-expression-per-line': ['off'],
     'react/jsx-one-expression-per-line': ['off'],
     'operator-linebreak': ['error', 'after'],
+    indent: ['error', 2, { ignoreComments: true }],
   },
 };
