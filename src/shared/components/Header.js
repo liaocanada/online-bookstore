@@ -2,20 +2,20 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Navbar, Nav } from 'react-bootstrap';
 import Search from './Search';
-import authenticationService from '../services/authenticationService';
+import { getCurrentUser } from '../api/authenticationApi';
 
 class Header extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      currentUser: authenticationService.getCurrentUser(),
+      currentUser: getCurrentUser(),
     };
   }
 
   componentDidMount() {
     this.setState({
-      currentUser: authenticationService.getCurrentUser(),
+      currentUser: getCurrentUser(),
     });
   }
 

@@ -8,7 +8,7 @@ import Layout from '../shared/components/Layout';
 import ProductsSummaryTab from './components/ProductsSummaryTab';
 import ShippingBillingTab from './components/ShippingBillingTab';
 import ReviewTab from './components/ReviewTab';
-import authenticationService from '../shared/services/authenticationService';
+import { getCurrentUser } from '../shared/api/authenticationApi';
 
 class Cart extends React.Component {
   // Query API Gateway for products
@@ -16,7 +16,7 @@ class Cart extends React.Component {
     const { username } = context.query;
     const res = await fetch(`${config.API_GATEWAY_ENDPOINT}/cart/${username}`);
 
-    const { firstName, lastName } = authenticationService.getCurrentUser();
+    const { firstName, lastName } = getCurrentUser();
 
     return {
       username,
@@ -32,7 +32,7 @@ class Cart extends React.Component {
 
     this.tabKeys = ['product-summary', 'shipping-billing', 'review'];
 
-    const defaultAddress = authenticationService.getCurrentUser().address;
+    const defaultAddress = getCurrentUser().address;
     const deepCopy = (obj) => JSON.parse(JSON.stringify(obj));
 
     this.state = {

@@ -13,7 +13,7 @@ import linkify from '../shared/helpers/linkify';
 import MyToast from '../shared/components/MyToast';
 import Layout from '../shared/components/Layout';
 import config from '../shared/config';
-import authenticationService from '../shared/services/authenticationService';
+import { getCurrentUser } from '../shared/api/authenticationApi';
 import capitalize from '../shared/helpers/capitalize';
 
 // /products/[id]
@@ -150,7 +150,7 @@ class Product extends React.Component {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(requestBody),
     };
-    const { username } = authenticationService.getCurrentUser();
+    const { username } = getCurrentUser();
     const url = `${config.API_GATEWAY_ENDPOINT}/cart/${username}`;
 
     await fetch(url, fetchOptions);

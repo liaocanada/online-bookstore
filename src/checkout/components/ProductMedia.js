@@ -4,7 +4,7 @@ import { Media, Button, Form } from 'react-bootstrap';
 
 import linkify from '../../shared/helpers/linkify';
 import capitalize from '../../shared/helpers/capitalize';
-import authenticationService from '../../shared/services/authenticationService';
+import { getCurrentUser } from '../../shared/api/authenticationApi';
 import config from '../../shared/config';
 
 class Product extends React.Component {
@@ -99,9 +99,9 @@ class Product extends React.Component {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(requestBody),
     };
-    const username = authenticationService.getCurrentUser().username;
+    const username = getCurrentUser().username;
     const productId = this.props.product.product_id;
-    const url = config.API_GATEWAY_ENDPOINT + '/cart/' + username + '/' + productId;
+    const url = `${config.API_GATEWAY_ENDPOINT}/cart/${username}/${productId}`;
 
     const res = await fetch(url, fetchOptions);
 
@@ -118,7 +118,7 @@ class Product extends React.Component {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(requestBody),
     };
-    const username = authenticationService.getCurrentUser().username;
+    const username = getCurrentUser().username;
     const productId = this.props.product.product_id;
     const url = config.API_GATEWAY_ENDPOINT + '/cart/' + username + '/' + productId;
 
