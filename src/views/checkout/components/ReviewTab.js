@@ -3,7 +3,7 @@ import { Button, Tab, Form, Row, Col } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleLeft, faAngleDoubleRight } from '@fortawesome/free-solid-svg-icons';
 import ProductMedia from './ProductMedia';
-import config from '../../shared/config';
+import config from '../../../config';
 
 class ReviewTab extends React.Component {
   // Define initial state

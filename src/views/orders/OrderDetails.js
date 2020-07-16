@@ -1,6 +1,6 @@
 import React from 'react';
 import fetch from 'isomorphic-unfetch';
-import config from '../shared/config';
+import config from '../../config';
 import Layout from '../shared/components/Layout';
 import ProductCard from '../products/components/ProductCard';
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Card } from 'react-bootstrap';
 import linkify from '../../shared/helpers/linkify';
-import config from '../../shared/config';
+import config from '../../../config';
 
 const productStyle = {
   border: '1px solid #DDD',

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Image } from 'react-bootstrap';
 import fetch from 'isomorphic-unfetch';
 import Layout from '../shared/components/Layout';
-import config from '../shared/config';
+import config from '../../config';
 
 // URL: /authors/[author_name]
 

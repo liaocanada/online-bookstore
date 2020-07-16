@@ -12,8 +12,8 @@ import fetch from 'isomorphic-unfetch';
 import linkify from '../shared/helpers/linkify';
 import MyToast from '../shared/components/MyToast';
 import Layout from '../shared/components/Layout';
-import config from '../shared/config';
-import { getCurrentUser } from '../shared/api/authenticationApi';
+import config from '../../config';
+import { getCurrentUser } from '../../api/authenticationApi';
 import capitalize from '../shared/helpers/capitalize';
 
 // /products/[id]

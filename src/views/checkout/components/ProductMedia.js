@@ -4,8 +4,8 @@ import { Media, Button, Form } from 'react-bootstrap';
 
 import linkify from '../../shared/helpers/linkify';
 import capitalize from '../../shared/helpers/capitalize';
-import { getCurrentUser } from '../../shared/api/authenticationApi';
-import config from '../../shared/config';
+import { getCurrentUser } from '../../../api/authenticationApi';
+import config from '../../../config';
 
 class Product extends React.Component {
   // Process props

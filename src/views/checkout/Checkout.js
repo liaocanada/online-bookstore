@@ -3,12 +3,12 @@ import fetch from 'isomorphic-unfetch';
 import {
   Tab, Row, Col, Nav
 } from 'react-bootstrap';
-import config from '../shared/config';
+import config from '../../config';
 import Layout from '../shared/components/Layout';
 import ProductsSummaryTab from './components/ProductsSummaryTab';
 import ShippingBillingTab from './components/ShippingBillingTab';
 import ReviewTab from './components/ReviewTab';
-import { getCurrentUser } from '../shared/api/authenticationApi';
+import { getCurrentUser } from '../../api/authenticationApi';
 
 class Cart extends React.Component {
   // Query API Gateway for products

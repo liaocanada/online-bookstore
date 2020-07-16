@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Navbar, Nav } from 'react-bootstrap';
 import Search from './Search';
-import { getCurrentUser } from '../api/authenticationApi';
+import { getCurrentUser } from '../../../api/authenticationApi';
 
 class Header extends React.Component {
   constructor(props) {
