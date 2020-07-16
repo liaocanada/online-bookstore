@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import Layout from './Layout';
+import Loading from './Loading';
 
 // Component which contains logic to call an API/other function
 //     while displaying Loading/Error/Success component
@@ -27,7 +29,7 @@ const Loader = props => {
     });
   }, []);
 
-  if (loading) return <h1>Loading</h1>;
+  if (loading) return <Layout><Loading /></Layout>;
   if (error) return <h1>Error: {error.toString()}</h1>;
 
   // If loaded and error-free, return component and pass data through props
