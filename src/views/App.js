@@ -8,6 +8,7 @@ import {
 // Pages
 import Home from './home/Home';
 import ProductsList from './products/ProductsList';
+import ProductDetailsLoader from './products/ProductDetailsLoader';
 import InsightsHome from './insights/InsightsHome';
 import UserDetails from './user/UserDetails';
 import Checkout from './checkout/Checkout';
@@ -16,10 +17,11 @@ const App = () => (
   <Router>
     <Switch>
       <Route exact path="/"><Home /></Route>
-      <Route path="/products"><ProductsList /></Route>
-      <Route path="/insights"><InsightsHome /></Route>
-      <Route path="/user/:username"><UserDetails /></Route>
-      <Route path="/cart/:username"><Checkout /></Route>
+      <Route exact path="/products"><ProductsList /></Route>
+      <Route exact path="/products/:id"><ProductDetailsLoader /></Route>
+      <Route exact path="/insights"><InsightsHome /></Route>
+      <Route exact path="/user/:username"><UserDetails /></Route>
+      <Route exact path="/cart/:username"><Checkout /></Route>
     </Switch>
   </Router>
 );

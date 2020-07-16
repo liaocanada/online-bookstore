@@ -12,7 +12,7 @@ const Products = () => {
       setProducts(res.products);
       setSearch(res.search);
     });
-  });
+  }, []);
 
   return (
     <Layout>

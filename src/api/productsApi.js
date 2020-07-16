@@ -14,6 +14,11 @@ export const getAllProducts = async q => {
   };
 };
 
-export const getProductById = id => {
-  // TODO
+export const getProductById = async id => {
+  const url = `${config.API_GATEWAY_ENDPOINT}/products/${id}`;
+
+  const res = await fetch(url);
+  return {
+    product: await res.json()
+  };
 };
