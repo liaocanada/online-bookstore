@@ -1,8 +1,6 @@
 import React from 'react';
-import fetch from 'isomorphic-unfetch';
 import { CardColumns } from 'react-bootstrap';
-import config from '../shared/config';
-import Layout from '../shared/Layout';
+import Layout from '../shared/components/Layout';
 import ProductCard from './components/ProductCard';
 
 const Products = () => {

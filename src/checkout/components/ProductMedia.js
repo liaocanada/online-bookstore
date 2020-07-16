@@ -2,10 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Media, Button, Form } from 'react-bootstrap';
 
-import linkify from '../../helpers/linkify';
-import capitalize from '../../helpers/capitalize';
-import authenticationService from '../../services/authenticationService';
-import config from '../../config';
+import linkify from '../../shared/helpers/linkify';
+import capitalize from '../../shared/helpers/capitalize';
+import authenticationService from '../../shared/services/authenticationService';
+import config from '../../shared/config';
 
 class Product extends React.Component {
   // Process props

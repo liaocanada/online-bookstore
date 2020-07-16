@@ -2,7 +2,7 @@ import { Image } from 'react-bootstrap';
 import React from 'react';
 import fetch from 'isomorphic-unfetch';
 import config from '../shared/config';
-import Layout from '../shared/Layout';
+import Layout from '../shared/components/Layout';
 import Order from '../orders/components/OrderCard';
 
 // /user/[username]

@@ -7,19 +7,19 @@ import {
 
 // Pages
 import Home from './home/Home';
-import Products from './products/components';
-import Insights from './pages/insights';
+import ProductsList from './products/ProductsList';
+import InsightsHome from './insights/InsightsHome';
 import UserDetails from './user/UserDetails';
-import CartDetails from './pages/cart/CartDetails';
+import Checkout from './checkout/Checkout';
 
 const App = () => (
   <Router>
     <Switch>
       <Route exact path="/"><Home /></Route>
-      <Route path="/products"><Products /></Route>
-      <Route path="/insights"><Insights /></Route>
+      <Route path="/products"><ProductsList /></Route>
+      <Route path="/insights"><InsightsHome /></Route>
       <Route path="/user/:username"><UserDetails /></Route>
-      <Route path="/cart/:username"><CartDetails /></Route>
+      <Route path="/cart/:username"><Checkout /></Route>
     </Switch>
   </Router>
 );

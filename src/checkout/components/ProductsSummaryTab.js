@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Button, Tab } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
-import config from '../../config';
+import config from '../../shared/config';
 import ProductMedia from './ProductMedia';
 
 class ProductsSummaryTab extends React.Component {

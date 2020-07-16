@@ -9,12 +9,12 @@ import {
   faAngleLeft, faAngleRight, faCartPlus, faCheck
 } from '@fortawesome/free-solid-svg-icons';
 import fetch from 'isomorphic-unfetch';
-import linkify from '../helpers/linkify';
-import MyToast from '../components/MyToast';
-import Layout from '../components/Layout';
-import config from '../config';
-import authenticationService from '../services/authenticationService';
-import capitalize from '../helpers/capitalize';
+import linkify from '../shared/helpers/linkify';
+import MyToast from '../shared/components/MyToast';
+import Layout from '../shared/components/Layout';
+import config from '../shared/config';
+import authenticationService from '../shared/services/authenticationService';
+import capitalize from '../shared/helpers/capitalize';
 
 // /products/[id]
 

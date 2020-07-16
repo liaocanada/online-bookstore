@@ -1,6 +1,6 @@
 import React from 'react';
-import MyPieChart from '../../components/insights/MyPieChart';
-import Layout from '../shared/Layout';
+import MyPieChart from './components/MyPieChart';
+import Layout from '../shared/components/Layout';
 import config from '../shared/config';
 
 class Income extends React.Component {

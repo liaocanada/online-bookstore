@@ -1,8 +1,8 @@
 import React from 'react';
 import fetch from 'isomorphic-unfetch';
 import config from '../shared/config';
-import Layout from '../shared/Layout';
-import ProductCard from '../../components/products/ProductCard';
+import Layout from '../shared/components/Layout';
+import ProductCard from '../products/components/ProductCard';
 
 // /orders/[order_number]
 
