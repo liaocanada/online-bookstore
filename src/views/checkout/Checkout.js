@@ -1,159 +1,151 @@
-import React from 'react';
-import fetch from 'isomorphic-unfetch';
+import React, { useState } from 'react';
 import {
   Tab, Row, Col, Nav
 } from 'react-bootstrap';
-import config from '../../config';
 import Layout from '../shared/components/Layout';
 import ProductsSummaryTab from './components/ProductsSummaryTab';
 import ShippingBillingTab from './components/ShippingBillingTab';
 import ReviewTab from './components/ReviewTab';
 import { getCurrentUser } from '../../api/authenticationApi';
+import { calculateNumItems } from '../shared/helpers/calculateProductsMetadata';
 
-class Cart extends React.Component {
-  // Query API Gateway for products
-  static async getInitialProps(context) {
-    const { username } = context.query;
-    const res = await fetch(`${config.API_GATEWAY_ENDPOINT}/cart/${username}`);
+// static async getInitialProps(context) {
+//   const { username } = context.query;
+//   const res = await fetch(`${config.API_GATEWAY_ENDPOINT}/cart/${username}`);
 
-    const { firstName, lastName } = getCurrentUser();
+//   const { firstName, lastName } = getCurrentUser();
 
-    return {
-      username,
-      firstName,
-      lastName,
-      products: await res.json() // TODO make sure 200
-    };
+//   return {
+//     username,
+//     firstName,
+//     lastName,
+//     products: await res.json() // TODO make sure 200
+//   };
+// }
+const tabKeys = ['product-summary', 'shipping-billing', 'review'];
+
+const Cart = props => {
+  const { products, username: urlUsername } = props.data;
+
+  const initialAddress = getCurrentUser().address;
+  const { firstName, lastName, username: currentUsername } = getCurrentUser();
+
+  // State
+  const [activeTab, setActiveTab] = useState(tabKeys[0]);
+  const [shippingAddress, setShippingAddress] = useState(initialAddress);
+  const [billingAddress, setBillingAddress] = useState(initialAddress);
+  const [numItems, setNumItems] = useState(calculateNumItems(products));
+
+  const getActiveTabIndex = () => tabKeys.indexOf(activeTab);
+
+  if (urlUsername !== currentUsername) {
+    // TODO redirect to currentUsername
   }
 
-  // Define initial state
-  constructor(props) {
-    super(props);
+  return (
+    <Layout>
+      <h1>
+        {firstName}&apos;s Cart
+      </h1>
+      <hr />
+      <Tab.Container
+        activeKey={activeTab}
+        onSelect={key => setActiveTab(key)}
+      >
+        <Row>
+          <Col sm={3}>
+            <Nav variant="pills" className="flex-column">
+              <Nav.Item>
+                <Nav.Link eventKey={tabKeys[0]}>
+                  1. Product Summary
+                </Nav.Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Nav.Link eventKey={tabKeys[1]} disabled={!numItems}>
+                  2. Shipping & Billing
+                </Nav.Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Nav.Link eventKey={tabKeys[2]} disabled={!(getActiveTabIndex() + 1 >= 2)}>
+                  3. Review Order
+                </Nav.Link>
+              </Nav.Item>
+            </Nav>
+          </Col>
+          <Col sm={9}>
+            <Tab.Content>
 
-    this.tabKeys = ['product-summary', 'shipping-billing', 'review'];
+              <ProductsSummaryTab
+                eventKey={tabKeys[0]}
+                products={products}
+                next={() => advanceTab(0, setActiveTab)}
+              />
 
-    const defaultAddress = getCurrentUser().address;
-    const deepCopy = (obj) => JSON.parse(JSON.stringify(obj));
+              <ShippingBillingTab
+                eventKey={tabKeys[1]}
+                shippingAddress={shippingAddress}
+                billingAddress={billingAddress}
+                setShippingAddress={setShippingAddress}
+                setBillingAddress={setBillingAddress}
+                next={() => advanceTab(1, setActiveTab)}
+              />
 
-    this.state = {
-      activeTab: this.tabKeys[0],
-      shippingAddress: deepCopy(defaultAddress),
-      billingAddress: deepCopy(defaultAddress),
-      numItems: this.calculateNumItems(this.props.products)
-    };
+              <ReviewTab
+                eventKey={tabKeys[2]}
+                products={products}
+                shippingAddress={shippingAddress}
+                billingAddress={billingAddress}
+                firstName={firstName}
+                lastName={lastName}
+                next={() => advanceTab(2)}
+              />
+            </Tab.Content>
+          </Col>
+        </Row>
+      </Tab.Container>
+    </Layout>
+  );
+};
+
+// const isTabEnabled = tabKey => {
+//   if (tabKey === 0) {
+//     return true;
+//   } else if (tabKey === 1) {
+//     return
+//   } else if (tabKey === 2) {
+
+//   } else throw new Error('Invalid tab key.');
+// };
+
+const advanceTab = (activeTabIndex, setActiveTab) => {
+  if (activeTabIndex >= tabKeys.length) throw new Error('Invalid tab index');
+
+  if (activeTabIndex === tabKeys.length - 1) {
+    submitOrder();
+    return;
   }
 
-  // Render
-  render() {
-    const activeTabIndex = this.tabKeys.indexOf(this.state.activeTab);
+  setActiveTab(tabKeys[activeTabIndex + 1]);
+};
 
-    return (
-      <Layout>
-        <h1>
-          {this.props.firstName}
-          's Cart
-        </h1>
-        <hr />
-        <Tab.Container
-          activeKey={this.state.activeTab}
-          onSelect={(key) => this.setState({ activeTab: key })}
-        >
-          <Row>
-            <Col sm={3}>
-              <Nav variant="pills" className="flex-column">
-                <Nav.Item>
-                  <Nav.Link eventKey={this.tabKeys[0]}>
-                    1. Product Summary
-                  </Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                  <Nav.Link eventKey={this.tabKeys[1]} disabled={!this.state.numItems}>
-                    2. Shipping & Billing
-                  </Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                  <Nav.Link eventKey={this.tabKeys[2]} disabled={!(activeTabIndex + 1 >= 2)}>
-                    3. Review Order
-                  </Nav.Link>
-                </Nav.Item>
-              </Nav>
-            </Col>
-            <Col sm={9}>
-              <Tab.Content>
+const submitOrder = async () => {
+  alert('submit order');
+  // const requestBody = {
+  //   username: this.props.username,
+  //   billed_to: this.state.billingAddress,
+  //   shipped_to: this.state.shippingAddress,
+  // };
+  // const fetchOptions = {
+  //   method: 'POST',
+  //   headers: { 'Content-Type': 'application/json' },
+  //   body: JSON.stringify(requestBody),
+  // };
+  // const url = `${config.API_GATEWAY_ENDPOINT}/orders`;
 
-                <ProductsSummaryTab
-                  eventKey={this.tabKeys[0]}
-                  products={this.props.products}
-                  next={() => this.advanceTab()}
-                />
+  // const res = await fetch(url, fetchOptions); // TODO error handling
+  // const orderNumber = (await res.json()).order_number;
 
-                <ShippingBillingTab
-                  eventKey={this.tabKeys[1]}
-                  shippingAddress={this.state.shippingAddress}
-                  billingAddress={this.state.billingAddress}
-                  setShippingAddress={(shippingAddress) => this.setState({ shippingAddress })}
-                  setBillingAddress={(billingAddress) => this.setState({ billingAddress })}
-                  next={() => this.advanceTab()}
-                />
-
-                <ReviewTab
-                  eventKey={this.tabKeys[2]}
-                  products={this.props.products}
-                  shippingAddress={this.state.shippingAddress}
-                  billingAddress={this.state.billingAddress}
-                  firstName={this.props.firstName}
-                  lastName={this.props.lastName}
-                  next={() => this.advanceTab()}
-                />
-
-              </Tab.Content>
-            </Col>
-          </Row>
-        </Tab.Container>
-      </Layout>
-    );
-  }
-
-  advanceTab() {
-    const activeTabIndex = this.tabKeys.indexOf(this.state.activeTab);
-    if (activeTabIndex >= this.tabKeys.length) throw new Error('Invalid tab index');
-
-    if (activeTabIndex === this.tabKeys.length - 1) {
-      this.submitOrder();
-      return;
-    }
-
-    this.setState({
-      activeTab: this.tabKeys[activeTabIndex + 1]
-    });
-  }
-
-  async submitOrder() {
-    const requestBody = {
-      username: this.props.username,
-      billed_to: this.state.billingAddress,
-      shipped_to: this.state.shippingAddress,
-    };
-    const fetchOptions = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(requestBody),
-    };
-    const url = `${config.API_GATEWAY_ENDPOINT}/orders`;
-
-    const res = await fetch(url, fetchOptions); // TODO error handling
-    const orderNumber = (await res.json()).order_number;
-
-    // Router.push(`/orders/${orderNumber}`);
-  }
-
-  // TODO move to helper
-  calculateNumItems(products) {
-    return products.reduce(
-      (accumulator, current) => accumulator += parseInt(current.quantity),
-      0
-    );
-  }
-}
+  // Router.push(`/orders/${orderNumber}`);
+};
 
 export default Cart;

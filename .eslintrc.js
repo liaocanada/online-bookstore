@@ -26,8 +26,9 @@ module.exports = {
     'no-multi-spaces': ['error', { ignoreEOLComments: true }],
     radix: ['off'],
     'react/jsx-one-expression-per-line': ['off'],
-    'react/jsx-one-expression-per-line': ['off'],
     'operator-linebreak': ['error', 'after'],
     indent: ['error', 2, { ignoreComments: true }],
+    'object-curly-newline': ['off'],
+    'react/prop-types': ['off'],  // TODO re-enable later
   },
 };

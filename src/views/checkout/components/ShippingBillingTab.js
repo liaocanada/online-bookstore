@@ -4,9 +4,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import AddressForm from './AddressForm';
 
-const ShippingBillingTab = () => {
+const ShippingBillingTab = props => {
   const { shippingAddress, setShippingAddress,
-    billingAddress, setBillingAddress, eventKey, next } = this.props;
+    billingAddress, setBillingAddress, eventKey, next } = props;
 
   return (
     <Tab.Pane eventKey={eventKey}>
