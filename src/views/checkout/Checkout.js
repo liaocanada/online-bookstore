@@ -2,11 +2,14 @@ import React, { useState } from 'react';
 import {
   Tab, Row, Col, Nav
 } from 'react-bootstrap';
+import { useHistory } from 'react-router-dom';
+
 import Layout from '../shared/components/Layout';
 import ProductsSummaryTab from './components/ProductsSummaryTab';
 import ShippingBillingTab from './components/ShippingBillingTab';
 import ReviewTab from './components/ReviewTab';
 import { getCurrentUser } from '../../api/authenticationApi';
+import { submitOrder as submitOrderApi } from '../../api/checkoutApi';
 import { calculateNumItems } from '../shared/helpers/calculateProductsMetadata';
 
 // static async getInitialProps(context) {
@@ -24,6 +27,35 @@ import { calculateNumItems } from '../shared/helpers/calculateProductsMetadata';
 // }
 const tabKeys = ['product-summary', 'shipping-billing', 'review'];
 
+const submitOrder = async (username, billedTo, shippedTo, history) => {
+  const orderNumber = await submitOrderApi(username, billedTo, shippedTo);
+  // TODO error handling
+  history.push(`/orders/${orderNumber}`);
+};
+
+const advanceTab = (activeTabIndex, setActiveTab) => {
+  if (activeTabIndex >= tabKeys.length) throw new Error('Invalid tab index');
+
+  // if (activeTabIndex === tabKeys.length - 1) {
+  //   submitOrder(username, billedTo, shippedTo, history);
+  //   return;
+  // }
+
+  setActiveTab(tabKeys[activeTabIndex + 1]);
+};
+
+// const isTabEnabled = tabKey => {
+//   if (tabKey === 0) {
+//     return true;
+//   } else if (tabKey === 1) {
+//     return
+//   } else if (tabKey === 2) {
+
+//   } else throw new Error('Invalid tab key.');
+// };
+
+// TODO move tab logic to shared component
+
 const Cart = props => {
   const { products, username: urlUsername } = props.data;
 
@@ -35,6 +67,8 @@ const Cart = props => {
   const [shippingAddress, setShippingAddress] = useState(initialAddress);
   const [billingAddress, setBillingAddress] = useState(initialAddress);
   const [numItems, setNumItems] = useState(calculateNumItems(products));
+
+  const history = useHistory();
 
   const getActiveTabIndex = () => tabKeys.indexOf(activeTab);
 
@@ -97,7 +131,7 @@ const Cart = props => {
                 billingAddress={billingAddress}
                 firstName={firstName}
                 lastName={lastName}
-                next={() => advanceTab(2)}
+                next={() => submitOrder(currentUsername, billingAddress, shippingAddress, history)}
               />
             </Tab.Content>
           </Col>
@@ -105,47 +139,6 @@ const Cart = props => {
       </Tab.Container>
     </Layout>
   );
-};
-
-// const isTabEnabled = tabKey => {
-//   if (tabKey === 0) {
-//     return true;
-//   } else if (tabKey === 1) {
-//     return
-//   } else if (tabKey === 2) {
-
-//   } else throw new Error('Invalid tab key.');
-// };
-
-const advanceTab = (activeTabIndex, setActiveTab) => {
-  if (activeTabIndex >= tabKeys.length) throw new Error('Invalid tab index');
-
-  if (activeTabIndex === tabKeys.length - 1) {
-    submitOrder();
-    return;
-  }
-
-  setActiveTab(tabKeys[activeTabIndex + 1]);
-};
-
-const submitOrder = async () => {
-  alert('submit order');
-  // const requestBody = {
-  //   username: this.props.username,
-  //   billed_to: this.state.billingAddress,
-  //   shipped_to: this.state.shippingAddress,
-  // };
-  // const fetchOptions = {
-  //   method: 'POST',
-  //   headers: { 'Content-Type': 'application/json' },
-  //   body: JSON.stringify(requestBody),
-  // };
-  // const url = `${config.API_GATEWAY_ENDPOINT}/orders`;
-
-  // const res = await fetch(url, fetchOptions); // TODO error handling
-  // const orderNumber = (await res.json()).order_number;
-
-  // Router.push(`/orders/${orderNumber}`);
 };
 
 export default Cart;

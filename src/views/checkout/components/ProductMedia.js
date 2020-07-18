@@ -1,131 +1,111 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 import { Media, Button, Form } from 'react-bootstrap';
 
 import linkify from '../../shared/helpers/linkify';
 import capitalize from '../../shared/helpers/capitalize';
 import { getCurrentUser } from '../../../api/authenticationApi';
+import { editProductInCart } from '../../../api/checkoutApi';
 import config from '../../../config';
 
-class Product extends React.Component {
-  // Process props
-  static async getInitialProps(context) {
-    const { username } = context.query;
-    const res = await fetch(`${config.API_GATEWAY_ENDPOINT}/cart/${username}`);
-    return {
-      username,
-      products: await res.json()  // TODO make sure 200
-    };
-  }
+const reloadPage = (history, location) => {
+  // From Zach Taylor https://stackoverflow.com/a/58188231/
+  history.push('/about');
+  history.replace(location.pathname);
+};
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      newQuantity: parseInt(this.props.product.quantity),
-      updated: false
-    };
-  }
+const updateQuantity = async (productId, newQuantity, username, setUpdated, history, location) => {
+  await editProductInCart(productId, parseInt(newQuantity), username);
+  setUpdated(true);
+  reloadPage(history, location);
+};
 
-  render() {
-    let { product_id, name, price, description, isbn, authors, genres,
-      quantity, images, format } = this.props.product;
+const deleteCurrentProduct = async (productId, username, history, location) => {
+  await editProductInCart(productId, 0, username);
+  reloadPage(history, location);
+};
 
-    price = parseFloat(price);
-    quantity = parseInt(quantity);
-    authors = linkify(authors, author => '/authors/' + author);
-    genres = linkify(genres, genre => '/products?q=' + genre);
+const ProductMedia = props => {
+  const { product, editable } = props;
 
-    const firstImage = images ?
-      images.split(', ')[0] :
-      config.BOOK_PLACEHOLDER_IMAGE;
+  let { product_id, name, price, description, isbn, authors, genres,
+    quantity, images, format } = product;
+  price = parseFloat(price);
+  quantity = parseInt(quantity);
+  authors = linkify(authors, author => `/authors/${author}`);
+  genres = linkify(genres, genre => `/products?q=${genre}`);
 
-    const editable = this.props.editable;
+  const [quantityField, setQuantityField] = useState(quantity);
+  const [quantityUpdated, setQuantityUpdated] = useState(false);
 
-    return (
-      <Media>
-        <img
-          width={80}
-          height={80}
-          className='mr-3'
-          src={firstImage}
-        />
-        <Media.Body>
-          <strong className='red float-right'>${price.toFixed(2)} ea</strong>
-          {editable ?
-            <Link to={'/products/' + product_id}>
-              <a><h5>{name}</h5></a>
-            </Link>
-            :
-            <h5>{name}</h5>
-          }
+  const history = useHistory();
+  const location = useLocation();
 
-          <Form inline>
-            <Form.Label>Quantity:</Form.Label>
-            {/* TODO make sure input is a positive integer */}
-            <Form.Control
-              plaintext={!editable}
-              readOnly={!editable}
-              value={this.state.newQuantity}
-              onChange={event => this.setState({ newQuantity: event.target.value })}
-              size='sm'
-            />
+  const firstImage = images ?
+    images.split(', ')[0] :
+    config.BOOK_PLACEHOLDER_IMAGE;
 
-            {editable && (
-              this.state.updated ?
-                <Button variant='success' size='sm' onClick={() => { }}>
-                  Updated!
-							</Button>
-                :
-                <Button variant='outline-primary' size='sm' onClick={() => this.updateQuantity()}>
-                  Update
-							</Button>
-            )}
-          </Form>
+  return (
+    <Media>
+      <img
+        width={80}
+        height={80}
+        className="mr-3"
+        src={firstImage}
+        alt={`A product called ${name}`}
+      />
+      <Media.Body>
+        <strong className="red float-right">${price.toFixed(2)} ea</strong>
+        {editable ? (
+          <Link to={`/products/${product_id}`}>
+            <a><h5>{name}</h5></a>
+          </Link>
+        ) : (
+          <h5>{name}</h5>
+        )}
 
-          {!!authors && <>By {authors}<br /></>}
-          {!!format && <>{capitalize(format)} format<br /></>}
-          {editable && <a href='#' onClick={() => this.delete()}>Delete</a>}
-        </Media.Body>
-      </Media>
-    );
-  }
+        <Form inline>
+          <Form.Label>Quantity:</Form.Label>
+          {/* TODO make sure input is a positive integer */}
+          <Form.Control
+            plaintext={!editable}
+            readOnly={!editable}
+            value={quantityField}
+            onChange={event => setQuantityField(event.target.value)}
+            size="sm"
+          />
 
-  async updateQuantity() {
-    const requestBody = {
-      quantity: this.state.newQuantity
-    };
-    const fetchOptions = {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(requestBody),
-    };
-    const username = getCurrentUser().username;
-    const productId = this.props.product.product_id;
-    const url = `${config.API_GATEWAY_ENDPOINT}/cart/${username}/${productId}`;
+          {editable && (
+            quantityUpdated ? (
+              <Button variant="success" size="sm" onClick={() => { }}>
+                Updated!
+              </Button>
+            ) : (
+              <Button
+                variant="outline-primary"
+                size="sm"
+                onClick={() => updateQuantity(product_id, quantityField,
+                  getCurrentUser().username, setQuantityUpdated, history, location)}
+              >
+                Update
+              </Button>
+            )
+          )}
+        </Form>
 
-    const res = await fetch(url, fetchOptions);
+        {!!authors && <>By {authors}<br /></>}
+        {!!format && <>{capitalize(format)} format<br /></>}
+        {editable && (
+          <a 
+            href="#"
+            onClick={() => deleteCurrentProduct(product_id, getCurrentUser().username, history, location)}
+          >
+            Delete
+          </a>
+        )}
+      </Media.Body>
+    </Media>
+  );
+};
 
-    this.setState({ updated: true });
-    // Router.reload();  TODO
-  }
-
-  async delete() {
-    const requestBody = {
-      quantity: 0
-    };
-    const fetchOptions = {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(requestBody),
-    };
-    const username = getCurrentUser().username;
-    const productId = this.props.product.product_id;
-    const url = config.API_GATEWAY_ENDPOINT + '/cart/' + username + '/' + productId;
-
-    const res = await fetch(url, fetchOptions);
-
-    // Router.reload();  TODO
-  }
-}
-
-export default Product;
+export default ProductMedia;

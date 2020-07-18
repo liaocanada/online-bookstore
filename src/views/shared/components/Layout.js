@@ -7,12 +7,12 @@ const layoutStyle = {
   border: '1px solid #DDD'
 };
 
-const Layout = props => (
+const Layout = ({ children }) => (
   <>
     <Header />
 
     <div style={layoutStyle}>
-      {props.children}
+      {children}
     </div>
   </>
 );

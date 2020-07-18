@@ -26,6 +26,7 @@ const ProductsSummaryTab = props => {
           <hr />
         </>
       ))}
+
       <h5 className="float-right">CAD ${subtotal.toFixed(2)}</h5>
       <h5>Subtotal ({numItems} items)</h5>
 
