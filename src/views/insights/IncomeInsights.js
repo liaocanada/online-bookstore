@@ -1,41 +1,28 @@
 import React from 'react';
 import MyPieChart from './components/MyPieChart';
 import Layout from '../shared/components/Layout';
-import config from '../../config';
 
-class Income extends React.Component {
-  static async getInitialProps(context) {
-    // TODO promise.all
-    const byProductRes = await fetch(`${config.API_GATEWAY_ENDPOINT}/insights/income/byProduct`);
-    const byMonthRes = await fetch(`${config.API_GATEWAY_ENDPOINT}/insights/income/byMonth`);
+const IncomeInsights = props => {
+  // eslint-disable-next-line react/destructuring-assignment
+  const { incomeByProduct, incomeByMonth } = props.data;
 
-    return {
-      incomeByProduct: await byProductRes.json(),
-      incomeByMonth: await byMonthRes.json(),
-    };
-  }
+  // TODO do this for all month/year
+  const julyData = incomeByMonth.find(element => element.month === 7 && element.year === 2020);
+  const formattedJulyData = [
+    { title: 'Profits', value: parseFloat(julyData.profit) },
+    { title: 'Commission', value: parseFloat(julyData.commission) },
+    { title: 'Delivery', value: parseFloat(julyData.delivery_fee) },
+    { title: 'Taxes', value: parseFloat(julyData.taxes) },
+  ];
 
-  render() {
-    const { incomeByProduct, incomeByMonth } = this.props;
+  return (
+    <Layout>
+      <h1>Income by product</h1>
+      <MyPieChart data={incomeByProduct} titleKey="name" valueKey="profit" />
+      <h1>Income for July 2020</h1>
+      <MyPieChart data={formattedJulyData} />
+    </Layout>
+  );
+};
 
-    // TODO do this for all month/year
-    const aprilData = incomeByMonth.find((element) => element.month === 4 && element.year === 2020);
-    const formattedAprilData = [
-      { title: 'Profits', value: parseFloat(aprilData.profit) },
-      { title: 'Commission', value: parseFloat(aprilData.commission) },
-      { title: 'Delivery', value: parseFloat(aprilData.delivery_fee) },
-      { title: 'Taxes', value: parseFloat(aprilData.taxes) },
-    ];
-
-    return (
-      <Layout>
-        <h1>Income by product</h1>
-        <MyPieChart data={incomeByProduct} titleKey="name" valueKey="profit" />
-        <h1>Income for April 2020</h1>
-        <MyPieChart data={formattedAprilData} />
-      </Layout>
-    );
-  }
-}
-
-export default Income;
+export default IncomeInsights;

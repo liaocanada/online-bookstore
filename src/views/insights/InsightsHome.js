@@ -7,13 +7,13 @@ const Insights = () => (
   <Layout>
     <h1>Performance Insights</h1>
     <h5>Pick one:</h5>
-    <Link href="/insights/income">
+    <Link to="/insights/income">
       <Button variant="primary">Income</Button>
     </Link>
     <br />
     <strong>or</strong>
     <br />
-    <Link href="/insights/sales">
+    <Link to="/insights/sales">
       <Button variant="primary">Sales</Button>
     </Link>
   </Layout>
