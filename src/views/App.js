@@ -12,6 +12,7 @@ import ProductDetailsLoader from './products/ProductDetailsLoader';
 import InsightsHome from './insights/InsightsHome';
 import UserDetails from './user/UserDetails';
 import CheckoutLoader from './checkout/CheckoutLoader';
+import OrderDetailsLoader from './orders/OrderDetailsLoader';
 
 const App = () => (
   <Router>
@@ -22,6 +23,7 @@ const App = () => (
       <Route exact path="/insights"><InsightsHome /></Route>
       <Route exact path="/user/:username"><UserDetails /></Route>
       <Route exact path="/cart/:username"><CheckoutLoader /></Route>
+      <Route exact path="/orders/:orderNumber"><OrderDetailsLoader /></Route>
     </Switch>
   </Router>
 );
