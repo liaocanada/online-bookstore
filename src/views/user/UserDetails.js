@@ -1,5 +1,5 @@
-import { Image } from 'react-bootstrap';
 import React from 'react';
+import { Image } from 'react-bootstrap';
 import Layout from '../shared/components/Layout';
 import Order from '../orders/components/OrderCard';
 
@@ -9,8 +9,8 @@ const UserDetails = props => {
 
   return (
     <Layout>
+      <Image id="profile-picture" src={user.picture} rounded />
       <h1>Hello, {username}</h1>
-      <Image src={user.picture} rounded />
       <h3>Real name: {`${user.first_name} ${user.last_name}`}</h3>
       <h3>Email:{user.email}</h3>
       <h3>Address:{user.address}</h3>

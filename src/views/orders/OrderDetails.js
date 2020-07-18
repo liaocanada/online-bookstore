@@ -17,7 +17,7 @@ const OrderDetails = props => {
       <h4>Status: {order_info.status}</h4>
       <h4>Billed to: {order_info.billed_to}</h4>
       <h4>Shipped to: {order_info.shipped_to}</h4>
-      <h4>Time placed:{order_info.time_placed}</h4>
+      <h4>Time placed: {order_info.time_placed}</h4>
 
       {/* TODO fix image loading, might have to make extra api requests */}
       {products.map(product => <ProductCard key={product.product_id} product={product} />)}

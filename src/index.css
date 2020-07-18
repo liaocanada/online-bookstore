@@ -35,3 +35,8 @@
     width: 50%;
     margin: 0 auto;
 }
+
+#profile-picture {
+    width: 15%;
+    float: right;
+}
