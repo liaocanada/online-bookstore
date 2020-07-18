@@ -13,7 +13,8 @@ const Loader = props => {
                 //     The result of this function will be passed to the child component
                 //     through a "data" prop.
     propsKey,   // The key of the prop to pass into the component. By default this is "data"
-    extraProps, // Extra props to pass into the component, represented as an object.
+    extraProps, // Extra props to pass into the component, represented as an object.,
+    triggers,   // An array of triggers which trigger a re-fetch (i.e. second arg in useEffect)
   } = props;
 
   const [data, setData] = useState({});
@@ -28,7 +29,7 @@ const Loader = props => {
       setError(err);
       setLoading(false);
     });
-  }, []);
+  }, (triggers || []));
 
   if (loading) return <Layout><Loading /></Layout>;
   if (error) return <h1>Error: {error.toString()}</h1>;

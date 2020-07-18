@@ -14,7 +14,7 @@ const AuthorDetails = props => {
       <br />
       <h3>Summary</h3>
       <p>{summary}</p>
-      <Link href={`/products?q=${name}`}><a><u>Check out their books!</u></a></Link>
+      <Link to={`/products?q=${name}`}><a><u>Check out their books!</u></a></Link>
     </Layout>
   );
 };

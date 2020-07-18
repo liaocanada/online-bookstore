@@ -3,7 +3,8 @@ import { CardColumns } from 'react-bootstrap';
 import Layout from '../shared/components/Layout';
 import ProductCard from './components/ProductCard';
 
-const Products = props => {
+const ProductsList = props => {
+  // eslint-disable-next-line react/destructuring-assignment
   const { products, search } = props.data;
 
   return (
@@ -23,4 +24,4 @@ const Products = props => {
   );
 };
 
-export default Products;
+export default ProductsList;
