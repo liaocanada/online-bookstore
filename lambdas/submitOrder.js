@@ -62,13 +62,14 @@ exports.handler = async (event, context) => {
             },
             {
                 name: "delivery_fee",
-                value: { stringValue: delivery_fee }
+                value: { doubleValue: delivery_fee }
             }
         ]
     });
 
-
-    const order_number = res.records[0].order_number;
+    console.log('order placed: ', res.records);
+    // const order_number = res.rows[0].order_number.toString();
+    const order_number = res.records[0][0].longValue;
 
     // get all items from user cart cart_product and add them to order_product
     // get items from cart first
