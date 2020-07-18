@@ -3,7 +3,8 @@ import MyPieChart from './components/MyPieChart';
 import Layout from '../shared/components/Layout';
 
 const SalesInsights = props => {
-  const { salesByProduct, salesByBookGenre, salesByBookAuthor } = props;
+  // eslint-disable-next-line react/destructuring-assignment
+  const { salesByProduct, salesByBookGenre, salesByBookAuthor } = props.data;
 
   return (
     <Layout>
