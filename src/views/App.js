@@ -15,6 +15,7 @@ import IncomeInsightsLoader from './insights/IncomeInsightsLoader';
 import UserDetailsLoader from './user/UserDetailsLoader';
 import CheckoutLoader from './checkout/CheckoutLoader';
 import OrderDetailsLoader from './orders/OrderDetailsLoader';
+import AuthorDetailsLoader from './authors/AuthorDetailsLoader';
 
 const App = () => (
   <Router>
@@ -28,6 +29,8 @@ const App = () => (
       <Route exact path="/user/:username"><UserDetailsLoader /></Route>
       <Route exact path="/cart/:username"><CheckoutLoader /></Route>
       <Route exact path="/orders/:orderNumber"><OrderDetailsLoader /></Route>
+      <Route exact path="/authors"><h1>to do</h1></Route>
+      <Route exact path="/authors/:authorName"><AuthorDetailsLoader /></Route>
     </Switch>
   </Router>
 );
