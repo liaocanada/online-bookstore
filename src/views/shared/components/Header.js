@@ -2,13 +2,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Navbar, Nav } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
-import { selectIsLoggedIn } from '../redux/authorization';
+import { selectIsLoggedIn, selectUsername } from '../redux/authorization';
 import Search from './Search';
 import config from '../../../config';
 
-const Header = props => {
+const Header = () => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
-  // const username = useSelector(selectIsLoggedIn);
+  const username = useSelector(selectUsername);
 
   return (
     <>
@@ -27,9 +27,9 @@ const Header = props => {
             <>
               {/* Logging out redirects to another URL which resets state anyways */}
               {/* So no need to set isLoggedIn to false */}
+              <Nav.Link as={Link} to={`/user/${username}`}>Account</Nav.Link>
+              <Nav.Link as={Link} to={`/cart/${username}`}>Cart</Nav.Link>
               <Nav.Link href={config.LOGOUT_URL}>Log&nbsp;Out</Nav.Link>
-              {/* <Nav.Link as={Link} to={`/user/${currentUser.username}`}>Account</Nav.Link> */}
-              {/* <Nav.Link as={Link} to={`/cart/${currentUser.username}`}>Cart</Nav.Link> */}
             </>
           ) : (
             <Nav.Link href={config.LOGIN_URL}>Login</Nav.Link>
