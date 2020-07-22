@@ -1,6 +1,6 @@
 import { useHistory, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { updateJwt } from '../shared/redux/authorization';
+import { login } from '../shared/redux/authorization';
 import getHashParams from '../shared/helpers/getHashParams';
 
 // Receives a cognito code, and uses it to make a request for a JWT.
@@ -16,7 +16,7 @@ const LoginCallBackHandler = props => {
   const jwt = hashObj.id_token;
 
   if (jwt) {
-    dispatch(updateJwt(jwt));
+    dispatch(login(jwt));
     history.push('/?message=loginSuccess');
   } else {
     history.push('/?message=loginFailed');

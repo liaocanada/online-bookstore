@@ -4,12 +4,15 @@ export const authorizationSlice = createSlice({
   name: 'authorization',
   initialState: { jwt: null, isLoggedIn: false },
   reducers: {
-    updateJwt: (state, action) => { state.jwt = action.payload; }
+    login: (state, action) => {
+      state.jwt = action.payload;
+      state.isLoggedIn = true;
+    }
   },
 });
 
 // Actions (operations which mutate state)
-export const { updateJwt } = authorizationSlice.actions;
+export const { login } = authorizationSlice.actions;
 
 // Reducer (handling actions)
 export default authorizationSlice.reducer;
