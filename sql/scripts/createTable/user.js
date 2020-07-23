@@ -2,7 +2,6 @@ module.exports = outputStream =>
     outputStream.write(
         "CREATE TABLE storeuser(" +
             "username VARCHAR(255) PRIMARY KEY, " + 
-            "password VARCHAR(255), " + 
             "first_name VARCHAR(255), " + 
             "last_name VARCHAR(255), " + 
             "email VARCHAR(255), " + 
