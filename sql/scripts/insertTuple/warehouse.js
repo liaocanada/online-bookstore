@@ -4,7 +4,7 @@ function mapToWarehouseSql(warehouse, outputStream) {
     // Due to limitations on pg-escape module, numbers are injected directly into the string
     // Numbers don't come from user input
     const sqlFormat = 
-        "INSERT INTO warehouse(name, address, phone, area_sqft) " + 
+        "INSERT INTO warehouse(warehouse_name, address, phone, area_sqft) " + 
         `VALUES (%L, %L, ${warehouse.phone}, ${warehouse.area_sqft});`;
 
     // Use pg-escape to escape strings
