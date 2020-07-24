@@ -1,7 +1,9 @@
 import { useHistory, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { login } from '../shared/redux/authorization';
+import jwtDecode from 'jwt-decode';
+import { login, setUserData } from '../shared/redux/authorization';
 import getHashParams from '../shared/helpers/getHashParams';
+import { getUser } from '../../api/usersApi';
 
 // Receives a cognito code, and uses it to make a request for a JWT.
 //     Then, stores JWT in Redux state
@@ -16,8 +18,17 @@ const LoginCallBackHandler = props => {
   const jwt = hashObj.id_token;
 
   if (jwt) {
-    dispatch(login(jwt));
+    // Decode and save jwt
+    const accountData = jwtDecode(jwt);
+    const payload = { jwt, accountData };
+    dispatch(login(payload));
+
+    // Fetch user data asynchronously. When done, save it to redux.
+    const username = accountData['cognito:username'];
+    getUser(username).then(userAndOrders => dispatch(setUserData(userAndOrders.user)));
+
     history.push('/?message=loginSuccess');
+    // TODO implement the ?message= thingy
   } else {
     history.push('/?message=loginFailed');
   }
