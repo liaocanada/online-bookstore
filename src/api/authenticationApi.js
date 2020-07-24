@@ -1,4 +1,4 @@
-export const getCurrentUser = () => {
+export const getCurrentUser = () => {  // TODO call getUser lambda
   return {
     username: 'davidliao',
     firstName: 'David',

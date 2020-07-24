@@ -7,18 +7,17 @@ const formatToTimestamp = require('./helpers/formatToTimestamp');
 // TODO make this transactional
 
 exports.handler = async event => {
+  console.log(event);
     // TODO validate data types of each
   const requestBody = JSON.parse(event.body);
-  const expectedKeys = ['username', 'first_name', 'last_name',
-    'email', 'address', 'picture'];
+  const expectedKeys = ['username', 'email'];
 
   if (!validateRequestBody(requestBody, expectedKeys)) {
     return formTextResponse(400,
       `Missing request body attributes: one of ${expectedKeys.toString()}`);
   }
 
-  const { username, first_name, last_name,
-    email, address, picture } = requestBody;
+  const { username, email } = requestBody;
   const time_created = new Date();
   const time_last_login = new Date();
 
@@ -26,10 +25,8 @@ exports.handler = async event => {
 
     // add user
     // TODO add error handling for duplicate usernames
-  let statement = 'insert into storeuser (username, first_name, ' +
-        'last_name, email, address, picture, time_created, time_last_login) ' +
-        'values (:username, :first_name, :last_name, :email, :address, ' +
-        ':picture, :time_created, :time_last_login);';
+  let statement = 'insert into storeuser (username, email, time_created, time_last_login) ' +
+        'values (:username, :email, :time_created, :time_last_login);';
     // let values = { username, first_name, last_name, email, address,
     //     picture, time_created, time_last_login };
     // let res = await client.query(statement, values);
@@ -45,24 +42,8 @@ exports.handler = async event => {
         value: { stringValue: username }
       },
       {
-        name: 'first_name',
-        value: { stringValue: first_name }
-      },
-      {
-        name: 'last_name',
-        value: { stringValue: last_name }
-      },
-      {
         name: 'email',
         value: { stringValue: email }
-      },
-      {
-        name: 'address',
-        value: { stringValue: address }
-      },
-      {
-        name: 'picture',
-        value: { stringValue: picture }
       },
       {
         name: 'time_created',
@@ -100,7 +81,7 @@ exports.handler = async event => {
     ]
   });
 
-    // give user the role of customer
+  // Give user the role of customer (role ID: 1)
   statement = 'insert into user_role (username, role_id) values (:username, :role_id);';
   const values = { username, role_id: 1 }; // 1 is role id for customer
   res = await client.query(statement, values);
