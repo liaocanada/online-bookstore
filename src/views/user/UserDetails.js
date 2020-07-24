@@ -21,8 +21,7 @@ const UserDetails = props => {
       <Image id="profile-picture" src={user.picture} rounded />
       {user.first_name ?
         <h1>Hello, {user.first_name}</h1> :
-        <h1>Hello, {user.username}</h1>
-      }
+        <h1>Hello, {user.username}</h1>}
       <h4>Full name: {`${user.first_name} ${user.last_name}`}</h4>
       <h4>Username: {user.username}</h4>  {/* user.username === targetUsername */}
       <h4>Email: {user.email}</h4>

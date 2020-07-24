@@ -1,100 +1,99 @@
-import React from 'react';
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { Button, Form, Col } from 'react-bootstrap';
 
-class AddressForm extends React.Component {
-  // Define initial state
-  constructor(props) {
-    super(props);
-
-    const initialAddress = props.initialAddress;
-    const initialAddressArray = initialAddress.split(', ');
-
-    this.state = {
-      addressField: initialAddressArray[0] || '',
-      cityField: initialAddressArray[1] || '',
-      provinceField: initialAddressArray[2] || '',
-      countryField: initialAddressArray[3] || '',
-      saved: false,
-      error: '',
-    };
+const handleSave = (formFields, setFormSaved, setFormError, saveAddress) => {
+  if (formFields.some(fieldValue => fieldValue === '')) {
+    setFormError('Fields cannot be empty!');
+  } else if (formFields.some(fieldValue => fieldValue.includes(','))) {
+    setFormError('Fields cannot contain commas!');
+  } else {
+    const newAddress = formFields.join(', ');
+    saveAddress(newAddress);
+    setFormSaved(true);
   }
 
-  render() {
-    return (
-      <Form className="address-form">
-        <Form.Row>
-          <Form.Group as={Col}>
-            <Form.Label>Address</Form.Label>
-            <Form.Control
-              value={this.state.addressField}
-              onChange={event => this.setState({ addressField: event.target.value })}
-              required
-            />
-          </Form.Group>
-        </Form.Row>
-        <Form.Row>
-          <Form.Group as={Col}>
-            <Form.Label>City</Form.Label>
-            <Form.Control
-              value={this.state.cityField}
-              onChange={event => this.setState({ cityField: event.target.value })}
-              required
-            />
-          </Form.Group>
-          <Form.Group as={Col}>
-            <Form.Label>Province</Form.Label>
-            <Form.Control
-              value={this.state.provinceField}
-              onChange={event => this.setState({ provinceField: event.target.value })}
-              required
-            />
-          </Form.Group>
-          <Form.Group as={Col}>
-            <Form.Label>Country</Form.Label>
-            <Form.Control
-              value={this.state.countryField}
-              onChange={event => this.setState({ countryField: event.target.value })}
-              required
-            />
-          </Form.Group>
-        </Form.Row>
-        {
-          this.state.saved ?
-            <Button variant="primary" onClick={() => { }}>
-              Saved!
-                    </Button>
-            :
-            this.state.error ?
-              <Button variant="warning" onClick={() => { }}>
-                {this.state.error}
-              </Button>
-              :
-              <Button variant="outline-primary" onClick={() => this.handleSave()}>
-                Save
-              </Button>
-        }
-      </Form>
-    );
-  }
+  setTimeout(() => this.setState({ saved: false, error: '' }), 1500);
+};
 
-  handleSave() {
-    const { addressField, cityField, provinceField, countryField } = this.state;
-    const fieldsArray = [addressField, cityField, provinceField, countryField];
+const AddressForm = props => {
+  const { initialAddress, saveAddress } = props;
+  const initialAddressArray = initialAddress.split(', ');
 
-    if (fieldsArray.some(fieldValue => fieldValue === '')) {
-      this.setState({ error: 'Fields cannot be empty!' });
-    }
-    else if (fieldsArray.some(fieldValue => fieldValue.includes(','))) {
-      this.setState({ error: 'Fields cannot contain commas!' });
-    }
-    else {
-      const newAddress = fieldsArray.join(', ');
-      this.props.saveAddress(newAddress);
-      this.setState({ saved: true });
-    }
+  const [addressField, setAddressField] = useState(initialAddressArray[0] || '');
+  const [cityField, setCityField] = useState(initialAddressArray[1] || '');
+  const [provinceField, setProvinceField] = useState(initialAddressArray[2] || '');
+  const [countryField, setCountryField] = useState(initialAddressArray[3] || '');
+  const [formSaved, setFormSaved] = useState(false);
+  const [formError, setFormError] = useState('');
 
-    setTimeout(() => this.setState({ saved: false, error: '' }), 1500);
-  }
-}
+  const formFields = [addressField, cityField, provinceField, countryField];
+
+  return (
+    <Form className="address-form">
+      <Form.Row>
+        <Form.Group as={Col}>
+          <Form.Label>Address</Form.Label>
+          <Form.Control
+            value={addressField}
+            onChange={event => setAddressField(event.target.value)}
+            required
+          />
+        </Form.Group>
+      </Form.Row>
+      <Form.Row>
+        <Form.Group as={Col}>
+          <Form.Label>City</Form.Label>
+          <Form.Control
+            value={cityField}
+            onChange={event => setCityField(event.target.value)}
+            required
+          />
+        </Form.Group>
+        <Form.Group as={Col}>
+          <Form.Label>Province</Form.Label>
+          <Form.Control
+            value={provinceField}
+            onChange={event => setProvinceField(event.target.value)}
+            required
+          />
+        </Form.Group>
+        <Form.Group as={Col}>
+          <Form.Label>Country</Form.Label>
+          <Form.Control
+            value={countryField}
+            onChange={event => setCountryField(event.target.value)}
+            required
+          />
+        </Form.Group>
+      </Form.Row>
+      {/* eslint-disable-next-line no-nested-ternary */}
+      {formSaved ? (
+        <Button variant="primary" onClick={() => { }}>
+          Saved!
+        </Button>
+      ) : (
+        formError ? (
+          <Button variant="warning" onClick={() => { }}>
+            {formError}
+          </Button>
+        ) : (
+          <Button variant="outline-primary" onClick={() => handleSave(formFields, setFormSaved, setFormError, saveAddress)}>
+            Save
+          </Button>
+        )
+      )}
+    </Form>
+  );
+};
+
+AddressForm.propTypes = {
+  initialAddress: PropTypes.string,
+  saveAddress: PropTypes.func.isRequired
+};
+
+AddressForm.defaultProps = {
+  initialAddress: ''
+};
 
 export default AddressForm;

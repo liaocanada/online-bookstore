@@ -56,8 +56,8 @@ const Cart = props => {
 
   // State
   const [activeTab, setActiveTab] = useState(tabKeys[0]);
-  const [shippingAddress, setShippingAddress] = useState(initialAddress);
-  const [billingAddress, setBillingAddress] = useState(initialAddress);
+  const [shippingAddress, setShippingAddress] = useState(initialAddress || undefined);
+  const [billingAddress, setBillingAddress] = useState(initialAddress || undefined);
   const numItems = calculateNumItems(products);
   // const [numItems, setNumItems] = useState(calculateNumItems(products));
 
@@ -72,9 +72,9 @@ const Cart = props => {
 
   return (
     <Layout>
-      <h1>
-        {firstName}&apos;s Cart
-      </h1>
+      {firstName ?
+        <h1>{firstName}&apos;s Cart</h1> :
+        <h1>Your Cart</h1>}
       <hr />
       <Tab.Container
         activeKey={activeTab}
