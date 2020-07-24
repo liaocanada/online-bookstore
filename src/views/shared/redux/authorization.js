@@ -32,5 +32,5 @@ export const selectJwt = state => state.authorization.jwt;
 export const selectIsLoggedIn = state => state.authorization.isLoggedIn;
 export const selectUsername = state => (state.authorization.accountData ?
   state.authorization.accountData['cognito:username'] : '');
-export const selectEmail = state => (state.authorization.accountData ?
-  state.authorization.accountData.email : '');
+
+export const selectUserData = state => (state.authorization.userData || {});

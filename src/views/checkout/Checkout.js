@@ -3,28 +3,16 @@ import {
   Tab, Row, Col, Nav
 } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 import Layout from '../shared/components/Layout';
 import ProductsSummaryTab from './components/ProductsSummaryTab';
 import ShippingBillingTab from './components/ShippingBillingTab';
 import ReviewTab from './components/ReviewTab';
-import { getCurrentUser } from '../../api/authenticationApi';
+import { selectUserData } from '../shared/redux/authorization';
 import { submitOrder as submitOrderApi } from '../../api/checkoutApi';
 import { calculateNumItems } from '../shared/helpers/calculateProductsMetadata';
 
-// static async getInitialProps(context) {
-//   const { username } = context.query;
-//   const res = await fetch(`${config.API_GATEWAY_ENDPOINT}/cart/${username}`);
-
-//   const { firstName, lastName } = getCurrentUser();
-
-//   return {
-//     username,
-//     firstName,
-//     lastName,
-//     products: await res.json() // TODO make sure 200
-//   };
-// }
 const tabKeys = ['product-summary', 'shipping-billing', 'review'];
 
 const submitOrder = async (username, billedTo, shippedTo, history) => {
@@ -59,14 +47,19 @@ const advanceTab = (activeTabIndex, setActiveTab) => {
 const Cart = props => {
   const { products, username: urlUsername } = props.data;
 
-  const initialAddress = getCurrentUser().address;
-  const { firstName, lastName, username: currentUsername } = getCurrentUser();
+  const {
+    firstName,
+    lastName,
+    username: currentUsername,
+    address: initialAddress
+  } = useSelector(selectUserData);
 
   // State
   const [activeTab, setActiveTab] = useState(tabKeys[0]);
   const [shippingAddress, setShippingAddress] = useState(initialAddress);
   const [billingAddress, setBillingAddress] = useState(initialAddress);
-  const [numItems, setNumItems] = useState(calculateNumItems(products));
+  const numItems = calculateNumItems(products);
+  // const [numItems, setNumItems] = useState(calculateNumItems(products));
 
   const history = useHistory();
 
@@ -74,6 +67,7 @@ const Cart = props => {
 
   if (urlUsername !== currentUsername) {
     // TODO redirect to currentUsername
+    console.log('Should redirect to', currentUsername);
   }
 
   return (

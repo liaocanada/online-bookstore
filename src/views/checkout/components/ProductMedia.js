@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { Link, useHistory, useLocation } from 'react-router-dom';
 import { Media, Button, Form } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
 
+import { selectUserData } from '../../shared/redux/authorization';
 import linkify from '../../shared/helpers/linkify';
 import capitalize from '../../shared/helpers/capitalize';
-import { getCurrentUser } from '../../../api/authenticationApi';
 import { editProductInCart } from '../../../api/checkoutApi';
 import config from '../../../config';
 
@@ -44,6 +45,8 @@ const ProductMedia = props => {
   const firstImage = images ?
     images.split(', ')[0] :
     config.BOOK_PLACEHOLDER_IMAGE;
+
+  const { username } = useSelector(selectUserData);
 
   return (
     <Media>
@@ -85,7 +88,7 @@ const ProductMedia = props => {
                 variant="outline-primary"
                 size="sm"
                 onClick={() => updateQuantity(product_id, quantityField,
-                  getCurrentUser().username, setQuantityUpdated, history, location)}
+                  username, setQuantityUpdated, history, location)}
               >
                 Update
               </Button>
@@ -98,7 +101,7 @@ const ProductMedia = props => {
         {editable && (
           <a 
             href="#"
-            onClick={() => deleteCurrentProduct(product_id, getCurrentUser().username, history, location)}
+            onClick={() => deleteCurrentProduct(product_id, username, history, location)}
           >
             Delete
           </a>

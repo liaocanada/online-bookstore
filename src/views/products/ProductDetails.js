@@ -7,17 +7,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faAngleLeft, faAngleRight, faCartPlus, faCheck, faExclamationTriangle
 } from '@fortawesome/free-solid-svg-icons';
+import { useSelector } from 'react-redux';
+
+import { selectUserData } from '../shared/redux/authorization';
 import linkify from '../shared/helpers/linkify';
 import capitalize from '../shared/helpers/capitalize';
 import MyToast from '../shared/components/MyToast';
 import Layout from '../shared/components/Layout';
-import { getCurrentUser } from '../../api/authenticationApi';
 import { addProductToCart as addToCartApi } from '../../api/checkoutApi';
 
-// /products/[id]
-
-const addToCart = async (productId, productName, addMessage, setPurchasedTrue) => {
-  const { username } = getCurrentUser();
+const addToCart = async (username, productId, productName, addMessage, setPurchasedTrue) => {
   const res = await addToCartApi(username, productId);
 
   if (res.status === 200 || res.status === 201) {
@@ -78,6 +77,8 @@ const ProductDetails = props => {
 
   const stockBadge = getStockBadge(stock);
 
+  const { username } = useSelector(selectUserData);
+
   return (
     <Layout>
       <Row>
@@ -123,7 +124,10 @@ const ProductDetails = props => {
                   <FontAwesomeIcon icon={faCheck} />
                 </Button>
               ) : (
-                <Button variant="outline-primary" onClick={() => addToCart(product_id, name, addMessage, setPurchasedTrue)}>
+                <Button
+                  variant="outline-primary"
+                  onClick={() => addToCart(username, product_id, name, addMessage, setPurchasedTrue)}
+                >
                   Add to Cart <FontAwesomeIcon icon={faAngleRight} />
                 </Button>
               )
