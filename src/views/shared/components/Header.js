@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Navbar, Nav } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
-import { selectIsLoggedIn, selectUsername } from '../redux/authorization';
+import { selectIsLoggedIn, selectUsername } from '../../../redux/authenticationSlice';
 import Search from './Search';
 import config from '../../../config';
 

@@ -3,7 +3,7 @@ import { Link, useHistory, useLocation } from 'react-router-dom';
 import { Media, Button, Form } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
-import { selectUserData } from '../../shared/redux/authorization';
+import { selectUserData } from '../../../redux/authenticationSlice';
 import linkify from '../../shared/helpers/linkify';
 import capitalize from '../../shared/helpers/capitalize';
 import { editProductInCart } from '../../../api/checkoutApi';

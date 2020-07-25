@@ -9,7 +9,7 @@ import Layout from '../shared/components/Layout';
 import ProductsSummaryTab from './components/ProductsSummaryTab';
 import ShippingBillingTab from './components/ShippingBillingTab';
 import ReviewTab from './components/ReviewTab';
-import { selectUserData } from '../shared/redux/authorization';
+import { selectUserData } from '../../redux/authenticationSlice';
 import { submitOrder as submitOrderApi } from '../../api/checkoutApi';
 import { calculateNumItems } from '../shared/helpers/calculateProductsMetadata';
 

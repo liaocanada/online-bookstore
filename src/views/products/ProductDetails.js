@@ -9,7 +9,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { useSelector } from 'react-redux';
 
-import { selectUserData } from '../shared/redux/authorization';
+import { selectUserData } from '../../redux/authenticationSlice';
 import linkify from '../shared/helpers/linkify';
 import capitalize from '../shared/helpers/capitalize';
 import MyToast from '../shared/components/MyToast';

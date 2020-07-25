@@ -1,7 +1,7 @@
 import React from 'react';
 import { Image } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
-import { selectUserData } from '../shared/redux/authorization';
+import { selectUserData } from '../../redux/authenticationSlice';
 import Layout from '../shared/components/Layout';
 import Order from '../orders/components/OrderCard';
 

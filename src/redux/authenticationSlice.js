@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-export const authorizationSlice = createSlice({
-  name: 'authorization',
+export const authenticationSlice = createSlice({
+  name: 'authentication',
   initialState: { jwt: null, isLoggedIn: false, accountData: null, userData: null },
   reducers: {
     login: (state, action) => {
@@ -22,15 +22,15 @@ export const authorizationSlice = createSlice({
 });
 
 // Actions (operations which mutate state)
-export const { login, setUserData } = authorizationSlice.actions;
+export const { login, setUserData } = authenticationSlice.actions;
 
 // Reducer (handling actions)
-export default authorizationSlice.reducer;
+export default authenticationSlice.reducer;
 
 // Selectors (retrieving data from the state)
-export const selectJwt = state => state.authorization.jwt;
-export const selectIsLoggedIn = state => state.authorization.isLoggedIn;
-export const selectUsername = state => (state.authorization.accountData ?
-  state.authorization.accountData['cognito:username'] : '');
+export const selectJwt = state => state.authentication.jwt;
+export const selectIsLoggedIn = state => state.authentication.isLoggedIn;
+export const selectUsername = state => (state.authentication.accountData ?
+  state.authentication.accountData['cognito:username'] : '');
 
-export const selectUserData = state => (state.authorization.userData || {});
+export const selectUserData = state => (state.authentication.userData || {});

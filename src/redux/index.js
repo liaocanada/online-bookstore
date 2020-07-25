@@ -1,8 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
-import authorization from './authorization';
+import authentication from './authenticationSlice';
 
 export default configureStore({
   reducer: {
-    authorization,
+    authentication,
   },
 });
