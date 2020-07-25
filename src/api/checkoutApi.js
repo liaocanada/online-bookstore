@@ -1,5 +1,6 @@
 import fetch from 'isomorphic-unfetch';
 import config from '../config';
+import fetchWithToken from './helpers/fetchWithToken';
 
 export const addProductToCart = async (username, productId) => {
   const requestBody = {
@@ -18,10 +19,10 @@ export const addProductToCart = async (username, productId) => {
   return res;
 };
 
-export const getCartByUsername = async username => {
+export const getCartByUsername = async (username, jwt) => {
   const url = `${config.API_GATEWAY_ENDPOINT}/cart/${username}`;
 
-  const res = await fetch(url);
+  const res = await fetchWithToken(url, jwt);
 
   return {
     username,

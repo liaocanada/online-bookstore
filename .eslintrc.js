@@ -30,5 +30,7 @@ module.exports = {
     indent: ['error', 2, { ignoreComments: true }],
     'object-curly-newline': ['off'],
     'react/prop-types': ['off'],  // TODO re-enable later
+    'no-return-assign': ['off'],
+    'no-param-reassign': ['off'],
   },
 };

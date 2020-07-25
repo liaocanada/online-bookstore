@@ -16,7 +16,7 @@ function mapToSqlStoredIn(product, outputStream, isBook = true) {
     // Due to limitations on pg-escape module, 
     //     numbers are injected directly into the string and take no user input
     const sqlFormat = 
-        "INSERT INTO stored_in(product_id, name, stock, aisle) " + 
+        "INSERT INTO stored_in(product_id, warehouse_name, stock, aisle) " + 
         `VALUES (${productId}, %L, ${stock}, ${aisle});`;
 
     // Use pg-escape to escape strings
