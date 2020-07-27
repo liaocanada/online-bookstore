@@ -1,4 +1,4 @@
-import fetch from 'isomorphic-unfetch';
+import fetch from './helpers/fetchWithRetry';
 import config from '../config';
 
 export const getAllProducts = async q => {

@@ -1,4 +1,4 @@
-import fetch from 'isomorphic-unfetch';
+import fetch from './fetchWithRetry';
 
 export default async (url, jwt, options) => {
   if (!options) options = {};
