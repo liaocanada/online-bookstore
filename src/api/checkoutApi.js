@@ -1,6 +1,6 @@
-import fetch from 'isomorphic-unfetch';
-import config from '../config';
+import fetch from './helpers/fetchWithRetry';
 import fetchWithToken from './helpers/fetchWithToken';
+import config from '../config';
 
 export const addProductToCart = async (username, productId) => {
   const requestBody = {
