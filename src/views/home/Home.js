@@ -33,8 +33,8 @@ const Home = () => {
       )}
 
       <Jumbotron>
-        {isLoggedIn && userData.firstName ?
-          <h1>Welcome, {userData.firstName}</h1> :
+        {isLoggedIn && userData.first_name ?
+          <h1>Welcome, {userData.first_name}</h1> :
           <h1>Welcome</h1>
         }
         <p>Welcome to the BookStore. Get started by browsing through the collection.</p>

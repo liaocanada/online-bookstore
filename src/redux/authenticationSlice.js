@@ -1,5 +1,17 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+/**
+ * userData: {
+ *   address: string,
+ *   email: string,
+ *   first_name: string,
+ *   last_name: string,
+ *   picture: string, (url)
+ *   time_created: string, (YYYY-MM-DD HH:MM:SS.M)
+ *   username: string 
+ * }
+ */
+
 export const authenticationSlice = createSlice({
   name: 'authentication',
   initialState: { jwt: null, isLoggedIn: false, accountData: null, userData: null },
