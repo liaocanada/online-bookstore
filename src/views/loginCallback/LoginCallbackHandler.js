@@ -25,12 +25,9 @@ const LoginCallBackHandler = () => {
 
     // Fetch user data asynchronously. When done, save it to redux.
     const username = accountData['cognito:username'];
-    // TODO user may still be in the process of creating
-    //     Fix: if 404 throw and use exponential backup retry
     getUser(username).then(userAndOrders => dispatch(setUserData(userAndOrders.user)));
 
     history.push('/?message=loginSuccess');
-    // TODO implement the ?message= thingy
   } else {
     history.push('/?message=loginFailed');
   }
