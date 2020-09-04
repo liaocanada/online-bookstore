@@ -8,15 +8,18 @@ exports.handler = async (event, context) => {
 
     // Process and validate request
     const requestBody = JSON.parse(event.body);
-    const expectedKeys = ["username, first_name, last_name, email, address, picture"];
+    const expectedKeys = ["first_name, last_name, email, address, picture"];
     
     if (!validateRequestBody(requestBody, expectedKeys)) {
         return formTextResponse(400, 
             "Missing request body attributes: one of " + expectedKeys.toString());
     }
 
-    const { username, first_name, last_name, email, address, picture } = requestBody;
+    const { first_name, last_name, email, address, picture } = requestBody;
     
+    // TODO add some input validation here
+    const username = event.pathParameters.username;
+
     // Execute SQL query to update user profile info
     const statement = "update storeuser " +
         "set first_name=:first_name, last_name=:last_name, email=:email, address=:address, picture=:picture " +

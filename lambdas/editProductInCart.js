@@ -17,6 +17,7 @@ exports.handler = async (event, context) => {
 
     const { quantity } = requestBody;
 
+    // TODO add some input validation here
     const username = event.pathParameters.username;
     const prod_id = parseInt(event.pathParameters.product_id);
 
