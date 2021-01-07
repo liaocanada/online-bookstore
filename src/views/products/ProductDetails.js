@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useHistory, Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import {
   Button, Image, Carousel, Row, Col, Badge
 } from 'react-bootstrap';
@@ -17,7 +17,6 @@ import Layout from '../shared/components/Layout';
 import { addProductToCart as addToCartApi } from '../../api/checkoutApi';
 import { selectIsLoggedIn } from '../../redux/authenticationSlice';
 import config from '../../config';
-import { func } from 'prop-types';
 
 const addToCart = async (username, productId) => {
   const res = await addToCartApi(username, productId);
@@ -53,15 +52,11 @@ const respondToCartStatus = (status, isLoggedIn, productName, addMessage, setPur
       contents: `Your item ${productName} has been successfully added to your cart.`
     });
   } else {
-    if (!isLoggedIn) {
-      redirectToLogin(addMessage);
-    } else {
-      addMessage({
+    addMessage({
         icon: <FontAwesomeIcon icon={faExclamationTriangle} />,
         title: 'Uh oh!',
         contents: 'Something went wrong. Please try again later.'
-      });
-    }
+    });
   }
 }
 
@@ -71,8 +66,6 @@ const redirectToLogin = (addMessage) => {
     title: 'Uh oh!',
     contents: <><div className="mb-2">Please login to purchase items</div><Button href={config.LOGIN_URL} variant="secondary" size="sm">Login</Button></>
   });
-  //alert('Please login to purchase products.');
-  //window.location.href = config.LOGIN_URL;
 }
 
 const ProductDetails = props => {
@@ -148,8 +141,12 @@ const ProductDetails = props => {
                 <Button
                   variant="outline-primary"
                   onClick={() => {
-                    const cart_res_status = addToCart(username, product_id);
-                    respondToCartStatus(cart_res_status, isLoggedIn, name, addMessage, setPurchasedTrue);
+                    if (isLoggedIn) {
+                      const cart_res_status = addToCart(username, product_id);
+                      respondToCartStatus(cart_res_status, isLoggedIn, name, addMessage, setPurchasedTrue);
+                    } else {
+                      redirectToLogin(addMessage);
+                    }
                   }}
                 >
                   Add to Cart <FontAwesomeIcon icon={faAngleRight} />
