@@ -142,8 +142,8 @@ const ProductDetails = props => {
                   variant="outline-primary"
                   onClick={() => {
                     if (isLoggedIn) {
-                      const cart_res_status = addToCart(username, product_id);
-                      respondToCartStatus(cart_res_status, name, addMessage, setPurchasedTrue);
+                      const cartResStatus = addToCart(username, product_id);
+                      respondToCartStatus(cartResStatus, name, addMessage, setPurchasedTrue);
                     } else {
                       redirectToLogin(addMessage);
                     }
