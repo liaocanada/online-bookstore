@@ -11,8 +11,8 @@ const productStyle = {
   cursor: 'pointer'
 };
 
-const Product = props => {
-  let { product_id, name, price, description, isbn, authors,
+const ProductCard = props => {
+  let { product_id, name, price, authors,
     genres, quantity, images } = props.product;
 
   price = parseFloat(price);
@@ -42,4 +42,4 @@ const Product = props => {
   );
 };
 
-export default Product;
+export default ProductCard;

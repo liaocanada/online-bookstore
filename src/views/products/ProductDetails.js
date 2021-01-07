@@ -15,25 +15,12 @@ import capitalize from '../shared/helpers/capitalize';
 import MyToast from '../shared/components/MyToast';
 import Layout from '../shared/components/Layout';
 import { addProductToCart as addToCartApi } from '../../api/checkoutApi';
+import { selectIsLoggedIn } from '../../redux/authenticationSlice';
+import config from '../../config';
 
-const addToCart = async (username, productId, productName, addMessage, setPurchasedTrue) => {
+const addToCart = async (username, productId) => {
   const res = await addToCartApi(username, productId);
-
-  if (res.status === 200 || res.status === 201) {
-    setPurchasedTrue();
-
-    addMessage({
-      icon: <FontAwesomeIcon icon={faCartPlus} />,
-      title: 'Product added successfully!',
-      contents: `Your item ${productName} has been successfully added to your cart.`
-    });
-  } else {
-    addMessage({
-      icon: <FontAwesomeIcon icon={faExclamationTriangle} />,
-      title: 'Uh oh!',
-      contents: 'Something went wrong. Please try again later.'
-    });
-  }
+  return res.status;
 };
 
 const getStockBadge = stock => {
@@ -55,6 +42,32 @@ const getStockBadge = stock => {
   );
 };
 
+const respondToCartStatus = (status, productName, addMessage, setPurchasedTrue) => {
+  if (status === 200 || status === 201) {
+    setPurchasedTrue();
+
+    addMessage({
+      icon: <FontAwesomeIcon icon={faCartPlus} />,
+      title: 'Product added successfully!',
+      contents: `Your item ${productName} has been successfully added to your cart.`
+    });
+  } else {
+    addMessage({
+        icon: <FontAwesomeIcon icon={faExclamationTriangle} />,
+        title: 'Uh oh!',
+        contents: 'Something went wrong. Please try again later.'
+    });
+  }
+}
+
+const redirectToLogin = (addMessage) => {
+  addMessage({
+    icon: <FontAwesomeIcon icon={faExclamationTriangle} />,
+    title: 'Uh oh!',
+    contents: <><div className="mb-2">Please login to purchase items</div><Button href={config.LOGIN_URL} variant="secondary" size="sm">Login</Button></>
+  });
+}
+
 const ProductDetails = props => {
   let {
     product_id, name, price, description, isbn, authors, genres,
@@ -72,6 +85,7 @@ const ProductDetails = props => {
   const addMessage = message => setMessages(messages.concat([message]));
   const [purchased, setPurchased] = useState(false);
   const setPurchasedTrue = () => setPurchased(true);
+  const isLoggedIn = useSelector(selectIsLoggedIn);
 
   const history = useHistory();
 
@@ -126,7 +140,14 @@ const ProductDetails = props => {
               ) : (
                 <Button
                   variant="outline-primary"
-                  onClick={() => addToCart(username, product_id, name, addMessage, setPurchasedTrue)}
+                  onClick={() => {
+                    if (isLoggedIn) {
+                      const cartResStatus = addToCart(username, product_id);
+                      respondToCartStatus(cartResStatus, name, addMessage, setPurchasedTrue);
+                    } else {
+                      redirectToLogin(addMessage);
+                    }
+                  }}
                 >
                   Add to Cart <FontAwesomeIcon icon={faAngleRight} />
                 </Button>
