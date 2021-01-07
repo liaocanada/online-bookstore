@@ -42,7 +42,7 @@ const getStockBadge = stock => {
   );
 };
 
-const respondToCartStatus = (status, isLoggedIn, productName, addMessage, setPurchasedTrue) => {
+const respondToCartStatus = (status, productName, addMessage, setPurchasedTrue) => {
   if (status === 200 || status === 201) {
     setPurchasedTrue();
 
@@ -143,7 +143,7 @@ const ProductDetails = props => {
                   onClick={() => {
                     if (isLoggedIn) {
                       const cart_res_status = addToCart(username, product_id);
-                      respondToCartStatus(cart_res_status, isLoggedIn, name, addMessage, setPurchasedTrue);
+                      respondToCartStatus(cart_res_status, name, addMessage, setPurchasedTrue);
                     } else {
                       redirectToLogin(addMessage);
                     }

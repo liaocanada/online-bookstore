@@ -29,7 +29,7 @@ const deleteCurrentProduct = async (productId, username, history, location) => {
 const ProductMedia = props => {
   const { product, editable } = props;
 
-  let { product_id, name, price, description, isbn, authors, genres,
+  let { product_id, name, price, authors, genres,
     quantity, images, format } = product;
   price = parseFloat(price);
   quantity = parseInt(quantity);
@@ -61,7 +61,7 @@ const ProductMedia = props => {
         <strong className="red float-right">${price.toFixed(2)} ea</strong>
         {editable ? (
           <Link to={`/products/${product_id}`}>
-            <a><h5>{name}</h5></a>
+            <h5>{name}</h5>
           </Link>
         ) : (
           <h5>{name}</h5>
@@ -99,12 +99,13 @@ const ProductMedia = props => {
         {!!authors && <>By {authors}<br /></>}
         {!!format && <>{capitalize(format)} format<br /></>}
         {editable && (
-          <a 
-            href="#"
+          <Button
+            variant="outline-danger"
+            size="sm"
             onClick={() => deleteCurrentProduct(product_id, username, history, location)}
           >
             Delete
-          </a>
+          </Button>
         )}
       </Media.Body>
     </Media>
