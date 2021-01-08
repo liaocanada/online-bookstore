@@ -15,7 +15,7 @@ exports.handler = async (event, context) => {
     // TODO make sure order belongs to authenticated user
 
     // get order products
-    statement = "select distinct product_id,name,description,order_product.price,isbn,series,format,pages,authors,genres,tags,images "+
+    statement = "select distinct product_id,name,description,order_product.quantity,order_product.price,isbn,series,format,pages,authors,genres,tags,images "+
                     "from order_product left outer join (product natural full outer join book) using (product_id) natural join ( "+
                             "select product_id,string_agg(genre, ', ') as genres "+
                             "from product natural full outer join (book natural join book_genre) "+
