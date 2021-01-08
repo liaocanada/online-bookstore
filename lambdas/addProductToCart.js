@@ -38,7 +38,7 @@ exports.handler = async event => {
   updateCart(client, username);
 
   // check if user has product in cart already
-  const currentQuantity = getCurrentProductQuantity(username, product_id, client);
+  const currentQuantity = await getCurrentProductQuantity(username, product_id, client);
   if (currentQuantity === 0) {
     // add product to cart_product
     const statement = 'insert into cart_product (username, product_id, quantity) values (:username, :pid, :qty);';

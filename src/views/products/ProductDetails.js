@@ -9,13 +9,12 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { useSelector } from 'react-redux';
 
-import { selectUserData } from '../../redux/authenticationSlice';
+import { selectUserData, selectIsLoggedIn } from '../../redux/authenticationSlice';
 import linkify from '../shared/helpers/linkify';
 import capitalize from '../shared/helpers/capitalize';
 import MyToast from '../shared/components/MyToast';
 import Layout from '../shared/components/Layout';
 import { addProductToCart as addToCartApi } from '../../api/checkoutApi';
-import { selectIsLoggedIn } from '../../redux/authenticationSlice';
 import config from '../../config';
 
 const addToCart = async (username, productId) => {
@@ -53,20 +52,20 @@ const respondToCartStatus = (status, productName, addMessage, setPurchasedTrue) 
     });
   } else {
     addMessage({
-        icon: <FontAwesomeIcon icon={faExclamationTriangle} />,
-        title: 'Uh oh!',
-        contents: 'Something went wrong. Please try again later.'
+      icon: <FontAwesomeIcon icon={faExclamationTriangle} />,
+      title: 'Uh oh!',
+      contents: 'Something went wrong. Please try again later.'
     });
   }
-}
+};
 
-const redirectToLogin = (addMessage) => {
+const redirectToLogin = addMessage => {
   addMessage({
     icon: <FontAwesomeIcon icon={faExclamationTriangle} />,
     title: 'Uh oh!',
     contents: <><div className="mb-2">Please login to purchase items</div><Button href={config.LOGIN_URL} variant="secondary" size="sm">Login</Button></>
   });
-}
+};
 
 const ProductDetails = props => {
   let {
@@ -140,9 +139,9 @@ const ProductDetails = props => {
               ) : (
                 <Button
                   variant="outline-primary"
-                  onClick={() => {
+                  onClick={async () => {
                     if (isLoggedIn) {
-                      const cartResStatus = addToCart(username, product_id);
+                      const cartResStatus = await addToCart(username, product_id);
                       respondToCartStatus(cartResStatus, name, addMessage, setPurchasedTrue);
                     } else {
                       redirectToLogin(addMessage);
