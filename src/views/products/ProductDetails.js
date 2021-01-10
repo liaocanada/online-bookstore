@@ -12,10 +12,10 @@ import { useSelector } from 'react-redux';
 import { selectUserData, selectIsLoggedIn } from '../../redux/authenticationSlice';
 import linkify from '../shared/helpers/linkify';
 import capitalize from '../shared/helpers/capitalize';
+import redirectToLogin from '../shared/helpers/redirectToLogin';
 import MyToast from '../shared/components/MyToast';
 import Layout from '../shared/components/Layout';
 import { addProductToCart as addToCartApi } from '../../api/checkoutApi';
-import config from '../../config';
 
 const addToCart = async (username, productId) => {
   const res = await addToCartApi(username, productId);
@@ -59,13 +59,11 @@ const respondToCartStatus = (status, productName, addMessage, setPurchasedTrue) 
   }
 };
 
-const redirectToLogin = (addMessage, currentPath) => {
-  sessionStorage.setItem(config.sessionStorage.CURRENT_PATH_KEY, currentPath);
-
+const showLoginPrompt = (addMessage, currentPath) => {
   addMessage({
     icon: <FontAwesomeIcon icon={faExclamationTriangle} />,
     title: 'Uh oh!',
-    contents: <><div className="mb-2">Please login to purchase items</div><Button href={config.LOGIN_URL} variant="secondary" size="sm">Login</Button></>
+    contents: <><div className="mb-2">Please login to purchase items</div><Button onClick={() => redirectToLogin(currentPath)} variant="secondary" size="sm">Login</Button></>
   });
 };
 
@@ -147,7 +145,7 @@ const ProductDetails = props => {
                       const cartResStatus = await addToCart(username, product_id);
                       respondToCartStatus(cartResStatus, name, addMessage, setPurchasedTrue);
                     } else {
-                      redirectToLogin(addMessage, currentPath);
+                      showLoginPrompt(addMessage, currentPath);
                     }
                   }}
                 >
