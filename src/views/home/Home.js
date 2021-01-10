@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { Jumbotron, Button, Alert } from 'react-bootstrap';
 import Layout from '../shared/components/Layout';
 import { selectIsLoggedIn, selectUserData } from '../../redux/authenticationSlice';
-import { useSelector } from 'react-redux';
 import useQuery from '../shared/helpers/useQuery';
 
 const LOGIN_SUCCESS_QUERY_VALUE = 'loginSuccess';
