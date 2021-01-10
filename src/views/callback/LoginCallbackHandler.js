@@ -4,6 +4,7 @@ import jwtDecode from 'jwt-decode';
 import { login, setUserData } from '../../redux/authenticationSlice';
 import getHashParams from '../shared/helpers/getHashParams';
 import { getUser } from '../../api/usersApi';
+import config from '../../config';
 
 // Receives a cognito code, and uses it to make a request for a JWT.
 //     Then, stores JWT in Redux state
@@ -17,6 +18,9 @@ const LoginCallBackHandler = () => {
   // TODO Call cognito api to get JWT instead of receiving it directly in url
   const jwt = hashObj.id_token;
 
+  // Get the path that the user was on before logging in
+  const redirectPath = sessionStorage.getItem(config.sessionStorage.CURRENT_PATH_KEY);
+
   if (jwt) {
     // Decode and save jwt (account data) to redux
     const accountData = jwtDecode(jwt);
@@ -27,7 +31,7 @@ const LoginCallBackHandler = () => {
     const username = accountData['cognito:username'];
     getUser(username).then(userAndOrders => dispatch(setUserData(userAndOrders.user)));
 
-    history.push('/?message=loginSuccess');
+    history.push(redirectPath || '/?message=loginSuccess');
   } else {
     history.push('/?message=loginFailed');
   }

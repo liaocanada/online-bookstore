@@ -6,7 +6,7 @@ import {
 } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
-import store from './../redux';
+import store from '../redux';
 
 // Pages
 import Home from './home/Home';
@@ -19,7 +19,8 @@ import UserDetailsLoader from './user/UserDetailsLoader';
 import CheckoutLoader from './checkout/CheckoutLoader';
 import OrderDetailsLoader from './orders/OrderDetailsLoader';
 import AuthorDetailsLoader from './authors/AuthorDetailsLoader';
-import LoginCallbackHandler from './loginCallback/LoginCallbackHandler';
+import LoginCallbackHandler from './callback/LoginCallbackHandler';
+import LogoutCallbackHandler from './callback/LogoutCallbackHandler';
 
 const App = () => (
   <Provider store={store}>
@@ -36,7 +37,8 @@ const App = () => (
         <Route exact path="/orders/:orderNumber"><OrderDetailsLoader /></Route>
         <Route exact path="/authors"><h1>to do</h1></Route>
         <Route exact path="/authors/:authorName"><AuthorDetailsLoader /></Route>
-        <Route exact path="/callback"><LoginCallbackHandler /></Route>
+        <Route exact path="/loginCallback"><LoginCallbackHandler /></Route>
+        <Route exact path="/logoutCallback"><LogoutCallbackHandler /></Route>
       </Switch>
     </Router>
   </Provider>
