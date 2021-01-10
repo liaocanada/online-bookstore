@@ -8,6 +8,9 @@ const configDefaults = {
   LOGOUT_URL: process.env.NODE_ENV === 'development' ?
     'https://davidliaobookstore.auth.us-east-1.amazoncognito.com/logout?client_id=3gv2ehl5eo84cijqql7sgquoc4&logout_uri=http://localhost:3000/?message=logout_success' :
     'https://davidliaobookstore.auth.us-east-1.amazoncognito.com/logout?client_id=3gv2ehl5eo84cijqql7sgquoc4&logout_uri=https://ebookstore.davidliao.ca/?message=logout_success',
+  sessionStorage: {
+    CURRENT_PATH_KEY: 'currentPath'
+  },
 };
 
 const config = {};

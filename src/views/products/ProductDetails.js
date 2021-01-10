@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import {
   Button, Image, Carousel, Row, Col, Badge
 } from 'react-bootstrap';
@@ -59,7 +59,9 @@ const respondToCartStatus = (status, productName, addMessage, setPurchasedTrue) 
   }
 };
 
-const redirectToLogin = addMessage => {
+const redirectToLogin = (addMessage, currentPath) => {
+  sessionStorage.setItem(config.sessionStorage.CURRENT_PATH_KEY, currentPath);
+
   addMessage({
     icon: <FontAwesomeIcon icon={faExclamationTriangle} />,
     title: 'Uh oh!',
@@ -87,6 +89,7 @@ const ProductDetails = props => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
 
   const history = useHistory();
+  const currentPath = useLocation().pathname;
 
   const stockBadge = getStockBadge(stock);
 
@@ -144,7 +147,7 @@ const ProductDetails = props => {
                       const cartResStatus = await addToCart(username, product_id);
                       respondToCartStatus(cartResStatus, name, addMessage, setPurchasedTrue);
                     } else {
-                      redirectToLogin(addMessage);
+                      redirectToLogin(addMessage, currentPath);
                     }
                   }}
                 >
