@@ -21,6 +21,7 @@ import OrderDetailsLoader from './orders/OrderDetailsLoader';
 import AuthorDetailsLoader from './authors/AuthorDetailsLoader';
 import LoginCallbackHandler from './callback/LoginCallbackHandler';
 import LogoutCallbackHandler from './callback/LogoutCallbackHandler';
+import ErrNotFound from './error/ErrNotFound';
 
 const App = () => (
   <Provider store={store}>
@@ -39,6 +40,7 @@ const App = () => (
         <Route exact path="/authors/:authorName"><AuthorDetailsLoader /></Route>
         <Route exact path="/loginCallback"><LoginCallbackHandler /></Route>
         <Route exact path="/logoutCallback"><LogoutCallbackHandler /></Route>
+        <Route path="*"><ErrNotFound /></Route>
       </Switch>
     </Router>
   </Provider>
