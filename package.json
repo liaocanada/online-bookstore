@@ -21,7 +21,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.15.3",
     "@fortawesome/react-fontawesome": "^0.1.14",
     "@loadable/component": "^5.15.0",
-    "@reduxjs/toolkit": "^1.5.1",
+    "@reduxjs/toolkit": "^1.9.1",
     "@zeit/fetch-retry": "^5.0.1",
     "bootstrap": "^4.6.0",
     "faker": "^4.1.0",
