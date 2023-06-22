@@ -12,7 +12,7 @@
     "aws-sdk": "^2.709.0",
     "data-api-client": "^1.0.1",
     "is-integer": "^1.0.7",
-    "pg": "^7.18.2"
+    "pg": "^8.11.0"
   },
   "devDependencies": {
     "dotenv": "^8.2.0"
